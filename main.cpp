@@ -166,6 +166,10 @@ class instruction{
             steps = std::vector<c_word>(n, c_word(ALL_INACTIVE));
         };
 
+        int get_size(){
+            return size;
+        }
+
         void flip(int step, int ctrl_signal){
             if(step >= size){
                 std::cout << "Se ha intentado asignar valores al paso " << step << "de una instrucción con tamaño " << size << std::endl;
@@ -1580,7 +1584,68 @@ int main(){
 
     // IN (abs) (0x3D)
 
+    instruction inst_in_abs(4);
+
+    inst_in_abs.flip(0, SIG_DL_LOAD); // DL <- M(PC++)
+    inst_in_abs.flip(0, SIG_MEM_OE);
+    inst_in_abs.flip(0, SIG_BUS_EN);
+    inst_in_abs.flip(0, SIG_PC_OE);
+    inst_in_abs.flip(0, SIG_PC_UP);
+
+    inst_in_abs.flip(1, SIG_DH_LOAD); // DH <- M(PC++)
+    inst_in_abs.flip(1, SIG_MEM_OE);
+    inst_in_abs.flip(1, SIG_BUS_EN);
+    inst_in_abs.flip(1, SIG_PC_OE);
+    inst_in_abs.flip(1, SIG_PC_UP);
+
+    inst_in_abs.flip(2, SIG_AC_LOAD); // AC <- IO(D)
+    inst_in_abs.flip(2, SIG_BUS_EN);
+    inst_in_abs.flip(2, SIG_MEM_IO);
+    inst_in_abs.flip(2, SIG_MEM_OE);
+    inst_in_abs.flip(2, SIG_D_OE);
+    inst_in_abs.flip(2, SIG_S_DAT_2);
+
+    inst_in_abs.flip(3, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
+    inst_in_abs.flip(3, SIG_BUS_EN);
+    inst_in_abs.flip(3, SIG_PC_OE);
+    inst_in_abs.flip(3, SIG_PC_UP);
+    inst_in_abs.flip(3, SIG_MEM_OE);
+    inst_in_abs.flip(3, SIG_RCF_CLR);
+
+    microcode[OP_INST_IN_ABS] = inst_in_abs;
+
     // OUT (abs) (0x3E)
+
+    instruction inst_out_abs(7);
+
+    inst_out_abs.flip(0, SIG_DL_LOAD); // DL <- M(PC++)
+    inst_out_abs.flip(0, SIG_BUS_EN);
+    inst_out_abs.flip(0, SIG_MEM_OE);
+    inst_out_abs.flip(0, SIG_PC_OE);
+    inst_out_abs.flip(0, SIG_PC_UP);
+    inst_out_abs.flip(0, SIG_S_DAT_2);
+
+    inst_out_abs.flip(1, SIG_DH_LOAD); // DH <- M(PC++)
+    inst_out_abs.flip(1, SIG_BUS_EN);
+    inst_out_abs.flip(1, SIG_MEM_OE);
+    inst_out_abs.flip(1, SIG_PC_OE);
+    inst_out_abs.flip(1, SIG_PC_UP);
+    inst_out_abs.flip(1, SIG_S_DAT_2);
+
+    inst_out_abs.flip(2, SIG_BUS_EN); // IO(D) <- AC
+    inst_out_abs.flip(2, SIG_MEM_IO);
+    inst_out_abs.flip(2, SIG_MEM_WE);
+    inst_out_abs.flip(2, SIG_D_OE);
+    inst_out_abs.flip(2, SIG_S_DAT_0);
+
+    inst_out_abs.flip(3, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
+    inst_out_abs.flip(3, SIG_BUS_EN);
+    inst_out_abs.flip(3, SIG_PC_OE);
+    inst_out_abs.flip(3, SIG_PC_UP);
+    inst_out_abs.flip(3, SIG_MEM_OE);
+    inst_out_abs.flip(3, SIG_RCF_CLR);
+
+    microcode[OP_INST_OUT_ABS] = inst_out_abs;
 
     // LDSPH (0x3F)
 
