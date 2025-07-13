@@ -149,7 +149,7 @@
 
 El objetivo de este programa es el de generar un fichero con todas las señales de control
 definidas para cada instrucción y cada entrada a la unidad de control, para usarlo a la
-hora de programar los integrados (5 x FLASH 512Kx8)
+hora de programar los integrados (5 x FLASH 256Kx8)
 
 */
 
@@ -1666,6 +1666,46 @@ int main(){
     inst_ldsph.flip(1, SIG_RCF_CLR);
 
     microcode[OP_INST_LDSPH] = inst_ldsph;
+
+    std::cout << "Instrucciones microprogramadas. Creando el resto...\n";
+
+    //############################################################//
+    //             GENERACIÓN COMPLETA DEL MICROCÓDIGO            //
+    //############################################################//
+
+    /*
+        I
+        F
+        E               R R R R
+        T I B           C C C C R R R R R R
+        C R R           F F F F I I I I I I
+        H Q Q I Z O S C 3 2 1 0 5 4 3 2 1 0
+
+        x x x x x x x x x x x x x x x x x x  <- Palabra de entrada
+    
+        Archivo completo = 256Kx40 (18 bits de entrada y 40 de salida)
+    */
+
+    int input_size = 262144;
+    typedef std::bitset<18> i_word;
+
+    for(int palabra = 0; palabra < input_size; palabra++){
+        i_word input(palabra);
+
+        bool ifetch = input[17];
+        bool irq = input[16];
+        bool brq = input[15];
+        bool i = input[14];
+        bool z = input[13];
+        bool o = input[12];
+        bool s = input[11];
+        bool c = input[10];
+        int rcf = ((input.to_ulong() >> 6) & 0xF);
+        int ri = input.to_ulong() & 0x3F;
+
+        // debug
+        // std::cout << input << " # ifetch: " << ifetch << " irq: " << irq << " brq: " << brq << " i: " << i << " z: " << z << " o: " << o << " s: " << s << " c: " << c << " # rcf: " << rcf << " ri: " << ri << std::endl; 
+    }
 
     return 0;
 }
