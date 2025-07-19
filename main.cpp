@@ -1732,7 +1732,7 @@ int main(){
         int rcf = ((input.to_ulong() >> 6) & 0xF);
         int ri = input.to_ulong() & 0x3F;
 
-        // debug
+        // DEBUG
         // std::cout << input << " # ifetch: " << ifetch << " irq: " << irq << " brq: " << brq << " i: " << i << " z: " << z << " o: " << o << " s: " << s << " c: " << c << " # rcf: " << rcf << " ri: " << ri << std::endl; 
 
         // Si se está capturando una interrupción (IFETCH activa)
@@ -1768,209 +1768,46 @@ int main(){
             }
         }
 
-        if(z){
-            // En este caso no se salta
-            if(ri == OP_INST_JNZ){
-                switch(rcf){
-                    case 0:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_PC_UP);
-                    break;
-                    case 1:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_PC_UP);
-                    break;
-                    case 2:
-                        salida[palabra] = inst_nop.get(0);
-                    break;
-                    default:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_RCF_CLR);
-                    break;
-                }
-            }
-        }
+        if(
+            (ri == OP_INST_JZ && z)                         ||
+            (ri == OP_INST_JNZ && !z)                       ||
+            (ri == OP_INST_JC && c)                         ||
+            (ri == OP_INST_JNC && !c)                       ||
+            (ri == OP_INST_JS && s)                         ||
+            (ri == OP_INST_JNS && !s)                       ||
+            (ri == OP_INST_JO && o)                         ||
+            (ri == OP_INST_JNO && !o)                       ||
+            (ri == OP_INST_JB_SIGNED && s != o)             ||
+            (ri == OP_INST_JNB_SIGNED && s == o)            ||
+            (ri == OP_INST_JBE_SIGNED && (z || (s != o)))   ||
+            (ri == OP_INST_JNBE_SIGNED && !(z || (s != o))) ||
+            (ri == OP_INST_JBE_UNSIGNED && (c || z))        ||
+            (ri == OP_INST_JNBE_UNSIGNED && !(c || z))
+        ){
+            /*
+            Si se cumple la condición significa que se trata de una instrucción de salto condicional
+            con los flags correspondientes así que no se hace nada (la instrucción de salto se ejecuta)
 
-        if(!z){
-            // En este caso no se salta
-            if(ri == OP_INST_JZ){
-                switch(rcf){
-                    case 0:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_PC_UP);
-                    break;
-                    case 1:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_PC_UP);
-                    break;
-                    case 2:
-                        salida[palabra] = inst_nop.get(0);
-                    break;
-                    default:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_RCF_CLR);
-                    break;
-                }
-            }
-        }
-
-        if(o){
-            // En este caso no se salta
-            if(ri == OP_INST_JNO){
-                switch(rcf){
-                    case 0:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_PC_UP);
-                    break;
-                    case 1:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_PC_UP);
-                    break;
-                    case 2:
-                        salida[palabra] = inst_nop.get(0);
-                    break;
-                    default:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_RCF_CLR);
-                    break;
-                }
-            }
-        }
-
-        if(!o){
-            // En este caso no se salta
-            if(ri == OP_INST_JO){
-                switch(rcf){
-                    case 0:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_PC_UP);
-                    break;
-                    case 1:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_PC_UP);
-                    break;
-                    case 2:
-                        salida[palabra] = inst_nop.get(0);
-                    break;
-                    default:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_RCF_CLR);
-                    break;
-                }
-            }
-        }
-
-        if(s){
-            // En este caso no se salta
-            if(ri == OP_INST_JNS){
-                switch(rcf){
-                    case 0:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_PC_UP);
-                    break;
-                    case 1:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_PC_UP);
-                    break;
-                    case 2:
-                        salida[palabra] = inst_nop.get(0);
-                    break;
-                    default:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_RCF_CLR);
-                    break;
-                }
-            }
-        }
-
-        if(!s){
-            // En esta instrucción no se salta
-            if(ri == OP_INST_JS){
-                switch(rcf){
-                    case 0:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_PC_UP);
-                    break;
-                    case 1:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_PC_UP);
-                    break;
-                    case 2:
-                        salida[palabra] = inst_nop.get(0);
-                    break;
-                    default:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_RCF_CLR);
-                    break;
-                }
-            }
-        }
-
-        if(c){
-            // En este caso no se salta
-            if(ri == OP_INST_JNC){
-                switch(rcf){
-                    case 0:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_PC_UP);
-                    break;
-                    case 1:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_PC_UP);
-                    break;
-                    case 2:
-                        salida[palabra] = inst_nop.get(0);
-                    break;
-                    default:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_RCF_CLR);
-                    break;
-                }
-            }
-        }
-
-        if(!c){
-            // En este caso no se salta
-            if(ri == OP_INST_JC){
-                switch(rcf){
-                    case 0:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_PC_UP);
-                    break;
-                    case 1:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_PC_UP);
-                    break;
-                    case 2:
-                        salida[palabra] = inst_nop.get(0);
-                    break;
-                    default:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_RCF_CLR);
-                    break;
-                }
-            }
-        }
-
-        if(!(!z && s == o)){
-            if(ri == OP_INST_JNA_SIGNED){
-                switch(rcf){
-                    case 0:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_PC_UP);
-                    break;
-                    case 1:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_PC_UP);
-                    break;
-                    case 2:
-                        salida[palabra] = inst_nop.get(0);
-                    break;
-                    default:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_RCF_CLR);
-                    break;
-                }
+            Si no se cumple, se reemplaza por la instrucción que no hace nada más que avanzar a la siguiente
+            (como si fuera un NOP de 3 bytes)
+            */
+        }else{
+            switch(rcf){
+                case 0:
+                    salida[palabra] = c_word(ALL_INACTIVE);
+                    salida[palabra].flip(SIG_PC_UP);
+                break;
+                case 1:
+                    salida[palabra] = c_word(ALL_INACTIVE);
+                    salida[palabra].flip(SIG_PC_UP);
+                break;
+                case 2:
+                    salida[palabra] = inst_nop.get(0);
+                break;
+                default:
+                    salida[palabra] = c_word(ALL_INACTIVE);
+                    salida[palabra].flip(SIG_RCF_CLR);
+                break;
             }
         }
     }
