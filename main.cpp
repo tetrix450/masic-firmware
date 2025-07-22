@@ -176,7 +176,7 @@ class instruction{
 
         void flip(int step, int ctrl_signal){
             if(step >= size){
-                std::cout << "Se ha intentado asignar valores al paso " << step << "de una instrucción con tamaño " << size << std::endl;
+                std::cout << "Se ha intentado asignar valores al paso " << step << " de una instrucción con tamaño " << size << std::endl;
             }else{
                 steps[step].flip(ctrl_signal);
             }
@@ -192,7 +192,119 @@ class instruction{
         }
 };
 
+std::vector<std::string> inst_names(64);
+
+void check_instructions(c_word* salida){
+    // Para comprobar las instrucciones
+    for(int flags = 0; flags < 256; flags++){
+
+        // Extraigo cada bit por separado
+        std::bitset<1> ifetch   (flags&0b10000000);
+        std::bitset<1> irq      (flags&0b01000000);
+        std::bitset<1> brq      (flags&0b00100000);
+        std::bitset<1> i        (flags&0b00010000);
+        std::bitset<1> z        (flags&0b00001000);
+        std::bitset<1> o        (flags&0b00000100);
+        std::bitset<1> s        (flags&0b00000010);
+        std::bitset<1> c        (flags&0b00000001);
+
+        std::cout << "[ifetch=" << ifetch << " irq=" << irq << " brq=" << brq << " I=" << i << " Z=" << z << " O=" << o << " S=" << s << " C=" << c << "]" << std::endl;
+
+        std::cout << std::hex;
+
+        for(int ri = 0; ri < 64; ri++){
+            std::cout << "[0x" << ri << "] " << inst_names[ri] << std::endl;
+            for(int step = 0; step < 16; step++){
+                std::cout << step << ": ";
+
+                // Mostrar la palabra de control
+                unsigned long posicion = (ifetch.to_ulong()<<17) + (irq.to_ulong()<<16) + (brq.to_ulong()<<15) + (i.to_ulong()<<14) + (z.to_ulong()<<13) + (o.to_ulong()<<12) + (s.to_ulong()<<11) + (c.to_ulong()<<10) + (step<<6) + ri;
+                unsigned long palabra = salida[posicion].to_ulong();
+                
+                std::bitset<8> byte_0(palabra&0xFF);
+                std::bitset<8> byte_1((palabra>>8)&0xFF);
+                std::bitset<8> byte_2((palabra>>16)&0xFF);
+                std::bitset<8> byte_3((palabra>>24)&0xFF);
+                std::bitset<8> byte_4((palabra>>32)&0xFF);
+
+                std::cout << byte_4 << " " << byte_3 << " " << byte_2 << " " << byte_1 << " "<< byte_0 << std::endl;
+
+                // Dejar de mostrar la instrucción en el final (RCF_CLR activo)
+                if((palabra&0b0100000000000000000000000000000000000000) == 0b0100000000000000000000000000000000000000){
+                    break;
+                }
+            }
+            std::cin.get();
+        }
+    }
+}
+
 int main(){
+
+    inst_names[0x00] = "JMP (abs)";
+    inst_names[0x01] = "CLC";
+    inst_names[0x02] = "STC";
+    inst_names[0x03] = "CLI";
+    inst_names[0x04] = "STI";
+    inst_names[0x05] = "HLT";
+    inst_names[0x06] = "INC";
+    inst_names[0x07] = "DEC";
+    inst_names[0x08] = "LOAD (abs)";
+    inst_names[0x09] = "LOAD (imm)";
+    inst_names[0x0a] = "LOAD (ind)";
+    inst_names[0x0b] = "STORE (abs)";
+    inst_names[0x0c] = "STORE (ind)";
+    inst_names[0x0d] = "ADD (abs)";
+    inst_names[0x0e] = "ADD (imm)";
+    inst_names[0x0f] = "ADC (abs)";
+    inst_names[0x10] = "ADC (imm)";
+    inst_names[0x11] = "SUB (abs)";
+    inst_names[0x12] = "SUB (imm)";
+    inst_names[0x13] = "AND (abs)";
+    inst_names[0x14] = "AND (imm)";
+    inst_names[0x15] = "OR (abs)";
+    inst_names[0x16] = "OR (imm)";
+    inst_names[0x17] = "NOT";
+    inst_names[0x18] = "NEG";
+    inst_names[0x19] = "CMP (abs)";
+    inst_names[0x1a] = "CMP (imm)";
+    inst_names[0x1b] = "NOP";
+    inst_names[0x1c] = "JO";
+    inst_names[0x1d] = "JNO";
+    inst_names[0x1e] = "JZ";
+    inst_names[0x1f] = "JNZ";
+    inst_names[0x20] = "JB SIGNED";
+    inst_names[0x21] = "JNB SIGNED";
+    inst_names[0x22] = "JBE SIGNED";
+    inst_names[0x23] = "JNBE SIGNED";
+    inst_names[0x24] = "JC";
+    inst_names[0x25] = "JNC";
+    inst_names[0x26] = "JBE UNSIGNED";
+    inst_names[0x27] = "JNBE UNSIGNED";
+    inst_names[0x28] = "JS";
+    inst_names[0x29] = "JNS";
+    inst_names[0x2a] = "JMP (ind)";
+    inst_names[0x2b] = "SHL";
+    inst_names[0x2c] = "SHR SIGNED";
+    inst_names[0x2d] = "SHR UNSIGNED";
+    inst_names[0x2e] = "ROL";
+    inst_names[0x2f] = "ROR";
+    inst_names[0x30] = "IN (ind)";
+    inst_names[0x31] = "PUSH";
+    inst_names[0x32] = "POP";
+    inst_names[0x33] = "CALL";
+    inst_names[0x34] = "RET";
+    inst_names[0x35] = "INT";
+    inst_names[0x36] = "IRET";
+    inst_names[0x37] = "LDSP";
+    inst_names[0x38] = "OUT (ind)";
+    inst_names[0x39] = "LDSPL";
+    inst_names[0x3a] = "RCL";
+    inst_names[0x3b] = "RCR";
+    inst_names[0x3c] = "CMP (ind)";
+    inst_names[0x3d] = "IN (abs)";
+    inst_names[0x3e] = "OUT (abs)";
+    inst_names[0x3f] = "LDSPH";
 
     // Vector con todas las instrucciones
     std::vector<instruction> microcode(64, instruction(0));
@@ -850,7 +962,7 @@ int main(){
 
     // NEG (0x18)
 
-    instruction inst_neg(1);
+    instruction inst_neg(2);
 
     inst_neg.flip(0, SIG_AC_LOAD); // AC <- NOT(AC)
     inst_neg.flip(0, SIG_S_AC_2);
@@ -954,7 +1066,7 @@ int main(){
 
     // JMP (ind) (0x2A)
 
-    instruction inst_jmp_ind(4);
+    instruction inst_jmp_ind(7);
 
     inst_jmp_ind.flip(0, SIG_MEM_OE);   // DL <- M(PC++)
     inst_jmp_ind.flip(0, SIG_BUS_EN);
@@ -1674,6 +1786,16 @@ int main(){
 
     microcode[OP_INST_LDSPH] = inst_ldsph;
 
+    /*
+        // Muestro todas las instrucciones
+        std::cout << std::hex;
+        for(int i = 0; i < 64; i++){
+            std::cout << "[0x" << i << "]" << std::endl;
+            std::cout << microcode[i];
+        }
+        std::cout << std::dec;
+    */
+
     //############################################################//
     //             GENERACIÓN COMPLETA DEL MICROCÓDIGO            //
     //############################################################//
@@ -1691,30 +1813,31 @@ int main(){
         Archivo completo = 256Kx40 (18 bits de entrada y 40 de salida)
     */
 
-    std::cout << "Instrucciones microprogramadas. Creando el resto...\n";
+    std::cout << "Instrucciones microprogramadas. Creando las palabras de control...\n";
     c_word salida[262144];
 
-    // Primero copio todas las instrucciones:
+    // Primero genero palabras vacías con RCF_CLR activo
+    for(int i = 0; i < 262144; i++){
+        salida[i] = inst_hlt.get(0);
+    }
     
-    // Hay 64 códigos de operación
-    for(int ins = 0; ins < 64; ins++){
-        // Que tienen 16 pasos como máximo (los pasos inutilizados sólo activan SIG_RCF_CLR)
-        for(int step = 0; step < 16; step++){
-            // Que a su vez tienen 256 combinaciones de IFETCH, IRQ, BRQ, I, Z, O, S, C
-            for(int comb = 0; comb < 256; comb++){
-                int posicion = ins + step*64 + comb*1024;
+    // Hay 256 combinaciones de flags
+    for(int comb = 0; comb < 256; comb++){
+        // 64 instrucciones
+        for(int ins = 0; ins < 64; ins++){
+            // Con 16 pasos como máximo
+            for(int step = 0; step < 16; step++){
+                int posicion = ins + (step<<6) + (comb<<10);
                 
-                // Comprobar si la microinstrucción existe
                 if(step < microcode[ins].get_size()){
                     salida[posicion] = microcode[ins].get(step);
                 }else{
-                    // Si no existe, tomamos la microinstrucción de HLT (RCF_CLR)
-                    salida[posicion] = inst_hlt.get(0);
+                    break;
                 }
             }
         }
     }
-
+    
     typedef std::bitset<18> i_word;
 
     // Hay 262144 palabras de control en total
@@ -1733,17 +1856,20 @@ int main(){
         int ri = input.to_ulong() & 0x3F;
 
         // DEBUG
-        // std::cout << input << " # ifetch: " << ifetch << " irq: " << irq << " brq: " << brq << " i: " << i << " z: " << z << " o: " << o << " s: " << s << " c: " << c << " # rcf: " << rcf << " ri: " << ri << std::endl; 
+        //std::cout << input << " # ifetch: " << ifetch << " irq: " << irq << " brq: " << brq << " i: " << i << " z: " << z << " o: " << o << " s: " << s << " c: " << c << " # rcf: " << rcf << " ri: " << ri << std::endl;
 
         // Si se está capturando una interrupción (IFETCH activa)
         if(ifetch){
+            //std::cout << "ifetch activa."<< std::endl;
             if(rcf == 0){
+                //std::cout << "primer paso."<< std::endl;
                 salida[palabra] = c_word(ALL_INACTIVE); // AUX <- AC, AC <- I/O(INT), IACK
                 salida[palabra].flip(SIG_AC_LOAD);
                 salida[palabra].flip(SIG_AUX_LOAD);
                 salida[palabra].flip(SIG_S_DAT_2);
                 salida[palabra].flip(SIG_IACK);
             }else{
+                //std::cout << "no es primer paso."<< std::endl;
                 salida[palabra] = inst_int.get(rcf);
             }
         }
@@ -1755,6 +1881,7 @@ int main(){
         if(irq && !brq && i){
             // Si es el último paso de la instrucción, activar ifetch
             if(rcf == last_step){
+                //std::cout << "atendiendo irq."<< std::endl;
                 salida[palabra].flip(SIG_IFETCH);
             }
         }
@@ -1762,55 +1889,117 @@ int main(){
         if((!irq && brq) || (irq && brq)){
             // Si es el primer paso de la instrucción, activar BACK
             if(rcf == 0){
+                //std::cout << "atendiendo brq."<< std::endl;
                 salida[palabra] = c_word(ALL_INACTIVE);
                 salida[palabra].flip(SIG_BACK);
                 salida[palabra].flip(SIG_RCF_CLR);
             }
         }
 
-        if(
-            (ri == OP_INST_JZ && z)                         ||
-            (ri == OP_INST_JNZ && !z)                       ||
-            (ri == OP_INST_JC && c)                         ||
-            (ri == OP_INST_JNC && !c)                       ||
-            (ri == OP_INST_JS && s)                         ||
-            (ri == OP_INST_JNS && !s)                       ||
-            (ri == OP_INST_JO && o)                         ||
-            (ri == OP_INST_JNO && !o)                       ||
-            (ri == OP_INST_JB_SIGNED && s != o)             ||
-            (ri == OP_INST_JNB_SIGNED && s == o)            ||
-            (ri == OP_INST_JBE_SIGNED && (z || (s != o)))   ||
-            (ri == OP_INST_JNBE_SIGNED && !(z || (s != o))) ||
-            (ri == OP_INST_JBE_UNSIGNED && (c || z))        ||
-            (ri == OP_INST_JNBE_UNSIGNED && !(c || z))
-        ){
-            /*
-            Si se cumple la condición significa que se trata de una instrucción de salto condicional
-            con los flags correspondientes así que no se hace nada (la instrucción de salto se ejecuta)
-
-            Si no se cumple, se reemplaza por la instrucción que no hace nada más que avanzar a la siguiente
-            (como si fuera un NOP de 3 bytes)
-            */
-        }else{
-            switch(rcf){
-                case 0:
-                    salida[palabra] = c_word(ALL_INACTIVE);
-                    salida[palabra].flip(SIG_PC_UP);
-                break;
-                case 1:
-                    salida[palabra] = c_word(ALL_INACTIVE);
-                    salida[palabra].flip(SIG_PC_UP);
-                break;
-                case 2:
-                    salida[palabra] = inst_nop.get(0);
-                break;
-                default:
-                    salida[palabra] = c_word(ALL_INACTIVE);
-                    salida[palabra].flip(SIG_RCF_CLR);
-                break;
+        // Si se trata de un salto condicional
+        if(ri >= 0x1C && ri <= 0x29){
+            if(// Comprobar si se cumplen las condiciones
+                (ri == OP_INST_JZ && z)                         ||
+                (ri == OP_INST_JNZ && !z)                       ||
+                (ri == OP_INST_JC && c)                         ||
+                (ri == OP_INST_JNC && !c)                       ||
+                (ri == OP_INST_JS && s)                         ||
+                (ri == OP_INST_JNS && !s)                       ||
+                (ri == OP_INST_JO && o)                         ||
+                (ri == OP_INST_JNO && !o)                       ||
+                (ri == OP_INST_JB_SIGNED && s != o)             ||
+                (ri == OP_INST_JNB_SIGNED && s == o)            ||
+                (ri == OP_INST_JBE_SIGNED && (z || (s != o)))   ||
+                (ri == OP_INST_JNBE_SIGNED && !(z || (s != o))) ||
+                (ri == OP_INST_JBE_UNSIGNED && (c || z))        ||
+                (ri == OP_INST_JNBE_UNSIGNED && !(c || z))
+            ){
+                //std::cout << "salto condicional correcto."<< std::endl;
+                /*
+                Si se cumple la condición significa que se trata de una instrucción de salto condicional
+                con los flags correspondientes así que no se hace nada (la instrucción de salto se ejecuta)
+                
+                Si no se cumple, se reemplaza por la instrucción que no hace nada más que avanzar a la siguiente
+                (como si fuera un NOP de 3 bytes)
+                */
+            }else{
+                //std::cout << "salto condicional nop."<< std::endl;
+                switch(rcf){
+                    case 0:
+                        salida[palabra] = c_word(ALL_INACTIVE);
+                        salida[palabra].flip(SIG_PC_UP);
+                    break;
+                    case 1:
+                        salida[palabra] = c_word(ALL_INACTIVE);
+                        salida[palabra].flip(SIG_PC_UP);
+                    break;
+                    case 2:
+                        salida[palabra] = inst_nop.get(0);
+                    break;
+                    default:
+                        salida[palabra] = c_word(ALL_INACTIVE);
+                        salida[palabra].flip(SIG_RCF_CLR);
+                    break;
+                }
             }
         }
     }
+
+    // Exportar el archivo binario a 5 archivos .bin (1 por cada EEPROM)
+
+    FILE *archivo0 = fopen("microinstrucciones_0.bin", "wb");  // modo binario
+    if (archivo0 == NULL) {
+        perror("No se pudo abrir el archivo0");
+        return 1;
+    }
+    FILE *archivo1 = fopen("microinstrucciones_1.bin", "wb");  // modo binario
+    if (archivo1 == NULL) {
+        perror("No se pudo abrir el archivo1");
+        return 1;
+    }
+    FILE *archivo2 = fopen("microinstrucciones_2.bin", "wb");  // modo binario
+    if (archivo2 == NULL) {
+        perror("No se pudo abrir el archivo2");
+        return 1;
+    }
+    FILE *archivo3 = fopen("microinstrucciones_3.bin", "wb");  // modo binario
+    if (archivo3 == NULL) {
+        perror("No se pudo abrir el archivo3");
+        return 1;
+    }
+    FILE *archivo4 = fopen("microinstrucciones_4.bin", "wb");  // modo binario
+    if (archivo4 == NULL) {
+        perror("No se pudo abrir el archivo4");
+        return 1;
+    }
+
+    // Se itera por cada palabra de control
+    for(int i = 0; i < 262144; i++){
+        // Convierto la palabra a unsigned long
+        unsigned long palabra = salida[i].to_ulong();
+
+        // Extraigo 5 palabras de 8 bits cada una
+        char byte_0 = palabra&0xFF;
+        char byte_1 = (palabra>>8)&0xFF;
+        char byte_2 = (palabra>>16)&0xFF;
+        char byte_3 = (palabra>>24)&0xFF;
+        char byte_4 = (palabra>>32)&0xFF;
+
+        // Escribo en el correspondiente archivo
+        fwrite(&byte_0, sizeof(char), 1, archivo0);
+        fwrite(&byte_1, sizeof(char), 1, archivo1);
+        fwrite(&byte_2, sizeof(char), 1, archivo2);
+        fwrite(&byte_3, sizeof(char), 1, archivo3);
+        fwrite(&byte_4, sizeof(char), 1, archivo4);
+    }
+    
+    //check_instructions(salida);
+
+    fclose(archivo0);
+    fclose(archivo1);
+    fclose(archivo2);
+    fclose(archivo3);
+    fclose(archivo4);
 
     return 0;
 }
