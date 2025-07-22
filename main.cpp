@@ -2,6 +2,7 @@
 #include <bitset>
 #include <vector>
 #include <string>
+#include <iomanip>
 
 // Señales de control
 // (Señalan el nº de bit dentro de la palabra de control, de 0 a 39)
@@ -193,6 +194,7 @@ class instruction{
 };
 
 std::vector<std::string> inst_names(64);
+std::vector<std::string> signal_names(40);
 
 void check_instructions(c_word* salida){
     // Para comprobar las instrucciones
@@ -208,32 +210,51 @@ void check_instructions(c_word* salida){
         std::bitset<1> s        (flags&0b00000010);
         std::bitset<1> c        (flags&0b00000001);
 
-        std::cout << "[ifetch=" << ifetch << " irq=" << irq << " brq=" << brq << " I=" << i << " Z=" << z << " O=" << o << " S=" << s << " C=" << c << "]" << std::endl;
+        std::cout << "┌────ifetch=" << ifetch << " irq=" << irq << " brq=" << brq << " I=" << i << " Z=" << z << " O=" << o << " S=" << s << " C=" << c << "───┐" << std::endl;
 
         std::cout << std::hex;
 
         for(int ri = 0; ri < 64; ri++){
-            std::cout << "[0x" << ri << "] " << inst_names[ri] << std::endl;
+            std::cout << "┌───────────────────────────────────────────────┐" << std::endl;
+            std::cout << "│[0x" << ri << ": " << inst_names[ri];
+
+            for(int j = 0; j < 40 - (int)inst_names[ri].length(); j++){
+                std::cout << " ";
+            }
+            std::cout << "│" << std::endl;
+
             for(int step = 0; step < 16; step++){
-                std::cout << step << ": ";
+                std::cout << "│" << step << ": ";
 
                 // Mostrar la palabra de control
                 unsigned long posicion = (ifetch.to_ulong()<<17) + (irq.to_ulong()<<16) + (brq.to_ulong()<<15) + (i.to_ulong()<<14) + (z.to_ulong()<<13) + (o.to_ulong()<<12) + (s.to_ulong()<<11) + (c.to_ulong()<<10) + (step<<6) + ri;
                 unsigned long palabra = salida[posicion].to_ulong();
                 
+                // Construyo un string con las señales activadas
+                std::string activated_signals;
+
+                unsigned long signals = ALL_INACTIVE ^ palabra; // Operación XOR para comprobar diferencias
+                for(int i = 0; i < 40; i++){
+                    // Comprobar si la señal i-ésima está activa
+                    if((signals>>i) & 1){
+                        activated_signals += " " + signal_names[i];
+                    }
+                }
+
                 std::bitset<8> byte_0(palabra&0xFF);
                 std::bitset<8> byte_1((palabra>>8)&0xFF);
                 std::bitset<8> byte_2((palabra>>16)&0xFF);
                 std::bitset<8> byte_3((palabra>>24)&0xFF);
                 std::bitset<8> byte_4((palabra>>32)&0xFF);
 
-                std::cout << byte_4 << " " << byte_3 << " " << byte_2 << " " << byte_1 << " "<< byte_0 << std::endl;
+                std::cout << byte_4 << " " << byte_3 << " " << byte_2 << " " << byte_1 << " "<< byte_0 << "│" << activated_signals << std::endl;
 
                 // Dejar de mostrar la instrucción en el final (RCF_CLR activo)
                 if((palabra&0b0100000000000000000000000000000000000000) == 0b0100000000000000000000000000000000000000){
                     break;
                 }
             }
+            std::cout << "└───────────────────────────────────────────────┘" << std::endl;
             std::cin.get();
         }
     }
@@ -305,6 +326,13 @@ int main(){
     inst_names[0x3d] = "IN (abs)";
     inst_names[0x3e] = "OUT (abs)";
     inst_names[0x3f] = "LDSPH";
+
+    signal_names = {"SP_DOWN", "AC_LOAD", "AUX_LOAD", "RI_LOAD", "D_UP",
+    "SP_UP", "PC_UP", "BACK", "IACK", "C_LOAD", "ZOS_LOAD", "I_LOAD", "MUX_CI_0",
+    "MUX_CI_1", "MUX_CI_2", "BUS_EN", "S_AC_0", "S_AC_1", "S_AC_2", "S_DAT_0",
+    "S_DAT_1", "S_DAT_2", "MUX_C_0", "MUX_C_1", "MUX_ZOS", "FILL_BIT", "D_CLR",
+    "MEM_OE", "MEM_WE", "DH_LOAD", "DL_LOAD", "D_OE", "MUX_ADD", "SP_LOAD",
+    "SP_OE", "PC_LOAD", "MEM_IO", "PC_OE", "RCF_CLR", "IFETCH"};
 
     // Vector con todas las instrucciones
     std::vector<instruction> microcode(64, instruction(0));
@@ -1992,14 +2020,16 @@ int main(){
         fwrite(&byte_3, sizeof(char), 1, archivo3);
         fwrite(&byte_4, sizeof(char), 1, archivo4);
     }
-    
-    //check_instructions(salida);
 
     fclose(archivo0);
     fclose(archivo1);
     fclose(archivo2);
     fclose(archivo3);
     fclose(archivo4);
+
+    std::cout << "Archivos exportados" << std::endl;
+
+    check_instructions(salida);
 
     return 0;
 }
