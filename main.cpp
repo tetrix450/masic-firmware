@@ -31,7 +31,7 @@
 #define SIG_S_AC_2              18
 #define SIG_S_AC_1              17
 #define SIG_S_AC_0              16
-#define SIG_BUS_EN              15
+#define SIG_BUS_DIS             15
 #define SIG_MUX_CI_2            14
 #define SIG_MUX_CI_1            13
 #define SIG_MUX_CI_0            12
@@ -50,7 +50,7 @@
 
 // Máscara de señales activas a nivel bajo
 
-#define ALL_INACTIVE            0b0010111011111111000000001000111001111111
+#define ALL_INACTIVE            0b0010111011111111000000000000111001111111
 
 // Códigos de operación de cada instrucción
 
@@ -135,7 +135,7 @@
 #define OP_INST_IRET            0x36
 #define OP_INST_RETI            0x36
 
-#define OP_INST_LDSP            0x37
+#define OP_INST_STSP            0x37
 #define OP_INST_OUT_IND         0x38
 #define OP_INST_LDSPL           0x39
 
@@ -319,7 +319,7 @@ int main(){
     inst_names[0x34] = "RET";
     inst_names[0x35] = "INT";
     inst_names[0x36] = "IRET";
-    inst_names[0x37] = "LDSP";
+    inst_names[0x37] = "STSP";
     inst_names[0x38] = "OUT (ind)";
     inst_names[0x39] = "LDSPL";
     inst_names[0x3a] = "RCL";
@@ -331,7 +331,7 @@ int main(){
 
     signal_names = {"SP_DOWN", "AC_LOAD", "AUX_LOAD", "RI_LOAD", "D_UP",
     "SP_UP", "PC_UP", "BACK", "IACK", "C_LOAD", "ZOS_LOAD", "I_LOAD", "MUX_CI_0",
-    "MUX_CI_1", "MUX_CI_2", "BUS_EN", "S_AC_0", "S_AC_1", "S_AC_2", "S_DAT_0",
+    "MUX_CI_1", "MUX_CI_2", "BUS_DIS", "S_AC_0", "S_AC_1", "S_AC_2", "S_DAT_0",
     "S_DAT_1", "S_DAT_2", "MUX_C_0", "MUX_C_1", "MUX_ZOS", "FILL_BIT", "D_CLR",
     "MEM_OE", "MEM_WE", "DH_LOAD", "DL_LOAD", "D_OE", "MUX_ADD", "SP_LOAD",
     "SP_OE", "PC_LOAD", "MEM_IO", "PC_OE", "RCF_CLR", "IFETCH"};
@@ -343,14 +343,12 @@ int main(){
     instruction inst_jmp_abs(4);
 
     inst_jmp_abs.flip(0, SIG_MEM_OE);   // DL <- M(PC++)
-    inst_jmp_abs.flip(0, SIG_BUS_EN);
     inst_jmp_abs.flip(0, SIG_PC_OE);
     inst_jmp_abs.flip(0, SIG_PC_UP);
     inst_jmp_abs.flip(0, SIG_DL_LOAD);
     inst_jmp_abs.flip(0, SIG_S_DAT_2);
 
     inst_jmp_abs.flip(1, SIG_MEM_OE);   // DH <- M(PC++)
-    inst_jmp_abs.flip(1, SIG_BUS_EN);
     inst_jmp_abs.flip(1, SIG_PC_OE);
     inst_jmp_abs.flip(1, SIG_PC_UP);
     inst_jmp_abs.flip(1, SIG_DH_LOAD);
@@ -360,7 +358,6 @@ int main(){
 
     inst_jmp_abs.flip(3, SIG_PC_UP);    // PC++, RI <- M(D), RCF_CLR
     inst_jmp_abs.flip(3, SIG_MEM_OE);
-    inst_jmp_abs.flip(3, SIG_BUS_EN);
     inst_jmp_abs.flip(3, SIG_D_OE);
     inst_jmp_abs.flip(3, SIG_RI_LOAD);
     inst_jmp_abs.flip(3, SIG_RCF_CLR);
@@ -376,7 +373,6 @@ int main(){
     inst_clc.flip(0, SIG_MEM_OE);
     inst_clc.flip(0, SIG_PC_OE);
     inst_clc.flip(0, SIG_RI_LOAD);
-    inst_clc.flip(0, SIG_BUS_EN);
     inst_clc.flip(0, SIG_PC_UP);
     inst_clc.flip(0, SIG_RCF_CLR);
 
@@ -393,7 +389,6 @@ int main(){
     inst_stc.flip(0, SIG_PC_OE);
     inst_stc.flip(0, SIG_RI_LOAD);
     inst_stc.flip(0, SIG_PC_UP);
-    inst_stc.flip(0, SIG_BUS_EN);
     inst_stc.flip(0, SIG_RCF_CLR);
 
     microcode[OP_INST_STC] = inst_stc;
@@ -408,7 +403,6 @@ int main(){
     inst_cli.flip(0, SIG_PC_OE);
     inst_cli.flip(0, SIG_RI_LOAD);
     inst_cli.flip(0, SIG_PC_UP);
-    inst_cli.flip(0, SIG_BUS_EN);
     inst_cli.flip(0, SIG_RCF_CLR);
 
     microcode[OP_INST_CLI] = inst_cli;
@@ -421,7 +415,6 @@ int main(){
     inst_sti.flip(0, SIG_S_DAT_2);
     inst_sti.flip(0, SIG_LOAD_I);
     inst_sti.flip(0, SIG_MEM_OE);
-    inst_sti.flip(0, SIG_BUS_EN);
     inst_sti.flip(0, SIG_PC_OE);
     inst_sti.flip(0, SIG_RI_LOAD);
     inst_sti.flip(0, SIG_PC_UP);
@@ -448,7 +441,6 @@ int main(){
     inst_inc.flip(0, SIG_LOAD_ZOS);
     inst_inc.flip(0, SIG_AC_LOAD);
     inst_inc.flip(0, SIG_MEM_OE);
-    inst_sti.flip(0, SIG_BUS_EN);
     inst_inc.flip(0, SIG_RI_LOAD);
     inst_inc.flip(0, SIG_PC_OE);
     inst_inc.flip(0, SIG_PC_UP);
@@ -484,17 +476,14 @@ int main(){
     inst_load_abs.flip(0, SIG_PC_UP);
     inst_load_abs.flip(0, SIG_DL_LOAD);
     inst_load_abs.flip(0, SIG_S_DAT_2);
-    inst_load_abs.flip(0, SIG_BUS_EN);
     
     inst_load_abs.flip(1, SIG_MEM_OE);  // DH <- M(PC++)
     inst_load_abs.flip(1, SIG_PC_OE);
     inst_load_abs.flip(1, SIG_PC_UP);
     inst_load_abs.flip(1, SIG_DH_LOAD);
     inst_load_abs.flip(1, SIG_S_DAT_2);
-    inst_load_abs.flip(1, SIG_BUS_EN);
 
     inst_load_abs.flip(2, SIG_MEM_OE);  // AC <- M(D)
-    inst_load_abs.flip(2, SIG_BUS_EN);
     inst_load_abs.flip(2, SIG_D_OE);
     inst_load_abs.flip(2, SIG_S_AC_2);
     inst_load_abs.flip(2, SIG_S_AC_0);
@@ -502,7 +491,6 @@ int main(){
     inst_load_abs.flip(2, SIG_S_DAT_2);
 
     inst_load_abs.flip(3, SIG_MEM_OE);  // RI <- M(PC++), RCF_CLR
-    inst_load_abs.flip(3, SIG_BUS_EN);
     inst_load_abs.flip(3, SIG_PC_OE);
     inst_load_abs.flip(3, SIG_PC_UP);
     inst_load_abs.flip(3, SIG_RI_LOAD);
@@ -521,10 +509,8 @@ int main(){
     inst_load_imm.flip(0, SIG_S_AC_2);
     inst_load_imm.flip(0, SIG_AC_LOAD);
     inst_load_imm.flip(0, SIG_S_DAT_2);
-    inst_load_imm.flip(0, SIG_BUS_EN);
 
     inst_load_imm.flip(1, SIG_MEM_OE);  // RI <- M(PC++), RCF_CLR
-    inst_load_imm.flip(1, SIG_BUS_EN);
     inst_load_imm.flip(1, SIG_PC_OE);
     inst_load_imm.flip(1, SIG_PC_UP);
     inst_load_imm.flip(1, SIG_RI_LOAD);
@@ -541,17 +527,14 @@ int main(){
     inst_load_ind.flip(0, SIG_PC_UP);
     inst_load_ind.flip(0, SIG_DL_LOAD);
     inst_load_ind.flip(0, SIG_S_DAT_2);
-    inst_load_ind.flip(0, SIG_BUS_EN);
 
     inst_load_ind.flip(1, SIG_MEM_OE); // DH <- M(PC++)
     inst_load_ind.flip(1, SIG_PC_OE);
     inst_load_ind.flip(1, SIG_PC_UP);
     inst_load_ind.flip(1, SIG_DH_LOAD);
     inst_load_ind.flip(1, SIG_S_DAT_2);
-    inst_load_ind.flip(1, SIG_BUS_EN);
 
     inst_load_ind.flip(2, SIG_MEM_OE); // AC <- M(D++)
-    inst_load_ind.flip(2, SIG_BUS_EN);
     inst_load_ind.flip(2, SIG_S_DAT_2);
     inst_load_ind.flip(2, SIG_D_OE);
     inst_load_ind.flip(2, SIG_D_UP);
@@ -563,13 +546,11 @@ int main(){
     inst_load_ind.flip(3, SIG_D_OE);
     inst_load_ind.flip(3, SIG_DH_LOAD);
     inst_load_ind.flip(3, SIG_S_DAT_2);
-    inst_load_ind.flip(3, SIG_BUS_EN);
 
     inst_load_ind.flip(4, SIG_S_DAT_0); // DL <- AC
     inst_load_ind.flip(4, SIG_DL_LOAD);
 
     inst_load_ind.flip(5, SIG_MEM_OE); // AC <- M(D)
-    inst_load_ind.flip(5, SIG_BUS_EN);
     inst_load_ind.flip(5, SIG_D_OE);
     inst_load_ind.flip(5, SIG_S_DAT_2);
     inst_load_ind.flip(5, SIG_S_AC_0);
@@ -577,7 +558,6 @@ int main(){
     inst_load_ind.flip(5, SIG_AC_LOAD);
     
     inst_load_ind.flip(6, SIG_MEM_OE); // RI <- M(PC++), RCF_CLR
-    inst_load_ind.flip(6, SIG_BUS_EN);
     inst_load_ind.flip(6, SIG_RI_LOAD);
     inst_load_ind.flip(6, SIG_PC_OE);
     inst_load_ind.flip(6, SIG_PC_UP);
@@ -590,24 +570,20 @@ int main(){
     instruction inst_store_abs(4);
 
     inst_store_abs.flip(0, SIG_MEM_OE); // DL <- M(PC++)
-    inst_store_abs.flip(0, SIG_BUS_EN);
     inst_store_abs.flip(0, SIG_PC_OE);
     inst_store_abs.flip(0, SIG_PC_UP);
     inst_store_abs.flip(0, SIG_DL_LOAD);
 
     inst_store_abs.flip(1, SIG_MEM_OE); // DH <- M(PC++)
-    inst_store_abs.flip(1, SIG_BUS_EN);
     inst_store_abs.flip(1, SIG_PC_OE);
     inst_store_abs.flip(1, SIG_PC_UP);
     inst_store_abs.flip(1, SIG_DH_LOAD);
 
     inst_store_abs.flip(2, SIG_MEM_WE); // M(D) <- AC
-    inst_store_abs.flip(2, SIG_BUS_EN);
     inst_store_abs.flip(2, SIG_S_DAT_0);
     inst_store_abs.flip(2, SIG_D_OE);
 
     inst_store_abs.flip(3, SIG_MEM_OE); // RI <- M(PC++), RCF_CLR
-    inst_store_abs.flip(3, SIG_BUS_EN);
     inst_store_abs.flip(3, SIG_PC_OE);
     inst_store_abs.flip(3, SIG_PC_UP);
     inst_store_abs.flip(3, SIG_RI_LOAD);
@@ -619,14 +595,12 @@ int main(){
     instruction inst_store_ind(7);
 
     inst_store_ind.flip(0, SIG_MEM_OE); // DL <- M(PC++)
-    inst_store_ind.flip(0, SIG_BUS_EN);
     inst_store_ind.flip(0, SIG_S_DAT_2);
     inst_store_ind.flip(0, SIG_PC_OE);
     inst_store_ind.flip(0, SIG_PC_UP);
     inst_store_ind.flip(0, SIG_DL_LOAD);
 
     inst_store_ind.flip(1, SIG_MEM_OE); // DH <- M(PC++), AUX <- AC
-    inst_store_ind.flip(1, SIG_BUS_EN);
     inst_store_ind.flip(1, SIG_S_DAT_2);
     inst_store_ind.flip(1, SIG_PC_OE);
     inst_store_ind.flip(1, SIG_PC_UP);
@@ -634,7 +608,6 @@ int main(){
     inst_store_ind.flip(1, SIG_AUX_LOAD);
 
     inst_store_ind.flip(2, SIG_MEM_OE); // AC <- M(D++)
-    inst_store_ind.flip(2, SIG_BUS_EN);
     inst_store_ind.flip(2, SIG_S_DAT_2);
     inst_store_ind.flip(2, SIG_D_OE);
     inst_store_ind.flip(2, SIG_D_UP);
@@ -643,7 +616,6 @@ int main(){
     inst_store_ind.flip(2, SIG_AC_LOAD);
 
     inst_store_ind.flip(3, SIG_MEM_OE); // DH <- M(D)
-    inst_store_ind.flip(3, SIG_BUS_EN);
     inst_store_ind.flip(3, SIG_S_DAT_2);
     inst_store_ind.flip(3, SIG_D_OE);
     inst_store_ind.flip(3, SIG_DH_LOAD);
@@ -652,7 +624,6 @@ int main(){
     inst_store_ind.flip(4, SIG_DL_LOAD);
 
     inst_store_ind.flip(5, SIG_MEM_WE); // M(D) <- AUX, AC <- AUX
-    inst_store_ind.flip(5, SIG_BUS_EN);
     inst_store_ind.flip(5, SIG_D_OE);
     inst_store_ind.flip(5, SIG_S_AC_2);
     inst_store_ind.flip(5, SIG_S_AC_0);
@@ -662,7 +633,6 @@ int main(){
     inst_store_ind.flip(6, SIG_PC_OE);
     inst_store_ind.flip(6, SIG_PC_UP);
     inst_store_ind.flip(6, SIG_MEM_OE);
-    inst_store_ind.flip(6, SIG_BUS_EN);
     inst_store_ind.flip(6, SIG_RCF_CLR);
 
     microcode[OP_INST_STORE_IND] = inst_store_ind;
@@ -672,21 +642,18 @@ int main(){
     instruction inst_add_abs(4);
 
     inst_add_abs.flip(0, SIG_MEM_OE); // DL <- M(PC++)
-    inst_add_abs.flip(0, SIG_BUS_EN);
     inst_add_abs.flip(0, SIG_S_DAT_2);
     inst_add_abs.flip(0, SIG_PC_OE);
     inst_add_abs.flip(0, SIG_PC_UP);
     inst_add_abs.flip(0, SIG_DL_LOAD);
 
     inst_add_abs.flip(1, SIG_MEM_OE); // DH <- M(PC++)
-    inst_add_abs.flip(1, SIG_BUS_EN);
     inst_add_abs.flip(1, SIG_S_DAT_2);
     inst_add_abs.flip(1, SIG_PC_OE);
     inst_add_abs.flip(1, SIG_PC_UP);
     inst_add_abs.flip(1, SIG_DH_LOAD);
 
     inst_add_abs.flip(2, SIG_MEM_OE); // AC <- AC + M(D), C <- ALU_C, ZOS <- ALU_ZOS
-    inst_add_abs.flip(2, SIG_BUS_EN);
     inst_add_abs.flip(2, SIG_S_DAT_2);
     inst_add_abs.flip(2, SIG_D_OE);
     inst_add_abs.flip(2, SIG_MUX_ZOS);
@@ -696,7 +663,6 @@ int main(){
     inst_add_abs.flip(2, SIG_MUX_C_1);
 
     inst_add_abs.flip(3, SIG_MEM_OE); // RI <- M(PC++), RCF_CLR
-    inst_add_abs.flip(3, SIG_BUS_EN);
     inst_add_abs.flip(3, SIG_RI_LOAD);
     inst_add_abs.flip(3, SIG_PC_OE);
     inst_add_abs.flip(3, SIG_PC_UP);
@@ -709,7 +675,6 @@ int main(){
     instruction inst_add_imm(2);
 
     inst_add_imm.flip(0, SIG_MEM_OE); // AC <- AC + M(PC++), C <- ALU_C, ZOS <- ALU_ZOS
-    inst_add_imm.flip(0, SIG_BUS_EN);
     inst_add_imm.flip(0, SIG_S_DAT_2);
     inst_add_imm.flip(0, SIG_PC_OE);
     inst_add_imm.flip(0, SIG_PC_UP);
@@ -720,7 +685,6 @@ int main(){
     inst_add_imm.flip(0, SIG_MUX_C_1);
 
     inst_add_imm.flip(1, SIG_MEM_OE); // RI <- M(PC++), RCF_CLR
-    inst_add_imm.flip(1, SIG_BUS_EN);
     inst_add_imm.flip(1, SIG_RI_LOAD);
     inst_add_imm.flip(1, SIG_PC_OE);
     inst_add_imm.flip(1, SIG_PC_UP);
@@ -733,21 +697,18 @@ int main(){
     instruction inst_adc_abs(4);
 
     inst_adc_abs.flip(0, SIG_MEM_OE); // DL <- M(PC++)
-    inst_adc_abs.flip(0, SIG_BUS_EN);
     inst_adc_abs.flip(0, SIG_S_DAT_2);
     inst_adc_abs.flip(0, SIG_PC_OE);
     inst_adc_abs.flip(0, SIG_PC_UP);
     inst_adc_abs.flip(0, SIG_DL_LOAD);
 
     inst_adc_abs.flip(1, SIG_MEM_OE); // DH <- (M(PC++))
-    inst_adc_abs.flip(1, SIG_BUS_EN);
     inst_adc_abs.flip(1, SIG_S_DAT_2);
     inst_adc_abs.flip(1, SIG_PC_OE);
     inst_adc_abs.flip(1, SIG_PC_UP);
     inst_adc_abs.flip(1, SIG_DH_LOAD);
 
     inst_adc_abs.flip(2, SIG_MEM_OE); // AC <- AC + M(D) + C, C <- ALU_C, ZOS <- ALU_ZOS
-    inst_adc_abs.flip(2, SIG_BUS_EN);
     inst_adc_abs.flip(2, SIG_S_DAT_2);
     inst_adc_abs.flip(2, SIG_D_OE);
     inst_adc_abs.flip(2, SIG_MUX_ZOS);
@@ -758,7 +719,6 @@ int main(){
     inst_adc_abs.flip(2, SIG_MUX_C_1);
 
     inst_adc_abs.flip(3, SIG_MEM_OE); // RI <- M(PC++), RCF_CLR
-    inst_adc_abs.flip(3, SIG_BUS_EN);
     inst_adc_abs.flip(3, SIG_RI_LOAD);
     inst_adc_abs.flip(3, SIG_PC_OE);
     inst_adc_abs.flip(3, SIG_PC_UP);
@@ -771,7 +731,6 @@ int main(){
     instruction inst_adc_imm(2);
 
     inst_adc_imm.flip(0, SIG_MEM_OE); // AC <- AC + M(PC++) + C, C <- ALU_C, ZOS <- ALU_ZOS
-    inst_adc_imm.flip(0, SIG_BUS_EN);
     inst_adc_imm.flip(0, SIG_S_DAT_2);
     inst_adc_imm.flip(0, SIG_PC_OE);
     inst_adc_imm.flip(0, SIG_PC_UP);
@@ -783,7 +742,6 @@ int main(){
     inst_adc_imm.flip(0, SIG_MUX_C_1);
 
     inst_adc_imm.flip(1, SIG_MEM_OE); // RI <- M(PC++), RCF_CLR
-    inst_adc_imm.flip(1, SIG_BUS_EN);
     inst_adc_imm.flip(1, SIG_RI_LOAD);
     inst_adc_imm.flip(1, SIG_PC_OE);
     inst_adc_imm.flip(1, SIG_PC_UP);
@@ -796,21 +754,18 @@ int main(){
     instruction inst_sub_abs(4);
 
     inst_sub_abs.flip(0, SIG_MEM_OE); // DL <- M(PC++)
-    inst_sub_abs.flip(0, SIG_BUS_EN);
     inst_sub_abs.flip(0, SIG_S_DAT_2);
     inst_sub_abs.flip(0, SIG_PC_OE);
     inst_sub_abs.flip(0, SIG_PC_UP);
     inst_sub_abs.flip(0, SIG_DL_LOAD);
 
     inst_sub_abs.flip(1, SIG_MEM_OE); // DH <- M(PC++)
-    inst_sub_abs.flip(1, SIG_BUS_EN);
     inst_sub_abs.flip(1, SIG_S_DAT_2);
     inst_sub_abs.flip(1, SIG_PC_OE);
     inst_sub_abs.flip(1, SIG_PC_UP);
     inst_sub_abs.flip(1, SIG_DH_LOAD);
 
     inst_sub_abs.flip(2, SIG_MEM_OE); // AC <- AC + NOT(M(D)) + 1, C <- ALU_C, ZOS <- ALU_ZOS
-    inst_sub_abs.flip(2, SIG_BUS_EN);
     inst_sub_abs.flip(2, SIG_D_OE);
     inst_sub_abs.flip(2, SIG_MUX_ADD);
     inst_sub_abs.flip(2, SIG_MUX_CI_0);
@@ -822,7 +777,6 @@ int main(){
     inst_sub_abs.flip(2, SIG_AC_LOAD);
 
     inst_sub_abs.flip(3, SIG_MEM_OE); // RI <- M(PC++), RCF_CLR
-    inst_sub_abs.flip(3, SIG_BUS_EN);
     inst_sub_abs.flip(3, SIG_RI_LOAD);
     inst_sub_abs.flip(3, SIG_PC_OE);
     inst_sub_abs.flip(3, SIG_PC_UP);
@@ -835,7 +789,6 @@ int main(){
     instruction inst_sub_imm(2);
 
     inst_sub_imm.flip(0, SIG_MEM_OE); // AUX <- AC, AC <- NOT(M(PC++))
-    inst_sub_imm.flip(0, SIG_BUS_EN);
     inst_sub_imm.flip(0, SIG_PC_OE);
     inst_sub_imm.flip(0, SIG_PC_UP);
     inst_sub_imm.flip(0, SIG_S_AC_2);
@@ -843,7 +796,6 @@ int main(){
     inst_sub_imm.flip(0, SIG_AUX_LOAD);
     
     inst_sub_imm.flip(1, SIG_MEM_OE); // AC <- AC + AUX + 1, ZOS <- ALU_ZOS, RI <- M(PC++), RCF_CLR
-    inst_sub_imm.flip(1, SIG_BUS_EN);
     inst_sub_imm.flip(1, SIG_AC_LOAD);
     inst_sub_imm.flip(1, SIG_MUX_CI_0);
     inst_sub_imm.flip(1, SIG_MUX_ZOS);
@@ -862,19 +814,16 @@ int main(){
     instruction inst_and_abs(4);
 
     inst_and_abs.flip(0, SIG_MEM_OE); // DL <- M(PC++)
-    inst_and_abs.flip(0, SIG_BUS_EN);
     inst_and_abs.flip(0, SIG_PC_OE);
     inst_and_abs.flip(0, SIG_PC_UP);
     inst_and_abs.flip(0, SIG_DL_LOAD);
 
     inst_and_abs.flip(1, SIG_MEM_OE); // DH <- M(PC++)
-    inst_and_abs.flip(1, SIG_BUS_EN);
     inst_and_abs.flip(1, SIG_PC_OE);
     inst_and_abs.flip(1, SIG_PC_UP);
     inst_and_abs.flip(1, SIG_DH_LOAD);
 
     inst_and_abs.flip(2, SIG_MEM_OE); // AC <- AC & M(D), ZOS <- ALU_ZOS
-    inst_and_abs.flip(2, SIG_BUS_EN);
     inst_and_abs.flip(2, SIG_S_DAT_2);
     inst_and_abs.flip(2, SIG_D_OE);
     inst_and_abs.flip(2, SIG_S_AC_1);
@@ -883,7 +832,6 @@ int main(){
     inst_and_abs.flip(2, SIG_LOAD_ZOS);
 
     inst_and_abs.flip(3, SIG_MEM_OE); // RI <- M(PC++), RCF_CLR
-    inst_and_abs.flip(3, SIG_BUS_EN);
     inst_and_abs.flip(3, SIG_RI_LOAD);
     inst_and_abs.flip(3, SIG_PC_OE);
     inst_and_abs.flip(3, SIG_PC_UP);
@@ -901,13 +849,11 @@ int main(){
     inst_and_imm.flip(0, SIG_PC_OE);
     inst_and_imm.flip(0, SIG_PC_UP);
     inst_and_imm.flip(0, SIG_MEM_OE);
-    inst_and_imm.flip(0, SIG_BUS_EN);
     inst_and_imm.flip(0, SIG_S_DAT_2);
     inst_and_imm.flip(0, SIG_MUX_ZOS);
     inst_and_imm.flip(0, SIG_LOAD_ZOS);
 
     inst_and_imm.flip(1, SIG_MEM_OE); // RI <- M(PC++), RCF_CLR
-    inst_and_imm.flip(1, SIG_BUS_EN);
     inst_and_imm.flip(1, SIG_RI_LOAD);
     inst_and_imm.flip(1, SIG_PC_OE);
     inst_and_imm.flip(1, SIG_PC_UP);
@@ -920,19 +866,16 @@ int main(){
     instruction inst_or_abs(4);
 
     inst_or_abs.flip(0, SIG_MEM_OE); // DL <- M(PC++)
-    inst_or_abs.flip(0, SIG_BUS_EN);
     inst_or_abs.flip(0, SIG_PC_OE);
     inst_or_abs.flip(0, SIG_PC_UP);
     inst_or_abs.flip(0, SIG_DL_LOAD);
 
     inst_or_abs.flip(1, SIG_MEM_OE); // DH <- M(PC++)
-    inst_or_abs.flip(1, SIG_BUS_EN);
     inst_or_abs.flip(1, SIG_PC_OE);
     inst_or_abs.flip(1, SIG_PC_UP);
     inst_or_abs.flip(1, SIG_DH_LOAD);
 
     inst_or_abs.flip(2, SIG_MEM_OE); // AC <- AC | M(D), ZOS <- ALU_ZOS
-    inst_or_abs.flip(2, SIG_BUS_EN);
     inst_or_abs.flip(2, SIG_D_OE);
     inst_or_abs.flip(2, SIG_S_AC_1);
     inst_or_abs.flip(2, SIG_S_AC_0);
@@ -941,7 +884,6 @@ int main(){
     inst_or_abs.flip(2, SIG_LOAD_ZOS);
 
     inst_or_abs.flip(3, SIG_MEM_OE); // RI <- M(PC++), RCF_CLR
-    inst_or_abs.flip(3, SIG_BUS_EN);
     inst_or_abs.flip(3, SIG_RI_LOAD);
     inst_or_abs.flip(3, SIG_PC_OE);
     inst_or_abs.flip(3, SIG_PC_UP);
@@ -958,13 +900,11 @@ int main(){
     inst_or_imm.flip(0, SIG_PC_OE);
     inst_or_imm.flip(0, SIG_PC_UP);
     inst_or_imm.flip(0, SIG_MEM_OE);
-    inst_or_imm.flip(0, SIG_BUS_EN);
     inst_or_imm.flip(0, SIG_S_DAT_2);
     inst_or_imm.flip(0, SIG_MUX_ZOS);
     inst_or_imm.flip(0, SIG_LOAD_ZOS);
 
     inst_or_imm.flip(1, SIG_MEM_OE); // RI <- M(PC++), RCF_CLR
-    inst_or_imm.flip(1, SIG_BUS_EN);
     inst_or_imm.flip(1, SIG_RI_LOAD);
     inst_or_imm.flip(1, SIG_PC_OE);
     inst_or_imm.flip(1, SIG_PC_UP);
@@ -980,7 +920,6 @@ int main(){
     inst_not.flip(0, SIG_S_AC_2);
     inst_not.flip(0, SIG_S_DAT_0);
     inst_not.flip(0, SIG_RI_LOAD);
-    inst_not.flip(0, SIG_BUS_EN);
     inst_not.flip(0, SIG_MEM_OE);
     inst_not.flip(0, SIG_PC_OE);
     inst_not.flip(0, SIG_PC_UP);
@@ -1001,7 +940,6 @@ int main(){
     inst_neg.flip(1, SIG_S_DAT_2);
     inst_neg.flip(1, SIG_S_DAT_1);
     inst_neg.flip(1, SIG_RI_LOAD);
-    inst_neg.flip(1, SIG_BUS_EN);
     inst_neg.flip(1, SIG_MEM_OE);
     inst_neg.flip(1, SIG_PC_OE);
     inst_neg.flip(1, SIG_PC_UP);
@@ -1014,21 +952,18 @@ int main(){
     instruction inst_cmp_abs(4);
 
     inst_cmp_abs.flip(0, SIG_MEM_OE); // DL <- M(PC++)
-    inst_cmp_abs.flip(0, SIG_BUS_EN);
     inst_cmp_abs.flip(0, SIG_S_DAT_2);
     inst_cmp_abs.flip(0, SIG_PC_OE);
     inst_cmp_abs.flip(0, SIG_PC_UP);
     inst_cmp_abs.flip(0, SIG_DL_LOAD);
 
     inst_cmp_abs.flip(1, SIG_MEM_OE); // DH <- M(PC++)
-    inst_cmp_abs.flip(1, SIG_BUS_EN);
     inst_cmp_abs.flip(1, SIG_S_DAT_2);
     inst_cmp_abs.flip(1, SIG_PC_OE);
     inst_cmp_abs.flip(1, SIG_PC_UP);
     inst_cmp_abs.flip(1, SIG_DH_LOAD);
 
     inst_cmp_abs.flip(2, SIG_MEM_OE); // (nada) <- AC + NOT(M(D)) + 1, C <- ALU_C, ZOS <- ALU_ZOS
-    inst_cmp_abs.flip(2, SIG_BUS_EN);
     inst_cmp_abs.flip(2, SIG_D_OE);
     inst_cmp_abs.flip(2, SIG_MUX_ADD);
     inst_cmp_abs.flip(2, SIG_MUX_CI_0);
@@ -1039,7 +974,6 @@ int main(){
     inst_cmp_abs.flip(2, SIG_S_DAT_2);
 
     inst_cmp_abs.flip(3, SIG_MEM_OE); // RI <- M(PC++), RCF_CLR
-    inst_cmp_abs.flip(3, SIG_BUS_EN);
     inst_cmp_abs.flip(3, SIG_RI_LOAD);
     inst_cmp_abs.flip(3, SIG_PC_OE);
     inst_cmp_abs.flip(3, SIG_PC_UP);
@@ -1052,7 +986,6 @@ int main(){
     instruction inst_cmp_imm(2);
 
     inst_cmp_imm.flip(0, SIG_MEM_OE); // AUX <- AC, AC <- NOT(M(PC++))
-    inst_cmp_imm.flip(0, SIG_BUS_EN);
     inst_cmp_imm.flip(0, SIG_PC_OE);
     inst_cmp_imm.flip(0, SIG_PC_UP);
     inst_cmp_imm.flip(0, SIG_S_AC_2);
@@ -1060,7 +993,6 @@ int main(){
     inst_cmp_imm.flip(0, SIG_AUX_LOAD);
     
     inst_cmp_imm.flip(1, SIG_MEM_OE); // (nada) <- AC + AUX + 1, C <- ALU_C, ZOS <- ALU_ZOS, RI <- M(PC++), RCF_CLR
-    inst_cmp_imm.flip(1, SIG_BUS_EN);
     inst_cmp_imm.flip(1, SIG_MUX_CI_0);
     inst_cmp_imm.flip(1, SIG_MUX_ZOS);
     inst_cmp_imm.flip(1, SIG_LOAD_ZOS);
@@ -1079,7 +1011,6 @@ int main(){
     instruction inst_nop(1);
     
     inst_nop.flip(0, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
-    inst_nop.flip(0, SIG_BUS_EN);
     inst_nop.flip(0, SIG_PC_OE);
     inst_nop.flip(0, SIG_PC_UP);
     inst_nop.flip(0, SIG_MEM_OE);
@@ -1099,14 +1030,12 @@ int main(){
     instruction inst_jmp_ind(7);
 
     inst_jmp_ind.flip(0, SIG_MEM_OE);   // DL <- M(PC++)
-    inst_jmp_ind.flip(0, SIG_BUS_EN);
     inst_jmp_ind.flip(0, SIG_PC_OE);
     inst_jmp_ind.flip(0, SIG_PC_UP);
     inst_jmp_ind.flip(0, SIG_DL_LOAD);
     inst_jmp_ind.flip(0, SIG_S_DAT_2);
 
     inst_jmp_ind.flip(1, SIG_MEM_OE);   // DH <- M(PC++), AUX <- AC
-    inst_jmp_ind.flip(1, SIG_BUS_EN);
     inst_jmp_ind.flip(1, SIG_PC_OE);
     inst_jmp_ind.flip(1, SIG_PC_UP);
     inst_jmp_ind.flip(1, SIG_DH_LOAD);
@@ -1114,14 +1043,12 @@ int main(){
     inst_jmp_ind.flip(1, SIG_AUX_LOAD);
 
     inst_jmp_ind.flip(2, SIG_AC_LOAD); // AC <- M(D++)
-    inst_jmp_ind.flip(2, SIG_BUS_EN);
     inst_jmp_ind.flip(2, SIG_MEM_OE);
     inst_jmp_ind.flip(2, SIG_D_OE);
     inst_jmp_ind.flip(2, SIG_D_UP);
 
     inst_jmp_ind.flip(3, SIG_DH_LOAD); // DH <- M(D++)
     inst_jmp_ind.flip(3, SIG_MEM_OE);
-    inst_jmp_ind.flip(3, SIG_BUS_EN);
     inst_jmp_ind.flip(3, SIG_D_OE);
     inst_jmp_ind.flip(3, SIG_D_UP);
 
@@ -1135,7 +1062,6 @@ int main(){
 
     inst_jmp_ind.flip(6, SIG_PC_UP);    // PC++, RI <- M(D), RCF_CLR
     inst_jmp_ind.flip(6, SIG_MEM_OE);
-    inst_jmp_ind.flip(6, SIG_BUS_EN);
     inst_jmp_ind.flip(6, SIG_D_OE);
     inst_jmp_ind.flip(6, SIG_RI_LOAD);
     inst_jmp_ind.flip(6, SIG_RCF_CLR);
@@ -1153,7 +1079,6 @@ int main(){
     inst_shl.flip(0, SIG_MUX_C_0);
     inst_shl.flip(0, SIG_LOAD_C);
     inst_shl.flip(0, SIG_RI_LOAD);
-    inst_shl.flip(0, SIG_BUS_EN);
     inst_shl.flip(0, SIG_PC_OE);
     inst_shl.flip(0, SIG_PC_UP);
     inst_shl.flip(0, SIG_MEM_OE);
@@ -1173,7 +1098,6 @@ int main(){
     inst_shr_signed.flip(0, SIG_LOAD_ZOS);
     inst_shr_signed.flip(0, SIG_LOAD_C);
     inst_shr_signed.flip(0, SIG_RI_LOAD);
-    inst_shr_signed.flip(0, SIG_BUS_EN);
     inst_shr_signed.flip(0, SIG_PC_OE);
     inst_shr_signed.flip(0, SIG_PC_UP);
     inst_shr_signed.flip(0, SIG_MEM_OE);
@@ -1191,7 +1115,6 @@ int main(){
     inst_shr_unsigned.flip(0, SIG_LOAD_ZOS);
     inst_shr_unsigned.flip(0, SIG_LOAD_C);
     inst_shr_unsigned.flip(0, SIG_RI_LOAD);
-    inst_shr_unsigned.flip(0, SIG_BUS_EN);
     inst_shr_unsigned.flip(0, SIG_PC_OE);
     inst_shr_unsigned.flip(0, SIG_PC_UP);
     inst_shr_unsigned.flip(0, SIG_MEM_OE);
@@ -1212,7 +1135,6 @@ int main(){
     inst_rol.flip(0, SIG_MUX_C_0);
     inst_rol.flip(0, SIG_LOAD_C);
     inst_rol.flip(0, SIG_RI_LOAD);
-    inst_rol.flip(0, SIG_BUS_EN);
     inst_rol.flip(0, SIG_PC_OE);
     inst_rol.flip(0, SIG_PC_UP);
     inst_rol.flip(0, SIG_MEM_OE);
@@ -1231,7 +1153,6 @@ int main(){
     inst_ror.flip(0, SIG_LOAD_ZOS);
     inst_ror.flip(0, SIG_LOAD_C);
     inst_ror.flip(0, SIG_RI_LOAD);
-    inst_ror.flip(0, SIG_BUS_EN);
     inst_ror.flip(0, SIG_PC_OE);
     inst_ror.flip(0, SIG_PC_UP);
     inst_ror.flip(0, SIG_MEM_OE);
@@ -1244,21 +1165,18 @@ int main(){
     instruction inst_in_ind(7);
 
     inst_in_ind.flip(0, SIG_DL_LOAD); // DL <- M(PC++)
-    inst_in_ind.flip(0, SIG_BUS_EN);
     inst_in_ind.flip(0, SIG_MEM_OE);
     inst_in_ind.flip(0, SIG_PC_OE);
     inst_in_ind.flip(0, SIG_PC_UP);
     inst_in_ind.flip(0, SIG_S_DAT_2);
 
     inst_in_ind.flip(1, SIG_DH_LOAD); // DH <- M(PC++)
-    inst_in_ind.flip(1, SIG_BUS_EN);
     inst_in_ind.flip(1, SIG_MEM_OE);
     inst_in_ind.flip(1, SIG_PC_OE);
     inst_in_ind.flip(1, SIG_PC_UP);
     inst_in_ind.flip(1, SIG_S_DAT_2);
 
     inst_in_ind.flip(2, SIG_AC_LOAD); // AC <- M(D++)
-    inst_in_ind.flip(2, SIG_BUS_EN);
     inst_in_ind.flip(2, SIG_MEM_OE);
     inst_in_ind.flip(2, SIG_D_OE);
     inst_in_ind.flip(2, SIG_D_UP);
@@ -1267,7 +1185,6 @@ int main(){
     inst_in_ind.flip(2, SIG_S_AC_2);
 
     inst_in_ind.flip(3, SIG_DH_LOAD); // DH <- M(D)
-    inst_in_ind.flip(3, SIG_BUS_EN);
     inst_in_ind.flip(3, SIG_MEM_OE);
     inst_in_ind.flip(3, SIG_D_OE);
     inst_in_ind.flip(3, SIG_S_DAT_2);
@@ -1276,14 +1193,12 @@ int main(){
     inst_in_ind.flip(4, SIG_S_DAT_0);
 
     inst_in_ind.flip(5, SIG_AC_LOAD); // AC <- IO(D)
-    inst_in_ind.flip(5, SIG_BUS_EN);
     inst_in_ind.flip(5, SIG_MEM_IO);
     inst_in_ind.flip(5, SIG_MEM_OE);
     inst_in_ind.flip(5, SIG_D_OE);
     inst_in_ind.flip(5, SIG_S_DAT_2);
 
     inst_in_ind.flip(6, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
-    inst_in_ind.flip(6, SIG_BUS_EN);
     inst_in_ind.flip(6, SIG_PC_OE);
     inst_in_ind.flip(6, SIG_PC_UP);
     inst_in_ind.flip(6, SIG_MEM_OE);
@@ -1299,8 +1214,7 @@ int main(){
     inst_push_ac.flip(0, SIG_SP_DOWN);
     inst_push_ac.flip(0, SIG_S_DAT_0);
 
-    inst_push_ac.flip(1, SIG_BUS_EN); // RI <- M(PC++), RCF_CLR
-    inst_push_ac.flip(1, SIG_MEM_OE);
+    inst_push_ac.flip(1, SIG_MEM_OE); // RI <- M(PC++), RCF_CLR
     inst_push_ac.flip(1, SIG_PC_OE);
     inst_push_ac.flip(1, SIG_PC_UP);
     inst_push_ac.flip(1, SIG_RI_LOAD);
@@ -1316,13 +1230,11 @@ int main(){
     inst_pop.flip(0, SIG_S_AC_0);
     inst_pop.flip(0, SIG_S_AC_2);
     inst_pop.flip(0, SIG_S_DAT_2);
-    inst_pop.flip(0, SIG_BUS_EN);
     inst_pop.flip(0, SIG_MEM_OE);
     inst_pop.flip(0, SIG_SP_OE);
     inst_pop.flip(0, SIG_SP_UP);
 
     inst_pop.flip(1, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
-    inst_pop.flip(1, SIG_BUS_EN);
     inst_pop.flip(1, SIG_MEM_OE);
     inst_pop.flip(1, SIG_PC_OE);
     inst_pop.flip(1, SIG_PC_UP);
@@ -1335,14 +1247,12 @@ int main(){
     instruction inst_call(7);
 
     inst_call.flip(0, SIG_DL_LOAD); // DL <- M(PC++)
-    inst_call.flip(0, SIG_BUS_EN);
     inst_call.flip(0, SIG_PC_OE);
     inst_call.flip(0, SIG_PC_UP);
     inst_call.flip(0, SIG_MEM_OE);
     inst_call.flip(0, SIG_S_DAT_2);
 
     inst_call.flip(1, SIG_DH_LOAD); // DH <- M(PC++), AUX <- AC
-    inst_call.flip(1, SIG_BUS_EN);
     inst_call.flip(1, SIG_PC_OE);
     inst_call.flip(1, SIG_PC_UP);
     inst_call.flip(1, SIG_MEM_OE);
@@ -1355,7 +1265,6 @@ int main(){
     inst_call.flip(2, SIG_S_AC_2);
 
     inst_call.flip(3, SIG_MEM_WE); // M(SP--) <- AC
-    inst_call.flip(3, SIG_BUS_EN);
     inst_call.flip(3, SIG_SP_OE);
     inst_call.flip(3, SIG_SP_DOWN);
     inst_call.flip(3, SIG_S_DAT_0);
@@ -1368,7 +1277,6 @@ int main(){
     inst_call.flip(4, SIG_S_AC_2);
 
     inst_call.flip(5, SIG_MEM_WE); // M(SP--) <- AC, PC <- D
-    inst_call.flip(5, SIG_BUS_EN);
     inst_call.flip(5, SIG_SP_OE);
     inst_call.flip(5, SIG_SP_DOWN);
     inst_call.flip(5, SIG_S_DAT_0);
@@ -1378,7 +1286,6 @@ int main(){
     inst_call.flip(6, SIG_S_AC_0);
     inst_call.flip(6, SIG_S_AC_2);
     inst_call.flip(6, SIG_RI_LOAD);
-    inst_call.flip(6, SIG_BUS_EN);
     inst_call.flip(6, SIG_MEM_OE);
     inst_call.flip(6, SIG_PC_OE);
     inst_call.flip(6, SIG_PC_UP);
@@ -1391,14 +1298,12 @@ int main(){
     instruction inst_ret(4);
 
     inst_ret.flip(0, SIG_DH_LOAD); // DH <- M(SP++)
-    inst_ret.flip(0, SIG_BUS_EN);
     inst_ret.flip(0, SIG_MEM_OE);
     inst_ret.flip(0, SIG_SP_OE);
     inst_ret.flip(0, SIG_SP_UP);
     inst_ret.flip(0, SIG_S_DAT_2);
 
     inst_ret.flip(1, SIG_DL_LOAD); // DL <- M(SP++)
-    inst_ret.flip(1, SIG_BUS_EN);
     inst_ret.flip(1, SIG_MEM_OE);
     inst_ret.flip(1, SIG_SP_OE);
     inst_ret.flip(1, SIG_SP_UP);
@@ -1407,7 +1312,6 @@ int main(){
     inst_ret.flip(2, SIG_PC_LOAD); // PC <- D
 
     inst_ret.flip(3, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
-    inst_ret.flip(3, SIG_BUS_EN);
     inst_ret.flip(3, SIG_MEM_OE);
     inst_ret.flip(3, SIG_PC_OE);
     inst_ret.flip(3, SIG_PC_UP);
@@ -1421,7 +1325,6 @@ int main(){
 
     inst_int.flip(0, SIG_AUX_LOAD); // AUX <- AC, AC <- M(PC++)
     inst_int.flip(0, SIG_AC_LOAD);
-    inst_int.flip(0, SIG_BUS_EN);
     inst_int.flip(0, SIG_MEM_OE);
     inst_int.flip(0, SIG_PC_OE);
     inst_int.flip(0, SIG_PC_UP);
@@ -1437,14 +1340,12 @@ int main(){
     inst_int.flip(3, SIG_AC_LOAD); // AC <- M(D++)
     inst_int.flip(3, SIG_S_AC_0);
     inst_int.flip(3, SIG_S_AC_2);
-    inst_int.flip(3, SIG_BUS_EN);
     inst_int.flip(3, SIG_MEM_OE);
     inst_int.flip(3, SIG_D_OE);
     inst_int.flip(3, SIG_D_UP);
     inst_int.flip(3, SIG_S_DAT_2);
     
     inst_int.flip(4, SIG_DH_LOAD); // DH <- M(D++)
-    inst_int.flip(4, SIG_BUS_EN);
     inst_int.flip(4, SIG_MEM_OE);
     inst_int.flip(4, SIG_D_OE);
     inst_int.flip(4, SIG_D_UP);
@@ -1460,7 +1361,6 @@ int main(){
     inst_int.flip(6, SIG_S_AC_2);
 
     inst_int.flip(7, SIG_S_DAT_0); // M(SP--) <- AC
-    inst_int.flip(7, SIG_BUS_EN);
     inst_int.flip(7, SIG_MEM_WE);
     inst_int.flip(7, SIG_SP_OE);
     inst_int.flip(7, SIG_SP_DOWN);
@@ -1473,13 +1373,11 @@ int main(){
     inst_int.flip(8, SIG_S_AC_2);
 
     inst_int.flip(9, SIG_MEM_WE); // M(SP--) <- AC
-    inst_int.flip(9, SIG_BUS_EN);
     inst_int.flip(9, SIG_SP_OE);
     inst_int.flip(9, SIG_SP_DOWN);
     inst_int.flip(9, SIG_S_DAT_0);
 
     inst_int.flip(10, SIG_MEM_WE); // M(SP--) <- EST
-    inst_int.flip(10, SIG_BUS_EN);
     inst_int.flip(10, SIG_SP_OE);
     inst_int.flip(10, SIG_SP_DOWN);
     inst_int.flip(10, SIG_S_DAT_0);
@@ -1491,7 +1389,6 @@ int main(){
     inst_int.flip(11, SIG_S_AC_2);
     
     inst_int.flip(12, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
-    inst_int.flip(12, SIG_BUS_EN);
     inst_int.flip(12, SIG_MEM_OE);
     inst_int.flip(12, SIG_PC_OE);
     inst_int.flip(12, SIG_PC_UP);
@@ -1506,21 +1403,18 @@ int main(){
     inst_iret.flip(0, SIG_LOAD_I); // EST <- M(SP++)
     inst_iret.flip(0, SIG_LOAD_C);
     inst_iret.flip(0, SIG_LOAD_ZOS);
-    inst_iret.flip(0, SIG_BUS_EN);
     inst_iret.flip(0, SIG_SP_OE);
     inst_iret.flip(0, SIG_SP_UP);
     inst_iret.flip(0, SIG_MEM_OE);
     inst_iret.flip(0, SIG_S_DAT_2);
 
-    inst_iret.flip(1, SIG_BUS_EN); // DH <- M(SP++)
-    inst_iret.flip(1, SIG_MEM_OE);
+    inst_iret.flip(1, SIG_MEM_OE); // DH <- M(SP++)
     inst_iret.flip(1, SIG_DH_LOAD);
     inst_iret.flip(1, SIG_SP_OE);
     inst_iret.flip(1, SIG_SP_UP);
     inst_iret.flip(1, SIG_S_DAT_2);
 
-    inst_iret.flip(2, SIG_BUS_EN); // DL <- M(SP++)
-    inst_iret.flip(2, SIG_MEM_OE);
+    inst_iret.flip(2, SIG_MEM_OE); // DL <- M(SP++)
     inst_iret.flip(2, SIG_DL_LOAD);
     inst_iret.flip(2, SIG_SP_OE);
     inst_iret.flip(2, SIG_SP_UP);
@@ -1529,7 +1423,6 @@ int main(){
     inst_iret.flip(3, SIG_PC_LOAD); // PC <- D
 
     inst_iret.flip(4, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
-    inst_iret.flip(4, SIG_BUS_EN);
     inst_iret.flip(4, SIG_MEM_OE);
     inst_iret.flip(4, SIG_PC_OE);
     inst_iret.flip(4, SIG_PC_UP);
@@ -1542,14 +1435,12 @@ int main(){
     instruction inst_stsp(4);
 
     inst_stsp.flip(0, SIG_DL_LOAD); // DL <- M(PC++)
-    inst_stsp.flip(0, SIG_BUS_EN);
     inst_stsp.flip(0, SIG_MEM_OE);
     inst_stsp.flip(0, SIG_PC_OE);
     inst_stsp.flip(0, SIG_PC_UP);
     inst_stsp.flip(0, SIG_S_DAT_2);
 
     inst_stsp.flip(1, SIG_DH_LOAD); // DH <- M(PC++)
-    inst_stsp.flip(1, SIG_BUS_EN);
     inst_stsp.flip(1, SIG_MEM_OE);
     inst_stsp.flip(1, SIG_PC_OE);
     inst_stsp.flip(1, SIG_PC_UP);
@@ -1558,32 +1449,30 @@ int main(){
     inst_stsp.flip(2, SIG_SP_LOAD); // SP <- D
 
     inst_stsp.flip(3, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
-    inst_stsp.flip(3, SIG_BUS_EN);
     inst_stsp.flip(3, SIG_MEM_OE);
     inst_stsp.flip(3, SIG_PC_OE);
     inst_stsp.flip(3, SIG_PC_UP);
     inst_stsp.flip(3, SIG_RCF_CLR);
+
+    microcode[OP_INST_STSP] = inst_stsp;
 
     // OUT (ind) (0x38) (puntero de E/S almacenado en memoria)
 
     instruction inst_out_ind(7);
 
     inst_out_ind.flip(0, SIG_DL_LOAD); // DL <- M(PC++)
-    inst_out_ind.flip(0, SIG_BUS_EN);
     inst_out_ind.flip(0, SIG_MEM_OE);
     inst_out_ind.flip(0, SIG_PC_OE);
     inst_out_ind.flip(0, SIG_PC_UP);
     inst_out_ind.flip(0, SIG_S_DAT_2);
 
     inst_out_ind.flip(1, SIG_DH_LOAD); // DH <- M(PC++)
-    inst_out_ind.flip(1, SIG_BUS_EN);
     inst_out_ind.flip(1, SIG_MEM_OE);
     inst_out_ind.flip(1, SIG_PC_OE);
     inst_out_ind.flip(1, SIG_PC_UP);
     inst_out_ind.flip(1, SIG_S_DAT_2);
 
     inst_out_ind.flip(2, SIG_AC_LOAD); // AC <- M(D++)
-    inst_out_ind.flip(2, SIG_BUS_EN);
     inst_out_ind.flip(2, SIG_MEM_OE);
     inst_out_ind.flip(2, SIG_D_OE);
     inst_out_ind.flip(2, SIG_D_UP);
@@ -1592,7 +1481,6 @@ int main(){
     inst_out_ind.flip(2, SIG_S_AC_2);
 
     inst_out_ind.flip(3, SIG_DH_LOAD); // DH <- M(D)
-    inst_out_ind.flip(3, SIG_BUS_EN);
     inst_out_ind.flip(3, SIG_MEM_OE);
     inst_out_ind.flip(3, SIG_D_OE);
     inst_out_ind.flip(3, SIG_S_DAT_2);
@@ -1600,14 +1488,12 @@ int main(){
     inst_out_ind.flip(4, SIG_DL_LOAD); // DL <- AC
     inst_out_ind.flip(4, SIG_S_DAT_0);
 
-    inst_out_ind.flip(5, SIG_BUS_EN); // IO(D) <- AC
-    inst_out_ind.flip(5, SIG_MEM_IO);
+    inst_out_ind.flip(5, SIG_MEM_IO); // IO(D) <- AC
     inst_out_ind.flip(5, SIG_MEM_WE);
     inst_out_ind.flip(5, SIG_D_OE);
     inst_out_ind.flip(5, SIG_S_DAT_0);
 
     inst_out_ind.flip(6, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
-    inst_out_ind.flip(6, SIG_BUS_EN);
     inst_out_ind.flip(6, SIG_PC_OE);
     inst_out_ind.flip(6, SIG_PC_UP);
     inst_out_ind.flip(6, SIG_MEM_OE);
@@ -1626,7 +1512,6 @@ int main(){
     inst_ldspl.flip(0, SIG_S_AC_2);
 
     inst_ldspl.flip(1, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
-    inst_ldspl.flip(1, SIG_BUS_EN);
     inst_ldspl.flip(1, SIG_MEM_OE);
     inst_ldspl.flip(1, SIG_PC_OE);
     inst_ldspl.flip(1, SIG_PC_UP);
@@ -1646,7 +1531,6 @@ int main(){
     inst_rcl.flip(0, SIG_MUX_C_0);
     inst_rcl.flip(0, SIG_LOAD_C);
     inst_rcl.flip(0, SIG_RI_LOAD);
-    inst_rcl.flip(0, SIG_BUS_EN);
     inst_rcl.flip(0, SIG_PC_OE);
     inst_rcl.flip(0, SIG_PC_UP);
     inst_rcl.flip(0, SIG_MEM_OE);
@@ -1665,7 +1549,6 @@ int main(){
     inst_rcr.flip(0, SIG_LOAD_ZOS);
     inst_rcr.flip(0, SIG_LOAD_C);
     inst_rcr.flip(0, SIG_RI_LOAD);
-    inst_rcr.flip(0, SIG_BUS_EN);
     inst_rcr.flip(0, SIG_PC_OE);
     inst_rcr.flip(0, SIG_PC_UP);
     inst_rcr.flip(0, SIG_MEM_OE);
@@ -1679,7 +1562,6 @@ int main(){
 
     inst_cmp_ind.flip(0, SIG_DL_LOAD); // DL <- M(PC++)
     inst_cmp_ind.flip(0, SIG_MEM_OE);
-    inst_cmp_ind.flip(0, SIG_BUS_EN);
     inst_cmp_ind.flip(0, SIG_PC_OE);
     inst_cmp_ind.flip(0, SIG_PC_UP);
     inst_cmp_ind.flip(0, SIG_S_DAT_2);
@@ -1687,13 +1569,11 @@ int main(){
     inst_cmp_ind.flip(1, SIG_AUX_LOAD); // AUX <- AC, DH <- M(PC++)
     inst_cmp_ind.flip(1, SIG_DH_LOAD);
     inst_cmp_ind.flip(1, SIG_MEM_OE);
-    inst_cmp_ind.flip(1, SIG_BUS_EN);
     inst_cmp_ind.flip(1, SIG_PC_OE);
     inst_cmp_ind.flip(1, SIG_PC_UP);
     inst_cmp_ind.flip(1, SIG_S_DAT_2);
 
     inst_cmp_ind.flip(2, SIG_MEM_OE); // AC <- M(D++)
-    inst_cmp_ind.flip(2, SIG_BUS_EN);
     inst_cmp_ind.flip(2, SIG_S_DAT_2);
     inst_cmp_ind.flip(2, SIG_D_OE);
     inst_cmp_ind.flip(2, SIG_D_UP);
@@ -1701,7 +1581,6 @@ int main(){
     inst_cmp_ind.flip(2, SIG_AC_LOAD);
 
     inst_cmp_ind.flip(3, SIG_MEM_OE); // DH <- M(D)
-    inst_cmp_ind.flip(3, SIG_BUS_EN);
     inst_cmp_ind.flip(3, SIG_S_DAT_2);
     inst_cmp_ind.flip(3, SIG_D_OE);
     inst_cmp_ind.flip(3, SIG_DH_LOAD);
@@ -1710,7 +1589,6 @@ int main(){
     inst_cmp_ind.flip(4, SIG_DL_LOAD);
 
     inst_cmp_ind.flip(5, SIG_MEM_OE); // (nada) <- AC + NOT(M(D)) + 1, C <- ALU_C, ZOS <- ALU_ZOS
-    inst_cmp_ind.flip(5, SIG_BUS_EN);
     inst_cmp_ind.flip(5, SIG_D_OE);
     inst_cmp_ind.flip(5, SIG_MUX_ADD);
     inst_cmp_ind.flip(5, SIG_MUX_CI_0);
@@ -1723,7 +1601,6 @@ int main(){
     inst_cmp_ind.flip(6, SIG_MEM_OE); // AC <- AUX, RI <- M(PC++), RCF_CLR
     inst_cmp_ind.flip(6, SIG_S_AC_0);
     inst_cmp_ind.flip(6, SIG_S_AC_2);
-    inst_cmp_ind.flip(6, SIG_BUS_EN);
     inst_cmp_ind.flip(6, SIG_RI_LOAD);
     inst_cmp_ind.flip(6, SIG_PC_OE);
     inst_cmp_ind.flip(6, SIG_PC_UP);
@@ -1737,25 +1614,21 @@ int main(){
 
     inst_in_abs.flip(0, SIG_DL_LOAD); // DL <- M(PC++)
     inst_in_abs.flip(0, SIG_MEM_OE);
-    inst_in_abs.flip(0, SIG_BUS_EN);
     inst_in_abs.flip(0, SIG_PC_OE);
     inst_in_abs.flip(0, SIG_PC_UP);
 
     inst_in_abs.flip(1, SIG_DH_LOAD); // DH <- M(PC++)
     inst_in_abs.flip(1, SIG_MEM_OE);
-    inst_in_abs.flip(1, SIG_BUS_EN);
     inst_in_abs.flip(1, SIG_PC_OE);
     inst_in_abs.flip(1, SIG_PC_UP);
 
     inst_in_abs.flip(2, SIG_AC_LOAD); // AC <- IO(D)
-    inst_in_abs.flip(2, SIG_BUS_EN);
     inst_in_abs.flip(2, SIG_MEM_IO);
     inst_in_abs.flip(2, SIG_MEM_OE);
     inst_in_abs.flip(2, SIG_D_OE);
     inst_in_abs.flip(2, SIG_S_DAT_2);
 
     inst_in_abs.flip(3, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
-    inst_in_abs.flip(3, SIG_BUS_EN);
     inst_in_abs.flip(3, SIG_PC_OE);
     inst_in_abs.flip(3, SIG_PC_UP);
     inst_in_abs.flip(3, SIG_MEM_OE);
@@ -1768,27 +1641,23 @@ int main(){
     instruction inst_out_abs(7);
 
     inst_out_abs.flip(0, SIG_DL_LOAD); // DL <- M(PC++)
-    inst_out_abs.flip(0, SIG_BUS_EN);
     inst_out_abs.flip(0, SIG_MEM_OE);
     inst_out_abs.flip(0, SIG_PC_OE);
     inst_out_abs.flip(0, SIG_PC_UP);
     inst_out_abs.flip(0, SIG_S_DAT_2);
 
     inst_out_abs.flip(1, SIG_DH_LOAD); // DH <- M(PC++)
-    inst_out_abs.flip(1, SIG_BUS_EN);
     inst_out_abs.flip(1, SIG_MEM_OE);
     inst_out_abs.flip(1, SIG_PC_OE);
     inst_out_abs.flip(1, SIG_PC_UP);
     inst_out_abs.flip(1, SIG_S_DAT_2);
 
-    inst_out_abs.flip(2, SIG_BUS_EN); // IO(D) <- AC
-    inst_out_abs.flip(2, SIG_MEM_IO);
+    inst_out_abs.flip(2, SIG_MEM_IO); // IO(D) <- AC
     inst_out_abs.flip(2, SIG_MEM_WE);
     inst_out_abs.flip(2, SIG_D_OE);
     inst_out_abs.flip(2, SIG_S_DAT_0);
 
     inst_out_abs.flip(3, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
-    inst_out_abs.flip(3, SIG_BUS_EN);
     inst_out_abs.flip(3, SIG_PC_OE);
     inst_out_abs.flip(3, SIG_PC_UP);
     inst_out_abs.flip(3, SIG_MEM_OE);
@@ -1808,7 +1677,6 @@ int main(){
     inst_ldsph.flip(0, SIG_S_AC_2);
 
     inst_ldsph.flip(1, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
-    inst_ldsph.flip(1, SIG_BUS_EN);
     inst_ldsph.flip(1, SIG_MEM_OE);
     inst_ldsph.flip(1, SIG_PC_OE);
     inst_ldsph.flip(1, SIG_PC_UP);
@@ -1885,9 +1753,6 @@ int main(){
         int rcf = ((input.to_ulong() >> 6) & 0xF);
         int ri = input.to_ulong() & 0x3F;
 
-        // DEBUG
-        //std::cout << input << " # ifetch: " << ifetch << " irq: " << irq << " brq: " << brq << " i: " << i << " z: " << z << " o: " << o << " s: " << s << " c: " << c << " # rcf: " << rcf << " ri: " << ri << std::endl;
-
         // Si se trata de un salto condicional
         if(ri >= 0x1C && ri <= 0x29){
             if(// Comprobar si se cumplen las condiciones
@@ -1940,6 +1805,7 @@ int main(){
         if(ifetch){
             if(rcf == 0){
                 salida[palabra] = c_word(ALL_INACTIVE); // AUX <- AC, AC <- I/O(INT), IACK
+                salida[palabra].flip(SIG_BUS_DIS);
                 salida[palabra].flip(SIG_AC_LOAD);
                 salida[palabra].flip(SIG_AUX_LOAD);
                 salida[palabra].flip(SIG_S_DAT_2);
@@ -1961,7 +1827,6 @@ int main(){
         if(irq && !brq && i){
             // Si es el último paso de la instrucción, activar ifetch
             if(rcf == last_step){
-                //std::cout << "atendiendo irq."<< std::endl;
                 salida[palabra].flip(SIG_IFETCH);
             }
         }
@@ -1969,37 +1834,37 @@ int main(){
         if((!irq && brq) || (irq && brq)){
             // Si es el primer paso de la instrucción, activar BACK
             if(rcf == 0){
-                //std::cout << "atendiendo brq."<< std::endl;
                 salida[palabra] = c_word(ALL_INACTIVE);
                 salida[palabra].flip(SIG_BACK);
                 salida[palabra].flip(SIG_RCF_CLR);
+                salida[palabra].flip(SIG_BUS_DIS);
             }
         }
     }
 
     // Exportar el archivo binario a 5 archivos .bin (1 por cada EEPROM)
 
-    FILE *archivo0 = fopen("microinstrucciones_0.bin", "wb");  // modo binario
+    FILE *archivo0 = fopen("firmware_0.bin", "wb");  // modo binario
     if (archivo0 == NULL) {
         perror("No se pudo abrir el archivo0");
         return 1;
     }
-    FILE *archivo1 = fopen("microinstrucciones_1.bin", "wb");  // modo binario
+    FILE *archivo1 = fopen("firmware_1.bin", "wb");  // modo binario
     if (archivo1 == NULL) {
         perror("No se pudo abrir el archivo1");
         return 1;
     }
-    FILE *archivo2 = fopen("microinstrucciones_2.bin", "wb");  // modo binario
+    FILE *archivo2 = fopen("firmware_2.bin", "wb");  // modo binario
     if (archivo2 == NULL) {
         perror("No se pudo abrir el archivo2");
         return 1;
     }
-    FILE *archivo3 = fopen("microinstrucciones_3.bin", "wb");  // modo binario
+    FILE *archivo3 = fopen("firmware_3.bin", "wb");  // modo binario
     if (archivo3 == NULL) {
         perror("No se pudo abrir el archivo3");
         return 1;
     }
-    FILE *archivo4 = fopen("microinstrucciones_4.bin", "wb");  // modo binario
+    FILE *archivo4 = fopen("firmware_4.bin", "wb");  // modo binario
     if (archivo4 == NULL) {
         perror("No se pudo abrir el archivo4");
         return 1;
