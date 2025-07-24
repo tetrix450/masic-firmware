@@ -218,7 +218,7 @@ void check_instructions(c_word* salida){
         std::cout << std::hex;
         for(int ri = 0; ri < 64; ri++){
             std::cout << "┌───────────────────────────────────────────────┐" << std::endl;
-            std::cout << "│[0x" << std::setw(2) << std::setfill('0') << ri << ": " << inst_names[ri];
+            std::cout << "│ 0x" << std::setw(2) << std::setfill('0') << ri << ": " << inst_names[ri];
 
             for(int j = 0; j < 40 - (int)inst_names[ri].length(); j++){
                 std::cout << " ";
@@ -342,7 +342,7 @@ int main(){
     // JMP (abs) (0x00)
     instruction inst_jmp_abs(4);
 
-    inst_jmp_abs.flip(0, SIG_MEM_OE);   // DL <- M(PC++)
+    inst_jmp_abs.flip(0, SIG_MEM_OE); // DL <- M(PC++)
     inst_jmp_abs.flip(0, SIG_PC_OE);
     inst_jmp_abs.flip(0, SIG_PC_UP);
     inst_jmp_abs.flip(0, SIG_DL_LOAD);
