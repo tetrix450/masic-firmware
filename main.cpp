@@ -201,22 +201,24 @@ void check_instructions(c_word* salida){
     for(int flags = 0; flags < 256; flags++){
 
         // Extraigo cada bit por separado
-        std::bitset<1> ifetch   (flags&0b10000000);
-        std::bitset<1> irq      (flags&0b01000000);
-        std::bitset<1> brq      (flags&0b00100000);
-        std::bitset<1> i        (flags&0b00010000);
-        std::bitset<1> z        (flags&0b00001000);
-        std::bitset<1> o        (flags&0b00000100);
-        std::bitset<1> s        (flags&0b00000010);
+        std::bitset<1> ifetch   ((flags&0b10000000)>>7);
+        std::bitset<1> irq      ((flags&0b01000000)>>6);
+        std::bitset<1> brq      ((flags&0b00100000)>>5);
+        std::bitset<1> i        ((flags&0b00010000)>>4);
+        std::bitset<1> z        ((flags&0b00001000)>>3);
+        std::bitset<1> o        ((flags&0b00000100)>>2);
+        std::bitset<1> s        ((flags&0b00000010)>>1);
         std::bitset<1> c        (flags&0b00000001);
 
-        std::cout << "┌────ifetch=" << ifetch << " irq=" << irq << " brq=" << brq << " I=" << i << " Z=" << z << " O=" << o << " S=" << s << " C=" << c << "───┐" << std::endl;
+        std::cout << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
+        std::cout << "╔═══════════════════════════════════════════════╗" << std::endl;
+        std::cout << "║    ifetch=" << ifetch << " irq=" << irq << " brq=" << brq << " I=" << i << " Z=" << z << " O=" << o << " S=" << s << " C=" << c << "   ║" << std::endl;
+        std::cout << "╚═══════════════════════════════════════════════╝" << std::endl;
 
         std::cout << std::hex;
-
         for(int ri = 0; ri < 64; ri++){
             std::cout << "┌───────────────────────────────────────────────┐" << std::endl;
-            std::cout << "│[0x" << ri << ": " << inst_names[ri];
+            std::cout << "│[0x" << std::setw(2) << std::setfill('0') << ri << ": " << inst_names[ri];
 
             for(int j = 0; j < 40 - (int)inst_names[ri].length(); j++){
                 std::cout << " ";
@@ -255,7 +257,7 @@ void check_instructions(c_word* salida){
                 }
             }
             std::cout << "└───────────────────────────────────────────────┘" << std::endl;
-            std::cin.get();
+            //std::cin.get();
         }
     }
 }
@@ -1886,44 +1888,6 @@ int main(){
         // DEBUG
         //std::cout << input << " # ifetch: " << ifetch << " irq: " << irq << " brq: " << brq << " i: " << i << " z: " << z << " o: " << o << " s: " << s << " c: " << c << " # rcf: " << rcf << " ri: " << ri << std::endl;
 
-        // Si se está capturando una interrupción (IFETCH activa)
-        if(ifetch){
-            //std::cout << "ifetch activa."<< std::endl;
-            if(rcf == 0){
-                //std::cout << "primer paso."<< std::endl;
-                salida[palabra] = c_word(ALL_INACTIVE); // AUX <- AC, AC <- I/O(INT), IACK
-                salida[palabra].flip(SIG_AC_LOAD);
-                salida[palabra].flip(SIG_AUX_LOAD);
-                salida[palabra].flip(SIG_S_DAT_2);
-                salida[palabra].flip(SIG_IACK);
-            }else{
-                //std::cout << "no es primer paso."<< std::endl;
-                salida[palabra] = inst_int.get(rcf);
-            }
-        }
-
-        // Último paso de la instrucción
-        int last_step = microcode[ri].get_size() - 1;
-
-        // Sólo se atiende a la interrupción si BRQ está inactiva e I está activo
-        if(irq && !brq && i){
-            // Si es el último paso de la instrucción, activar ifetch
-            if(rcf == last_step){
-                //std::cout << "atendiendo irq."<< std::endl;
-                salida[palabra].flip(SIG_IFETCH);
-            }
-        }
-
-        if((!irq && brq) || (irq && brq)){
-            // Si es el primer paso de la instrucción, activar BACK
-            if(rcf == 0){
-                //std::cout << "atendiendo brq."<< std::endl;
-                salida[palabra] = c_word(ALL_INACTIVE);
-                salida[palabra].flip(SIG_BACK);
-                salida[palabra].flip(SIG_RCF_CLR);
-            }
-        }
-
         // Si se trata de un salto condicional
         if(ri >= 0x1C && ri <= 0x29){
             if(// Comprobar si se cumplen las condiciones
@@ -1969,6 +1933,46 @@ int main(){
                         salida[palabra].flip(SIG_RCF_CLR);
                     break;
                 }
+            }
+        }
+
+        // Si se está capturando una interrupción (IFETCH activa)
+        if(ifetch){
+            if(rcf == 0){
+                salida[palabra] = c_word(ALL_INACTIVE); // AUX <- AC, AC <- I/O(INT), IACK
+                salida[palabra].flip(SIG_AC_LOAD);
+                salida[palabra].flip(SIG_AUX_LOAD);
+                salida[palabra].flip(SIG_S_DAT_2);
+                salida[palabra].flip(SIG_IACK);
+            }else{
+                salida[palabra] = inst_int.get(rcf);
+            }
+        }
+
+        // Último paso de la instrucción (Puede cambiar en función de ifetch)
+        int last_step;
+        if(!ifetch){
+            last_step = microcode[ri].get_size() - 1;
+        }else{
+            last_step = microcode[OP_INST_INT].get_size() - 1;
+        }
+
+        // Sólo se atiende a la interrupción si BRQ está inactiva e I está activo
+        if(irq && !brq && i){
+            // Si es el último paso de la instrucción, activar ifetch
+            if(rcf == last_step){
+                //std::cout << "atendiendo irq."<< std::endl;
+                salida[palabra].flip(SIG_IFETCH);
+            }
+        }
+
+        if((!irq && brq) || (irq && brq)){
+            // Si es el primer paso de la instrucción, activar BACK
+            if(rcf == 0){
+                //std::cout << "atendiendo brq."<< std::endl;
+                salida[palabra] = c_word(ALL_INACTIVE);
+                salida[palabra].flip(SIG_BACK);
+                salida[palabra].flip(SIG_RCF_CLR);
             }
         }
     }
