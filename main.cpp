@@ -568,7 +568,7 @@ int main(){
     // STORE (abs) (0x0B)
 
     instruction inst_store_abs(4);
-
+    
     inst_store_abs.flip(0, SIG_MEM_OE); // DL <- M(PC++)
     inst_store_abs.flip(0, SIG_PC_OE);
     inst_store_abs.flip(0, SIG_PC_UP);
@@ -1019,8 +1019,9 @@ int main(){
     microcode[OP_INST_NOP] = inst_nop;
 
     // SALTOS CONDICIONALES (abs) (0x1C -> 0x29)
-    // Estas instrucciones tienen el mismo microprograma que JMP pero
-    // teniendo en cuenta las flags
+    // Estas instrucciones tienen el mismo microprograma que JMP
+    // (Después de procesarse más adelante se asociará otro microprograma
+    // en función de las respectivas flags)
     for(int i = 0x1C; i <= 0x29; i++){
         microcode[i] = inst_jmp_abs;
     }
