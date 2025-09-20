@@ -229,13 +229,13 @@ void check_instructions(c_word* salida){
                 std::cout << "│" << step << ": ";
 
                 // Mostrar la palabra de control
-                unsigned long posicion = (ifetch.to_ulong()<<17) + (irq.to_ulong()<<16) + (brq.to_ulong()<<15) + (i.to_ulong()<<14) + (z.to_ulong()<<13) + (o.to_ulong()<<12) + (s.to_ulong()<<11) + (c.to_ulong()<<10) + (step<<6) + ri;
-                unsigned long palabra = salida[posicion].to_ulong();
+                uint64_t posicion = (ifetch.to_ulong()<<17) + (irq.to_ulong()<<16) + (brq.to_ulong()<<15) + (i.to_ulong()<<14) + (z.to_ulong()<<13) + (o.to_ulong()<<12) + (s.to_ulong()<<11) + (c.to_ulong()<<10) + (step<<6) + ri;
+                uint64_t palabra = salida[posicion].to_ulong();
                 
                 // Construyo un string con las señales activadas
                 std::string activated_signals;
 
-                unsigned long signals = ALL_INACTIVE ^ palabra; // Operación XOR para comprobar diferencias
+                uint64_t signals = ALL_INACTIVE ^ palabra; // Operación XOR para comprobar diferencias
                 for(int i = 0; i < 40; i++){
                     // Comprobar si la señal i-ésima está activa
                     if((signals>>i) & 1){
@@ -249,7 +249,7 @@ void check_instructions(c_word* salida){
                 std::bitset<8> byte_3((palabra>>24)&0xFF);
                 std::bitset<8> byte_4((palabra>>32)&0xFF);
 
-                std::cout << byte_4 << " " << byte_3 << " " << byte_2 << " " << byte_1 << " "<< byte_0 << "│" << activated_signals << std::endl;
+                std::cout << byte_4 << " " << byte_3 << " " << byte_2 << " " << byte_1 << " "<< byte_0 << "│" << " [" << posicion << "] " << activated_signals << std::endl;
 
                 // Dejar de mostrar la instrucción en el final (RCF_CLR activo)
                 if((palabra&0b0100000000000000000000000000000000000000) == 0b0100000000000000000000000000000000000000){
@@ -570,11 +570,13 @@ int main(){
     instruction inst_store_abs(4);
     
     inst_store_abs.flip(0, SIG_MEM_OE); // DL <- M(PC++)
+    inst_store_abs.flip(0, SIG_S_DAT_2);
     inst_store_abs.flip(0, SIG_PC_OE);
     inst_store_abs.flip(0, SIG_PC_UP);
     inst_store_abs.flip(0, SIG_DL_LOAD);
 
     inst_store_abs.flip(1, SIG_MEM_OE); // DH <- M(PC++)
+    inst_store_abs.flip(1, SIG_S_DAT_2);
     inst_store_abs.flip(1, SIG_PC_OE);
     inst_store_abs.flip(1, SIG_PC_UP);
     inst_store_abs.flip(1, SIG_DH_LOAD);
@@ -1473,13 +1475,14 @@ int main(){
     inst_out_ind.flip(1, SIG_PC_UP);
     inst_out_ind.flip(1, SIG_S_DAT_2);
 
-    inst_out_ind.flip(2, SIG_AC_LOAD); // AC <- M(D++)
+    inst_out_ind.flip(2, SIG_AC_LOAD); // AC <- M(D++), AUX <- AC
     inst_out_ind.flip(2, SIG_MEM_OE);
     inst_out_ind.flip(2, SIG_D_OE);
     inst_out_ind.flip(2, SIG_D_UP);
     inst_out_ind.flip(2, SIG_S_DAT_2);
     inst_out_ind.flip(2, SIG_S_AC_0);
     inst_out_ind.flip(2, SIG_S_AC_2);
+    inst_out_ind.flip(2, SIG_AUX_LOAD);
 
     inst_out_ind.flip(3, SIG_DH_LOAD); // DH <- M(D)
     inst_out_ind.flip(3, SIG_MEM_OE);
@@ -1489,10 +1492,12 @@ int main(){
     inst_out_ind.flip(4, SIG_DL_LOAD); // DL <- AC
     inst_out_ind.flip(4, SIG_S_DAT_0);
 
-    inst_out_ind.flip(5, SIG_MEM_IO); // IO(D) <- AC
+    inst_out_ind.flip(5, SIG_S_AC_0);// AC <- AUX, IO(D) <- AUX
+    inst_out_ind.flip(5, SIG_S_AC_2);
+    inst_out_ind.flip(5, SIG_AC_LOAD);
+    inst_out_ind.flip(5, SIG_MEM_IO);
     inst_out_ind.flip(5, SIG_MEM_WE);
     inst_out_ind.flip(5, SIG_D_OE);
-    inst_out_ind.flip(5, SIG_S_DAT_0);
 
     inst_out_ind.flip(6, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
     inst_out_ind.flip(6, SIG_PC_OE);
@@ -1811,8 +1816,10 @@ int main(){
                 salida[palabra].flip(SIG_AUX_LOAD);
                 salida[palabra].flip(SIG_S_DAT_2);
                 salida[palabra].flip(SIG_IACK);
+                salida[palabra].flip(SIG_IFETCH);
             }else{
                 salida[palabra] = inst_int.get(rcf);
+                salida[palabra].flip(SIG_IFETCH); // IFETCH debe mantenerse activa mientras se procesa la interrupción
             }
         }
 
@@ -1873,22 +1880,22 @@ int main(){
 
     // Se itera por cada palabra de control
     for(int i = 0; i < 262144; i++){
-        // Convierto la palabra a unsigned long
-        unsigned long palabra = salida[i].to_ulong();
+        // Convierto la palabra a uint64_t
+        uint64_t palabra = salida[i].to_ulong();
 
         // Extraigo 5 palabras de 8 bits cada una
-        char byte_0 = palabra&0xFF;
-        char byte_1 = (palabra>>8)&0xFF;
-        char byte_2 = (palabra>>16)&0xFF;
-        char byte_3 = (palabra>>24)&0xFF;
-        char byte_4 = (palabra>>32)&0xFF;
+        uint8_t byte_0 = palabra&0xFF;
+        uint8_t byte_1 = (palabra>>8)&0xFF;
+        uint8_t byte_2 = (palabra>>16)&0xFF;
+        uint8_t byte_3 = (palabra>>24)&0xFF;
+        uint8_t byte_4 = (palabra>>32)&0xFF;
 
         // Escribo en el correspondiente archivo
-        fwrite(&byte_0, sizeof(char), 1, archivo0);
-        fwrite(&byte_1, sizeof(char), 1, archivo1);
-        fwrite(&byte_2, sizeof(char), 1, archivo2);
-        fwrite(&byte_3, sizeof(char), 1, archivo3);
-        fwrite(&byte_4, sizeof(char), 1, archivo4);
+        fwrite(&byte_0, sizeof(uint8_t), 1, archivo0);
+        fwrite(&byte_1, sizeof(uint8_t), 1, archivo1);
+        fwrite(&byte_2, sizeof(uint8_t), 1, archivo2);
+        fwrite(&byte_3, sizeof(uint8_t), 1, archivo3);
+        fwrite(&byte_4, sizeof(uint8_t), 1, archivo4);
     }
 
     fclose(archivo0);
