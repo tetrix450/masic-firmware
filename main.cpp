@@ -740,7 +740,7 @@ int main(){
     inst_adc_imm.flip(0, SIG_LOAD_ZOS);
     inst_adc_imm.flip(0, SIG_AC_LOAD);
     inst_adc_imm.flip(0, SIG_LOAD_C);
-    inst_adc_imm.flip(0, SIG_MUX_CI_2);
+    inst_adc_imm.flip(0, SIG_MUX_CI_1);
     inst_adc_imm.flip(0, SIG_MUX_C_1);
 
     inst_adc_imm.flip(1, SIG_MEM_OE); // RI <- M(PC++), RCF_CLR
@@ -749,7 +749,7 @@ int main(){
     inst_adc_imm.flip(1, SIG_PC_UP);
     inst_adc_imm.flip(1, SIG_RCF_CLR);
 
-    microcode[OP_INST_ADC_IMM] = inst_add_imm;
+    microcode[OP_INST_ADC_IMM] = inst_adc_imm;
 
     // SUB (abs) (0x11)
 
@@ -1260,6 +1260,7 @@ int main(){
     inst_call.flip(1, SIG_PC_UP);
     inst_call.flip(1, SIG_MEM_OE);
     inst_call.flip(1, SIG_S_DAT_2);
+    inst_call.flip(1, SIG_AUX_LOAD);
 
     inst_call.flip(2, SIG_AC_LOAD); // AC <- PCL
     inst_call.flip(2, SIG_PC_OE);
@@ -1298,27 +1299,29 @@ int main(){
 
     // RET (0x34)
 
-    instruction inst_ret(4);
+    instruction inst_ret(5);
 
-    inst_ret.flip(0, SIG_DH_LOAD); // DH <- M(SP++)
-    inst_ret.flip(0, SIG_MEM_OE);
-    inst_ret.flip(0, SIG_SP_OE);
-    inst_ret.flip(0, SIG_SP_UP);
-    inst_ret.flip(0, SIG_S_DAT_2);
+    inst_ret.flip(0, SIG_SP_UP); // SP++
 
-    inst_ret.flip(1, SIG_DL_LOAD); // DL <- M(SP++)
+    inst_ret.flip(1, SIG_DH_LOAD); // DH <- M(SP++)
     inst_ret.flip(1, SIG_MEM_OE);
     inst_ret.flip(1, SIG_SP_OE);
     inst_ret.flip(1, SIG_SP_UP);
     inst_ret.flip(1, SIG_S_DAT_2);
 
-    inst_ret.flip(2, SIG_PC_LOAD); // PC <- D
+    inst_ret.flip(2, SIG_DL_LOAD); // DL <- M(SP)
+    inst_ret.flip(2, SIG_MEM_OE);
+    inst_ret.flip(2, SIG_SP_OE);
+    inst_ret.flip(2, SIG_SP_UP);
+    inst_ret.flip(2, SIG_S_DAT_2);
 
-    inst_ret.flip(3, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
-    inst_ret.flip(3, SIG_MEM_OE);
-    inst_ret.flip(3, SIG_PC_OE);
-    inst_ret.flip(3, SIG_PC_UP);
-    inst_ret.flip(3, SIG_RCF_CLR);
+    inst_ret.flip(3, SIG_PC_LOAD); // PC <- D
+
+    inst_ret.flip(4, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
+    inst_ret.flip(4, SIG_MEM_OE);
+    inst_ret.flip(4, SIG_PC_OE);
+    inst_ret.flip(4, SIG_PC_UP);
+    inst_ret.flip(4, SIG_RCF_CLR);
 
     microcode[OP_INST_RET] = inst_ret;
 
