@@ -838,21 +838,18 @@ int main(){
 
     instruction inst_sub_imm(2);
 
-    inst_sub_imm.flip(0, SIG_MEM_OE); // AUX <- AC, AC <- NOT(M(PC++))
+    inst_sub_imm.flip(0, SIG_MEM_OE); // AC <- AC + NOT(M(PC++)) + 1, ZOS <- ALU_ZOS, C <- ALU_C
     inst_sub_imm.flip(0, SIG_PC_OE);
     inst_sub_imm.flip(0, SIG_PC_UP);
-    inst_sub_imm.flip(0, SIG_S_AC_2);
+    inst_sub_imm.flip(0, SIG_MUX_CI_0);
+    inst_sub_imm.flip(0, SIG_MUX_ADD);
     inst_sub_imm.flip(0, SIG_AC_LOAD);
-    inst_sub_imm.flip(0, SIG_AUX_LOAD);
-    
-    inst_sub_imm.flip(1, SIG_MEM_OE); // AC <- AC + AUX + 1, ZOS <- ALU_ZOS, RI <- M(PC++), RCF_CLR
-    inst_sub_imm.flip(1, SIG_AC_LOAD);
-    inst_sub_imm.flip(1, SIG_MUX_CI_0);
-    inst_sub_imm.flip(1, SIG_MUX_ZOS);
-    inst_sub_imm.flip(1, SIG_LOAD_ZOS);
-    inst_sub_imm.flip(1, SIG_MUX_C_1);
-    inst_sub_imm.flip(1, SIG_LOAD_C);
-    inst_sub_imm.flip(1, SIG_S_AC_2);
+    inst_sub_imm.flip(0, SIG_MUX_ZOS);
+    inst_sub_imm.flip(0, SIG_LOAD_ZOS);
+    inst_sub_imm.flip(0, SIG_MUX_C_1);
+    inst_sub_imm.flip(0, SIG_LOAD_C);
+        
+    inst_sub_imm.flip(1, SIG_MEM_OE); // RI <- M(PC++), RCF_CLR
     inst_sub_imm.flip(1, SIG_RI_LOAD);
     inst_sub_imm.flip(1, SIG_PC_OE);
     inst_sub_imm.flip(1, SIG_PC_UP);

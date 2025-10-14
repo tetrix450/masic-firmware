@@ -1,7 +1,6 @@
-all: main.cpp
+all: main.cpp firmware_0.bin firmware_1.bin firmware_2.bin firmware_3.bin firmware_4.bin 
 	g++ main.cpp -o main -Wall
-
-update: firmware_0.bin firmware_1.bin firmware_2.bin firmware_3.bin firmware_4.bin 
+	./main > salida.txt
 	sudo cp ./firmware_0.bin /usr/local/bin/emasic_firmware
 	sudo cp ./firmware_1.bin /usr/local/bin/emasic_firmware
 	sudo cp ./firmware_2.bin /usr/local/bin/emasic_firmware
