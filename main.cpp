@@ -1354,7 +1354,6 @@ int main(){
     inst_ret.flip(2, SIG_DL_LOAD); // DL <- M(SP)
     inst_ret.flip(2, SIG_MEM_OE);
     inst_ret.flip(2, SIG_SP_OE);
-    inst_ret.flip(2, SIG_SP_UP);
     inst_ret.flip(2, SIG_S_DAT_2);
 
     inst_ret.flip(3, SIG_PC_LOAD); // PC <- D
