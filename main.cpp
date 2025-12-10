@@ -861,11 +861,13 @@ int main(){
     inst_and_abs.flip(0, SIG_PC_OE);
     inst_and_abs.flip(0, SIG_PC_UP);
     inst_and_abs.flip(0, SIG_DL_LOAD);
+    inst_and_abs.flip(0, SIG_S_DAT_2);
 
     inst_and_abs.flip(1, SIG_MEM_OE); // DH <- M(PC++)
     inst_and_abs.flip(1, SIG_PC_OE);
     inst_and_abs.flip(1, SIG_PC_UP);
     inst_and_abs.flip(1, SIG_DH_LOAD);
+    inst_and_abs.flip(1, SIG_S_DAT_2);
 
     inst_and_abs.flip(2, SIG_MEM_OE); // AC <- AC & M(D), ZOS <- ALU_ZOS
     inst_and_abs.flip(2, SIG_S_DAT_2);
@@ -913,14 +915,17 @@ int main(){
     inst_or_abs.flip(0, SIG_PC_OE);
     inst_or_abs.flip(0, SIG_PC_UP);
     inst_or_abs.flip(0, SIG_DL_LOAD);
+    inst_or_abs.flip(0, SIG_S_DAT_2);
 
     inst_or_abs.flip(1, SIG_MEM_OE); // DH <- M(PC++)
     inst_or_abs.flip(1, SIG_PC_OE);
     inst_or_abs.flip(1, SIG_PC_UP);
     inst_or_abs.flip(1, SIG_DH_LOAD);
+    inst_or_abs.flip(1, SIG_S_DAT_2);
 
     inst_or_abs.flip(2, SIG_MEM_OE); // AC <- AC | M(D), ZOS <- ALU_ZOS
     inst_or_abs.flip(2, SIG_D_OE);
+    inst_or_abs.flip(2, SIG_S_DAT_2);
     inst_or_abs.flip(2, SIG_S_AC_1);
     inst_or_abs.flip(2, SIG_S_AC_0);
     inst_or_abs.flip(2, SIG_AC_LOAD);
@@ -940,7 +945,8 @@ int main(){
     instruction inst_or_imm(2);
 
     inst_or_imm.flip(0, SIG_AC_LOAD); // AC <- AC | M(PC++), ZOS <- ALU_ZOS
-    inst_or_imm.flip(0, SIG_S_AC_2);
+    inst_or_imm.flip(0, SIG_S_AC_1);
+    inst_or_imm.flip(0, SIG_S_AC_0);
     inst_or_imm.flip(0, SIG_PC_OE);
     inst_or_imm.flip(0, SIG_PC_UP);
     inst_or_imm.flip(0, SIG_MEM_OE);
@@ -1087,17 +1093,20 @@ int main(){
     inst_jmp_ind.flip(1, SIG_S_DAT_2);
     inst_jmp_ind.flip(1, SIG_AUX_LOAD);
 
-    inst_jmp_ind.flip(2, SIG_AC_LOAD); // AC <- M(D++)
+    inst_jmp_ind.flip(2, SIG_AC_LOAD);  // AC <- M(D++)
     inst_jmp_ind.flip(2, SIG_MEM_OE);
+    inst_jmp_ind.flip(2, SIG_S_DAT_2);
+    inst_jmp_ind.flip(2, SIG_S_AC_0);
+    inst_jmp_ind.flip(2, SIG_S_AC_2);
     inst_jmp_ind.flip(2, SIG_D_OE);
     inst_jmp_ind.flip(2, SIG_D_UP);
 
-    inst_jmp_ind.flip(3, SIG_DH_LOAD); // DH <- M(D++)
+    inst_jmp_ind.flip(3, SIG_DH_LOAD);  // DH <- M(D)
     inst_jmp_ind.flip(3, SIG_MEM_OE);
+    inst_jmp_ind.flip(3, SIG_S_DAT_2);
     inst_jmp_ind.flip(3, SIG_D_OE);
-    inst_jmp_ind.flip(3, SIG_D_UP);
 
-    inst_jmp_ind.flip(4, SIG_DL_LOAD); // DL <- AC
+    inst_jmp_ind.flip(4, SIG_DL_LOAD);  // DL <- AC
     inst_jmp_ind.flip(4, SIG_S_DAT_0);
 
     inst_jmp_ind.flip(5, SIG_PC_LOAD);  // PC <- D, AC <- AUX
