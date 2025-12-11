@@ -1247,6 +1247,8 @@ int main(){
     inst_in_ind.flip(4, SIG_S_DAT_0);
 
     inst_in_ind.flip(5, SIG_AC_LOAD); // AC <- IO(D)
+    inst_in_ind.flip(5, SIG_S_AC_2);
+    inst_in_ind.flip(5, SIG_S_AC_0);
     inst_in_ind.flip(5, SIG_MEM_IO);
     inst_in_ind.flip(5, SIG_MEM_OE);
     inst_in_ind.flip(5, SIG_D_OE);
@@ -1266,6 +1268,7 @@ int main(){
 
     inst_push.flip(0, SIG_SP_OE); // M(SP--) <- AC
     inst_push.flip(0, SIG_SP_DOWN);
+    inst_push.flip(0, SIG_MEM_WE);
     inst_push.flip(0, SIG_S_DAT_0);
 
     inst_push.flip(1, SIG_MEM_OE); // RI <- M(PC++), RCF_CLR
@@ -1278,21 +1281,22 @@ int main(){
 
     // POP (0x32)
 
-    instruction inst_pop(2);
+    instruction inst_pop(3);
 
-    inst_pop.flip(0, SIG_AC_LOAD); // AC <- M(SP++)
-    inst_pop.flip(0, SIG_S_AC_0);
-    inst_pop.flip(0, SIG_S_AC_2);
-    inst_pop.flip(0, SIG_S_DAT_2);
-    inst_pop.flip(0, SIG_MEM_OE);
-    inst_pop.flip(0, SIG_SP_OE);
-    inst_pop.flip(0, SIG_SP_UP);
+    inst_pop.flip(0, SIG_SP_UP); // SP++
 
-    inst_pop.flip(1, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
+    inst_pop.flip(1, SIG_AC_LOAD); // AC <- M(SP)
+    inst_pop.flip(1, SIG_S_AC_0);
+    inst_pop.flip(1, SIG_S_AC_2);
+    inst_pop.flip(1, SIG_S_DAT_2);
     inst_pop.flip(1, SIG_MEM_OE);
-    inst_pop.flip(1, SIG_PC_OE);
-    inst_pop.flip(1, SIG_PC_UP);
-    inst_pop.flip(1, SIG_RCF_CLR);
+    inst_pop.flip(1, SIG_SP_OE);
+
+    inst_pop.flip(2, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
+    inst_pop.flip(2, SIG_MEM_OE);
+    inst_pop.flip(2, SIG_PC_OE);
+    inst_pop.flip(2, SIG_PC_UP);
+    inst_pop.flip(2, SIG_RCF_CLR);
 
     microcode[OP_INST_POP] = inst_pop;
 
@@ -1513,7 +1517,6 @@ int main(){
 
     inst_scr.flip(0, SIG_AC_LOAD); // AC <- C & AC7..AC1, C <- AC.0, ZOS <- ALU_ZOS, RI <- M(PC++), RCF_CLR
     inst_scr.flip(0, SIG_S_AC_0);
-    inst_scr.flip(0, SIG_MUX_CI_0);
     inst_scr.flip(0, SIG_MUX_CI_1);
     inst_scr.flip(0, SIG_MUX_ZOS);
     inst_scr.flip(0, SIG_LOAD_ZOS);
@@ -1569,6 +1572,7 @@ int main(){
 
     inst_rcr.flip(0, SIG_AC_LOAD); // AC <- C & AC7..AC1, C <- AC.0, ZOS <- ALU_ZOS, RI <- M(PC++), RCF_CLR
     inst_rcr.flip(0, SIG_S_AC_0);
+    inst_rcr.flip(0, SIG_S_DAT_0);
     inst_rcr.flip(0, SIG_MUX_CI_1);
     inst_rcr.flip(0, SIG_MUX_ZOS);
     inst_rcr.flip(0, SIG_LOAD_ZOS);
@@ -1634,16 +1638,20 @@ int main(){
     instruction inst_in_abs(4);
 
     inst_in_abs.flip(0, SIG_DL_LOAD); // DL <- M(PC++)
+    inst_in_abs.flip(0, SIG_S_DAT_2);
     inst_in_abs.flip(0, SIG_MEM_OE);
     inst_in_abs.flip(0, SIG_PC_OE);
     inst_in_abs.flip(0, SIG_PC_UP);
 
     inst_in_abs.flip(1, SIG_DH_LOAD); // DH <- M(PC++)
+    inst_in_abs.flip(1, SIG_S_DAT_2);
     inst_in_abs.flip(1, SIG_MEM_OE);
     inst_in_abs.flip(1, SIG_PC_OE);
     inst_in_abs.flip(1, SIG_PC_UP);
 
     inst_in_abs.flip(2, SIG_AC_LOAD); // AC <- IO(D)
+    inst_in_abs.flip(2, SIG_S_AC_2);
+    inst_in_abs.flip(2, SIG_S_AC_0);
     inst_in_abs.flip(2, SIG_MEM_IO);
     inst_in_abs.flip(2, SIG_MEM_OE);
     inst_in_abs.flip(2, SIG_D_OE);
