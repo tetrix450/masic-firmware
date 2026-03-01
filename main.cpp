@@ -1074,8 +1074,6 @@ int main(){
         microcode[i] = inst_nop;
     }
 
-    // ...
-
     // JMP (ind) (0x2A)
 
     instruction inst_jmp_ind(7);
@@ -1352,7 +1350,7 @@ int main(){
 
     microcode[OP_INST_CALL] = inst_call;
 
-    // RET (0x34)
+    //T (0x34)
 
     instruction inst_ret(5);
 
@@ -1730,10 +1728,10 @@ int main(){
     /*
         I
         F
-        E               R R R R
-        T I B           C C C C R R R R R R
-        C R R           F F F F I I I I I I
-        H Q Q I Z O S C 3 2 1 0 5 4 3 2 1 0
+        E                           R R R R
+        T I B           R R R R R R C C C C
+        C R R           I I I I I I F F F F
+        H Q Q I Z O S C 5 4 3 2 1 0 3 2 1 0
 
         x x x x x x x x x x x x x x x x x x  <- Palabra de entrada
     
@@ -1756,7 +1754,7 @@ int main(){
         for(int ins = 0; ins < 64; ins++){
             // Con 16 pasos como máximo
             for(int step = 0; step < 16; step++){
-                int posicion = ins + (step<<6) + (comb<<10);
+                int posicion = (comb<<10) + (ins<<4) + step;
                 
                 if(step < microcode[ins].get_size()){
                     salida[posicion] = microcode[ins].get(step);
@@ -1781,8 +1779,8 @@ int main(){
         bool o = input[12];
         bool s = input[11];
         bool c = input[10];
-        int rcf = ((input.to_ulong() >> 6) & 0xF);
-        int ri = input.to_ulong() & 0x3F;
+        int ri = ((input.to_ulong() >> 4) & 0x3F);
+        int rcf = input.to_ulong() & 0xF;
 
         // Si se trata de un salto condicional
         if(ri >= 0x1C && ri <= 0x23){
@@ -1816,19 +1814,24 @@ int main(){
                         salida[palabra].flip(SIG_PC_UP);
                     break;
                     case 2:
-                        salida[palabra] = inst_nop.get(0);
-                    break;
                     default:
-                        salida[palabra] = c_word(ALL_INACTIVE);
-                        salida[palabra].flip(SIG_RCF_CLR);
+                        salida[palabra] = inst_nop.get(0);
                     break;
                 }
             }
         }
 
+        // Último paso de la instrucción (Si ifetch está activa se está capturando una interrupción y el último paso es distinto)
+        int last_step;
+        if(!ifetch){
+            last_step = microcode[ri].get_size() - 1;
+        }else{
+            last_step = microcode[OP_INST_INT].get_size() - 1;
+        }
+
         // Si se está capturando una interrupción (IFETCH activa)
         if(ifetch){
-            if(rcf == 0){
+            if(rcf == 0 || rcf == 1){ // Los dos primeros ciclos son los de captura de vector de interrupción
                 salida[palabra] = c_word(ALL_INACTIVE); // AUX <- AC, AC <- I/O(INT), IACK
                 salida[palabra].flip(SIG_BUS_DIS);
                 salida[palabra].flip(SIG_AC_LOAD);
@@ -1838,16 +1841,10 @@ int main(){
                 salida[palabra].flip(SIG_IFETCH);
             }else{
                 salida[palabra] = inst_int.get(rcf);
-                salida[palabra].flip(SIG_IFETCH); // IFETCH debe mantenerse activa mientras se procesa la interrupción
+                if(rcf < last_step){
+                    salida[palabra].flip(SIG_IFETCH); // IFETCH debe mantenerse activa mientras se procesa la interrupción
+                }
             }
-        }
-
-        // Último paso de la instrucción (Puede cambiar en función de ifetch)
-        int last_step;
-        if(!ifetch){
-            last_step = microcode[ri].get_size() - 1;
-        }else{
-            last_step = microcode[OP_INST_INT].get_size() - 1;
         }
 
         // Sólo se atiende a la interrupción si BRQ está inactiva e I está activo
