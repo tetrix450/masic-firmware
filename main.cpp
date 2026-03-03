@@ -202,7 +202,7 @@ void check_instructions(c_word* salida){
                 std::cout << "│" << step << ": ";
 
                 // Mostrar la palabra de control
-                uint64_t posicion = (ifetch.to_ulong()<<17) + (irq.to_ulong()<<16) + (brq.to_ulong()<<15) + (i.to_ulong()<<14) + (z.to_ulong()<<13) + (o.to_ulong()<<12) + (s.to_ulong()<<11) + (c.to_ulong()<<10) + (step<<6) + ri;
+                uint64_t posicion = (ifetch.to_ulong()<<17) + (irq.to_ulong()<<16) + (brq.to_ulong()<<15) + (i.to_ulong()<<14) + (z.to_ulong()<<13) + (o.to_ulong()<<12) + (s.to_ulong()<<11) + (c.to_ulong()<<10) + (ri<<4) + step;
                 uint64_t palabra = salida[posicion].to_ulong();
                 
                 // Construyo un string con las señales activadas
