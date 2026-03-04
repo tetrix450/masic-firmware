@@ -50,7 +50,7 @@
 
 // Máscara de señales activas a nivel bajo
 
-#define ALL_INACTIVE            0b0010111011111111000000000000111001111111
+#define ALL_INACTIVE            0b0010111011111111000000000000111000101111
 
 // Códigos de operación de cada instrucción
 
@@ -343,6 +343,7 @@ int main(){
     inst_jmp_abs.flip(3, SIG_PC_UP);    // PC++, RI <- M(D), RCF_CLR
     inst_jmp_abs.flip(3, SIG_MEM_OE);
     inst_jmp_abs.flip(3, SIG_D_OE);
+    inst_jmp_abs.flip(3, SIG_PC_OE);
     inst_jmp_abs.flip(3, SIG_RI_LOAD);
     inst_jmp_abs.flip(3, SIG_RCF_CLR);
 
