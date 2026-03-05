@@ -340,9 +340,8 @@ int main(){
 
     inst_jmp_abs.flip(2, SIG_PC_LOAD);  // PC <- D
 
-    inst_jmp_abs.flip(3, SIG_PC_UP);    // PC++, RI <- M(D), RCF_CLR
+    inst_jmp_abs.flip(3, SIG_PC_UP);    // PC++, RI <- M(PC), RCF_CLR
     inst_jmp_abs.flip(3, SIG_MEM_OE);
-    inst_jmp_abs.flip(3, SIG_D_OE);
     inst_jmp_abs.flip(3, SIG_PC_OE);
     inst_jmp_abs.flip(3, SIG_RI_LOAD);
     inst_jmp_abs.flip(3, SIG_RCF_CLR);
