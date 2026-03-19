@@ -891,8 +891,7 @@ int main(){
     instruction inst_and_imm(2);
 
     inst_and_imm.flip(0, SIG_AC_LOAD); // AC <- AC & M(PC++)
-    inst_and_imm.flip(0, SIG_S_AC_2);
-    inst_and_imm.flip(0, SIG_S_AC_0);
+    inst_and_imm.flip(0, SIG_S_AC_1);
     inst_and_imm.flip(0, SIG_PC_OE);
     inst_and_imm.flip(0, SIG_PC_UP);
     inst_and_imm.flip(0, SIG_MEM_OE);
