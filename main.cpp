@@ -1247,6 +1247,7 @@ int main(){
 
     inst_shra.flip(0, SIG_AC_LOAD); // AC <- S & AC >> 1, C <- AC.0, ZOS <- ALU_ZOS, RI <- M(PC++), RCF_CLR
     inst_shra.flip(0, SIG_S_AC_0);
+    inst_shra.flip(0, SIG_S_DAT_0);
     inst_shra.flip(0, SIG_MUX_CI_0);
     inst_shra.flip(0, SIG_MUX_CI_1);
     inst_shra.flip(0, SIG_MUX_ZOS);
@@ -1266,6 +1267,7 @@ int main(){
 
     inst_shr.flip(0, SIG_AC_LOAD); // AC <- S & AC7..AC1, C <- AC.0, ZOS <- ALU_ZOS, RI <- M(PC++), RCF_CLR
     inst_shr.flip(0, SIG_S_AC_0);
+    inst_shr.flip(0, SIG_S_DAT_0);
     inst_shr.flip(0, SIG_MUX_ZOS);
     inst_shr.flip(0, SIG_LOAD_ZOS);
     inst_shr.flip(0, SIG_LOAD_C);

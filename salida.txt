@@ -286,11 +286,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [2c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [2c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [2d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [2d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -700,11 +700,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [6c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [6c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [6d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [6d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -1114,11 +1114,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -1528,11 +1528,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -1942,11 +1942,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [12c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [12c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [12d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [12d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -2356,11 +2356,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [16c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [16c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [16d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [16d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -2770,11 +2770,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [1ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [1ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [1ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [1ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -3184,11 +3184,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [1ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [1ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [1ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [1ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -3598,11 +3598,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [22c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [22c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [22d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [22d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -4012,11 +4012,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [26c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [26c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [26d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [26d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -4426,11 +4426,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [2ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [2ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [2ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [2ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -4840,11 +4840,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [2ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [2ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [2ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [2ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -5254,11 +5254,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [32c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [32c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [32d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [32d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -5668,11 +5668,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [36c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [36c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [36d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [36d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -6082,11 +6082,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [3ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [3ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [3ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [3ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -6496,11 +6496,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [3ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [3ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [3ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [3ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -6910,11 +6910,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [42c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [42c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [42d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [42d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -7324,11 +7324,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [46c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [46c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [46d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [46d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -7738,11 +7738,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [4ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [4ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [4ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [4ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -8152,11 +8152,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [4ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [4ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [4ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [4ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -8566,11 +8566,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [52c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [52c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [52d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [52d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -8980,11 +8980,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [56c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [56c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [56d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [56d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -9394,11 +9394,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [5ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [5ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [5ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [5ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -9808,11 +9808,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [5ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [5ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [5ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [5ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -10222,11 +10222,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [62c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [62c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [62d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [62d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -10636,11 +10636,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [66c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [66c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [66d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [66d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -11050,11 +11050,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [6ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [6ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [6ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [6ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -11464,11 +11464,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [6ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [6ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [6ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [6ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -11878,11 +11878,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [72c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [72c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [72d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [72d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -12292,11 +12292,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [76c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [76c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [76d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [76d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -12706,11 +12706,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [7ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [7ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [7ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [7ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -13120,11 +13120,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [7ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [7ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [7ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [7ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -22078,11 +22078,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [102c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [102c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [102d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [102d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -22492,11 +22492,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [106c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [106c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [106d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [106d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -22906,11 +22906,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [10ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [10ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [10ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [10ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -23320,11 +23320,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [10ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [10ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [10ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [10ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -23734,11 +23734,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [112c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [112c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [112d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [112d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -24148,11 +24148,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [116c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [116c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [116d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [116d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -24562,11 +24562,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [11ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [11ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [11ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [11ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -24976,11 +24976,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [11ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [11ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [11ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [11ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -25390,11 +25390,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [122c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [122c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [122d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [122d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -25804,11 +25804,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [126c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [126c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [126d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [126d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -26218,11 +26218,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [12ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [12ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [12ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [12ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -26632,11 +26632,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [12ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [12ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [12ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [12ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -27046,11 +27046,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [132c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [132c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [132d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [132d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -27460,11 +27460,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [136c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [136c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [136d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [136d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -27874,11 +27874,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [13ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [13ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [13ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [13ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -28288,11 +28288,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 01001110 11110111 00000001 00111000 01100101│ [13ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00111000 01100101│ [13ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 01001110 11110111 00000001 00001000 01100101│ [13ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
+│0: 01001110 11110111 00001001 00001000 01100101│ [13ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -28702,11 +28702,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 11001110 11110111 00000001 00111000 01100101│ [142c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00111000 01100101│ [142c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 11001110 11110111 00000001 00001000 01100101│ [142d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00001000 01100101│ [142d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -29116,11 +29116,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 11001110 11110111 00000001 00111000 01100101│ [146c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00111000 01100101│ [146c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 11001110 11110111 00000001 00001000 01100101│ [146d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00001000 01100101│ [146d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -29530,11 +29530,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 11001110 11110111 00000001 00111000 01100101│ [14ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00111000 01100101│ [14ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 11001110 11110111 00000001 00001000 01100101│ [14ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00001000 01100101│ [14ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -29944,11 +29944,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 11001110 11110111 00000001 00111000 01100101│ [14ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00111000 01100101│ [14ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 11001110 11110111 00000001 00001000 01100101│ [14ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00001000 01100101│ [14ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -30358,11 +30358,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 11001110 11110111 00000001 00111000 01100101│ [152c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00111000 01100101│ [152c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 11001110 11110111 00000001 00001000 01100101│ [152d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00001000 01100101│ [152d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -30772,11 +30772,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 11001110 11110111 00000001 00111000 01100101│ [156c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00111000 01100101│ [156c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 11001110 11110111 00000001 00001000 01100101│ [156d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00001000 01100101│ [156d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -31186,11 +31186,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 11001110 11110111 00000001 00111000 01100101│ [15ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00111000 01100101│ [15ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 11001110 11110111 00000001 00001000 01100101│ [15ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00001000 01100101│ [15ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -31600,11 +31600,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 11001110 11110111 00000001 00111000 01100101│ [15ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00111000 01100101│ [15ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 11001110 11110111 00000001 00001000 01100101│ [15ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00001000 01100101│ [15ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -32014,11 +32014,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 11001110 11110111 00000001 00111000 01100101│ [162c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00111000 01100101│ [162c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 11001110 11110111 00000001 00001000 01100101│ [162d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00001000 01100101│ [162d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -32428,11 +32428,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 11001110 11110111 00000001 00111000 01100101│ [166c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00111000 01100101│ [166c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 11001110 11110111 00000001 00001000 01100101│ [166d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00001000 01100101│ [166d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -32842,11 +32842,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 11001110 11110111 00000001 00111000 01100101│ [16ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00111000 01100101│ [16ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 11001110 11110111 00000001 00001000 01100101│ [16ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00001000 01100101│ [16ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -33256,11 +33256,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 11001110 11110111 00000001 00111000 01100101│ [16ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00111000 01100101│ [16ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 11001110 11110111 00000001 00001000 01100101│ [16ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00001000 01100101│ [16ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -33670,11 +33670,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 11001110 11110111 00000001 00111000 01100101│ [172c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00111000 01100101│ [172c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 11001110 11110111 00000001 00001000 01100101│ [172d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00001000 01100101│ [172d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -34084,11 +34084,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 11001110 11110111 00000001 00111000 01100101│ [176c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00111000 01100101│ [176c0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 11001110 11110111 00000001 00001000 01100101│ [176d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00001000 01100101│ [176d0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -34498,11 +34498,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 11001110 11110111 00000001 00111000 01100101│ [17ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00111000 01100101│ [17ac0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 11001110 11110111 00000001 00001000 01100101│ [17ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00001000 01100101│ [17ad0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
@@ -34912,11 +34912,11 @@ Archivos exportados
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2c: SHRA                                    │
-│0: 11001110 11110111 00000001 00111000 01100101│ [17ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00111000 01100101│ [17ec0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD MUX_CI_0 MUX_CI_1 S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2d: SHR                                     │
-│0: 11001110 11110111 00000001 00001000 01100101│ [17ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
+│0: 11001110 11110111 00001001 00001000 01100101│ [17ed0]  AC_LOAD RI_LOAD PC_UP C_LOAD ZOS_LOAD S_AC_0 S_DAT_0 MUX_ZOS MEM_OE PC_OE RCF_CLR IFETCH
 └───────────────────────────────────────────────┘
 ┌───────────────────────────────────────────────┐
 │ 0x2e: ROL                                     │
