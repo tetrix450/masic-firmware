@@ -78,7 +78,7 @@
 #define OP_INST_OR_ABS          0x15
 #define OP_INST_OR_IMM          0x16
 #define OP_INST_NOT             0x17
-#define OP_INST_STSP_IMM        0x18
+//#define OP_INST               0x18
 #define OP_INST_CMP_ABS         0x19
 #define OP_INST_CMP_IMM         0x1A
 #define OP_INST_NOP             0x1B
@@ -109,15 +109,15 @@
 #define OP_INST_RET             0x34
 #define OP_INST_INT             0x35
 #define OP_INST_RETI            0x36
-#define OP_INST_SCL             0x37
-#define OP_INST_SCR             0x38
+//#define OP_INST               0x37
+//#define OP_INST               0x38
 #define OP_INST_LDSPL           0x39
 #define OP_INST_RCL             0x3A
 #define OP_INST_RCR             0x3B
 #define OP_INST_OUT_IND         0x3C
 #define OP_INST_IN_ABS          0x3D
 #define OP_INST_OUT_ABS         0x3E
-#define OP_INST_LDSPH           0x3F
+//#define OP_INST_LDSPH         0x3F
 
 /*
 
@@ -261,7 +261,7 @@ int main(){
     inst_names[0x15] = "OR (abs)";
     inst_names[0x16] = "OR (imm)";
     inst_names[0x17] = "NOT";
-    inst_names[0x18] = "STSP (imm)";
+    inst_names[0x18] = "???";
     inst_names[0x19] = "CMP (abs)";
     inst_names[0x1a] = "CMP (imm)";
     inst_names[0x1b] = "NOP";
@@ -292,15 +292,15 @@ int main(){
     inst_names[0x34] = "RET";
     inst_names[0x35] = "INT";
     inst_names[0x36] = "RETI";
-    inst_names[0x37] = "SCL";
-    inst_names[0x38] = "SCR";
-    inst_names[0x39] = "LDSPL";
+    inst_names[0x37] = "???";
+    inst_names[0x38] = "???";
+    inst_names[0x39] = "???";
     inst_names[0x3a] = "RCL";
     inst_names[0x3b] = "RCR";
     inst_names[0x3c] = "OUT (ind)";
     inst_names[0x3d] = "IN (abs)";
     inst_names[0x3e] = "OUT (abs)";
-    inst_names[0x3f] = "LDSPH";
+    inst_names[0x3f] = "???";
 
     signal_names = {"SP_DOWN", "AC_LOAD", "AUX_LOAD", "RI_LOAD", "D_UP",
     "SP_UP", "PC_UP", "BACK", "IACK", "C_LOAD", "ZOS_LOAD", "I_LOAD", "MUX_CI_0",
@@ -979,30 +979,9 @@ int main(){
 
     microcode[OP_INST_NOT] = inst_not;
 
-    // STSP (imm) (0x18)
+    // ??? (0x18)
 
-    instruction inst_stsp(3);
-
-    inst_stsp.flip(0, SIG_DL_LOAD); // DL <- M(PC++)
-    inst_stsp.flip(0, SIG_MEM_OE);
-    inst_stsp.flip(0, SIG_PC_OE);
-    inst_stsp.flip(0, SIG_PC_UP);
-    inst_stsp.flip(0, SIG_S_DAT_2);
-
-    inst_stsp.flip(1, SIG_DH_LOAD); // DH <- M(PC++)
-    inst_stsp.flip(1, SIG_MEM_OE);
-    inst_stsp.flip(1, SIG_PC_OE);
-    inst_stsp.flip(1, SIG_PC_UP);
-    inst_stsp.flip(1, SIG_S_DAT_2);
-
-    inst_stsp.flip(2, SIG_SP_LOAD); // SP <- D, RI <- M(PC++), RCF_CLR
-    inst_stsp.flip(2, SIG_RI_LOAD);
-    inst_stsp.flip(2, SIG_MEM_OE);
-    inst_stsp.flip(2, SIG_PC_OE);
-    inst_stsp.flip(2, SIG_PC_UP);
-    inst_stsp.flip(2, SIG_RCF_CLR);
-
-    microcode[OP_INST_STSP_IMM] = inst_stsp;
+    microcode[0x18] = inst_nop;
 
     // CMP (abs) (0x19)
 
@@ -1367,39 +1346,39 @@ int main(){
 
     // PUSH (0x31)
 
-    instruction inst_push(2);
+    instruction inst_push(3);
 
-    inst_push.flip(0, SIG_SP_OE); // M(SP--) <- AC
-    inst_push.flip(0, SIG_SP_DOWN);
-    inst_push.flip(0, SIG_MEM_WE);
-    inst_push.flip(0, SIG_S_DAT_0);
+    inst_push.flip(0, SIG_SP_DOWN); // SP--
 
-    inst_push.flip(1, SIG_MEM_OE); // RI <- M(PC++), RCF_CLR
-    inst_push.flip(1, SIG_PC_OE);
-    inst_push.flip(1, SIG_PC_UP);
-    inst_push.flip(1, SIG_RI_LOAD);
-    inst_push.flip(1, SIG_RCF_CLR);
+    inst_push.flip(1, SIG_SP_OE); // M(SP) <- AC
+    inst_push.flip(1, SIG_MEM_WE);
+    inst_push.flip(1, SIG_S_DAT_0);
+
+    inst_push.flip(2, SIG_MEM_OE); // RI <- M(PC++), RCF_CLR
+    inst_push.flip(2, SIG_PC_OE);
+    inst_push.flip(2, SIG_PC_UP);
+    inst_push.flip(2, SIG_RI_LOAD);
+    inst_push.flip(2, SIG_RCF_CLR);
 
     microcode[OP_INST_PUSH] = inst_push;
 
     // POP (0x32)
 
-    instruction inst_pop(3);
+    instruction inst_pop(2);
 
-    inst_pop.flip(0, SIG_SP_UP); // SP++
+    inst_pop.flip(0, SIG_AC_LOAD); // AC <- M(SP++)
+    inst_pop.flip(0, SIG_S_AC_0);
+    inst_pop.flip(0, SIG_S_AC_2);
+    inst_pop.flip(0, SIG_S_DAT_2);
+    inst_pop.flip(0, SIG_MEM_OE);
+    inst_pop.flip(0, SIG_SP_OE);
+    inst_pop.flip(0, SIG_SP_UP);
 
-    inst_pop.flip(1, SIG_AC_LOAD); // AC <- M(SP)
-    inst_pop.flip(1, SIG_S_AC_0);
-    inst_pop.flip(1, SIG_S_AC_2);
-    inst_pop.flip(1, SIG_S_DAT_2);
+    inst_pop.flip(1, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
     inst_pop.flip(1, SIG_MEM_OE);
-    inst_pop.flip(1, SIG_SP_OE);
-
-    inst_pop.flip(2, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
-    inst_pop.flip(2, SIG_MEM_OE);
-    inst_pop.flip(2, SIG_PC_OE);
-    inst_pop.flip(2, SIG_PC_UP);
-    inst_pop.flip(2, SIG_RCF_CLR);
+    inst_pop.flip(1, SIG_PC_OE);
+    inst_pop.flip(1, SIG_PC_UP);
+    inst_pop.flip(1, SIG_RCF_CLR);
 
     microcode[OP_INST_POP] = inst_pop;
 
@@ -1420,27 +1399,27 @@ int main(){
     inst_call.flip(1, SIG_S_DAT_2);
     inst_call.flip(1, SIG_AUX_LOAD);
 
-    inst_call.flip(2, SIG_AC_LOAD); // AC <- PCL
+    inst_call.flip(2, SIG_AC_LOAD); // AC <- PCL, SP--
     inst_call.flip(2, SIG_PC_OE);
     inst_call.flip(2, SIG_S_DAT_1);
     inst_call.flip(2, SIG_S_AC_0);
     inst_call.flip(2, SIG_S_AC_2);
+    inst_call.flip(2, SIG_SP_DOWN);
 
-    inst_call.flip(3, SIG_MEM_WE); // M(SP--) <- AC
+    inst_call.flip(3, SIG_MEM_WE); // M(SP) <- AC
     inst_call.flip(3, SIG_SP_OE);
-    inst_call.flip(3, SIG_SP_DOWN);
     inst_call.flip(3, SIG_S_DAT_0);
 
-    inst_call.flip(4, SIG_AC_LOAD); // AC <- PCH
+    inst_call.flip(4, SIG_AC_LOAD); // AC <- PCH, SP--
     inst_call.flip(4, SIG_PC_OE);
     inst_call.flip(4, SIG_S_DAT_1);
     inst_call.flip(4, SIG_S_DAT_0);
     inst_call.flip(4, SIG_S_AC_0);
     inst_call.flip(4, SIG_S_AC_2);
+    inst_call.flip(4, SIG_SP_DOWN);
 
-    inst_call.flip(5, SIG_MEM_WE); // M(SP--) <- AC, PC <- D
+    inst_call.flip(5, SIG_MEM_WE); // M(SP) <- AC, PC <- D
     inst_call.flip(5, SIG_SP_OE);
-    inst_call.flip(5, SIG_SP_DOWN);
     inst_call.flip(5, SIG_S_DAT_0);
     inst_call.flip(5, SIG_PC_LOAD);
 
@@ -1455,30 +1434,29 @@ int main(){
 
     microcode[OP_INST_CALL] = inst_call;
 
-    //T (0x34)
+    //RET (0x34)
 
-    instruction inst_ret(5);
+    instruction inst_ret(4);
 
-    inst_ret.flip(0, SIG_SP_UP); // SP++
+    inst_ret.flip(0, SIG_DH_LOAD); // DH <- M(SP++)
+    inst_ret.flip(0, SIG_MEM_OE);
+    inst_ret.flip(0, SIG_SP_OE);
+    inst_ret.flip(0, SIG_SP_UP);
+    inst_ret.flip(0, SIG_S_DAT_2);
 
-    inst_ret.flip(1, SIG_DH_LOAD); // DH <- M(SP++)
+    inst_ret.flip(1, SIG_DL_LOAD); // DL <- M(SP++)
     inst_ret.flip(1, SIG_MEM_OE);
     inst_ret.flip(1, SIG_SP_OE);
     inst_ret.flip(1, SIG_SP_UP);
     inst_ret.flip(1, SIG_S_DAT_2);
 
-    inst_ret.flip(2, SIG_DL_LOAD); // DL <- M(SP)
-    inst_ret.flip(2, SIG_MEM_OE);
-    inst_ret.flip(2, SIG_SP_OE);
-    inst_ret.flip(2, SIG_S_DAT_2);
+    inst_ret.flip(2, SIG_PC_LOAD); // PC <- D
 
-    inst_ret.flip(3, SIG_PC_LOAD); // PC <- D
-
-    inst_ret.flip(4, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
-    inst_ret.flip(4, SIG_MEM_OE);
-    inst_ret.flip(4, SIG_PC_OE);
-    inst_ret.flip(4, SIG_PC_UP);
-    inst_ret.flip(4, SIG_RCF_CLR);
+    inst_ret.flip(3, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
+    inst_ret.flip(3, SIG_MEM_OE);
+    inst_ret.flip(3, SIG_PC_OE);
+    inst_ret.flip(3, SIG_PC_UP);
+    inst_ret.flip(3, SIG_RCF_CLR);
 
     microcode[OP_INST_RET] = inst_ret;
 
@@ -1595,42 +1573,28 @@ int main(){
 
     microcode[OP_INST_RETI] = inst_reti;
 
-    // SCL (0x37)
+    // ??? (0x37)
 
-    instruction inst_scl(1);
+    microcode[0x37] = inst_nop;
+    
+    // LDSPH (0x38)
 
-    inst_scl.flip(0, SIG_AC_LOAD); // AC <- AC + AC + C, C <- AC.7, ZOS <- ALU_ZOS, RI <- M(PC++), RCF_CLR
-    inst_scl.flip(0, SIG_S_DAT_0);
-    inst_scl.flip(0, SIG_MUX_ZOS);
-    inst_scl.flip(0, SIG_LOAD_ZOS);
-    inst_scl.flip(0, SIG_MUX_C_0);
-    inst_scl.flip(0, SIG_MUX_CI_1);
-    inst_scl.flip(0, SIG_LOAD_C);
-    inst_scl.flip(0, SIG_RI_LOAD);
-    inst_scl.flip(0, SIG_PC_OE);
-    inst_scl.flip(0, SIG_PC_UP);
-    inst_scl.flip(0, SIG_MEM_OE);
-    inst_scl.flip(0, SIG_RCF_CLR);
+    instruction inst_ldsph(2);
 
-    microcode[OP_INST_SCL] = inst_scl;
+    inst_ldsph.flip(0, SIG_AC_LOAD); // AC <- SPH
+    inst_ldsph.flip(0, SIG_SP_OE);
+    inst_ldsph.flip(0, SIG_S_DAT_0);
+    inst_ldsph.flip(0, SIG_S_DAT_1);
+    inst_ldsph.flip(0, SIG_S_AC_0);
+    inst_ldsph.flip(0, SIG_S_AC_2);
 
-    // SCR (0x38)
+    inst_ldsph.flip(1, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
+    inst_ldsph.flip(1, SIG_MEM_OE);
+    inst_ldsph.flip(1, SIG_PC_OE);
+    inst_ldsph.flip(1, SIG_PC_UP);
+    inst_ldsph.flip(1, SIG_RCF_CLR);
 
-    instruction inst_scr(1);
-
-    inst_scr.flip(0, SIG_AC_LOAD); // AC <- C & AC7..AC1, C <- AC.0, ZOS <- ALU_ZOS, RI <- M(PC++), RCF_CLR
-    inst_scr.flip(0, SIG_S_AC_0);
-    inst_scr.flip(0, SIG_MUX_CI_1);
-    inst_scr.flip(0, SIG_MUX_ZOS);
-    inst_scr.flip(0, SIG_LOAD_ZOS);
-    inst_scr.flip(0, SIG_LOAD_C);
-    inst_scr.flip(0, SIG_RI_LOAD);
-    inst_scr.flip(0, SIG_PC_OE);
-    inst_scr.flip(0, SIG_PC_UP);
-    inst_scr.flip(0, SIG_MEM_OE);
-    inst_scr.flip(0, SIG_RCF_CLR);
-
-    microcode[OP_INST_SCR] = inst_scr;
+    microcode[OP_INST_LDSPH] = inst_ldsph;
 
     // LDSPL (0x39)
 
@@ -1674,7 +1638,7 @@ int main(){
     instruction inst_rcr(1);
 
     inst_rcr.flip(0, SIG_AC_LOAD); // AC <- C & AC7..AC1, C <- AC.0, ZOS <- ALU_ZOS, RI <- M(PC++), RCF_CLR
-    inst_rcr.flip(0, SIG_S_AC_0);
+    inst_rcr.flip(0, SIG_S_AC_0); 
     inst_rcr.flip(0, SIG_S_DAT_0);
     inst_rcr.flip(0, SIG_MUX_CI_1);
     inst_rcr.flip(0, SIG_MUX_ZOS);
@@ -1797,24 +1761,9 @@ int main(){
 
     microcode[OP_INST_OUT_ABS] = inst_out_abs;
 
-    // LDSPH (0x3F)
+    // ??? (0x3F)
 
-    instruction inst_ldsph(2);
-
-    inst_ldsph.flip(0, SIG_AC_LOAD); // AC <- SPH
-    inst_ldsph.flip(0, SIG_SP_OE);
-    inst_ldsph.flip(0, SIG_S_DAT_0);
-    inst_ldsph.flip(0, SIG_S_DAT_1);
-    inst_ldsph.flip(0, SIG_S_AC_0);
-    inst_ldsph.flip(0, SIG_S_AC_2);
-
-    inst_ldsph.flip(1, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
-    inst_ldsph.flip(1, SIG_MEM_OE);
-    inst_ldsph.flip(1, SIG_PC_OE);
-    inst_ldsph.flip(1, SIG_PC_UP);
-    inst_ldsph.flip(1, SIG_RCF_CLR);
-
-    microcode[OP_INST_LDSPH] = inst_ldsph;
+    microcode[0x3F] = inst_nop;
 
     /*
         // Muestro todas las instrucciones
