@@ -1540,36 +1540,35 @@ int main(){
 
     // RETI (0x36)
 
-    instruction inst_reti(6);
+    instruction inst_reti(5);
 
-    inst_reti.flip(0, SIG_SP_UP); // SP++
+    inst_reti.flip(0, SIG_LOAD_I); // EST <- M(SP++)
+    inst_reti.flip(0, SIG_LOAD_C);
+    inst_reti.flip(0, SIG_LOAD_ZOS);
+    inst_reti.flip(0, SIG_SP_OE);
+    inst_reti.flip(0, SIG_SP_UP);
+    inst_reti.flip(0, SIG_MEM_OE);
+    inst_reti.flip(0, SIG_S_DAT_2);
 
-    inst_reti.flip(1, SIG_LOAD_I); // EST <- M(SP++)
-    inst_reti.flip(1, SIG_LOAD_C);
-    inst_reti.flip(1, SIG_LOAD_ZOS);
+    inst_reti.flip(1, SIG_MEM_OE); // DH <- M(SP++)
+    inst_reti.flip(1, SIG_DH_LOAD);
     inst_reti.flip(1, SIG_SP_OE);
     inst_reti.flip(1, SIG_SP_UP);
-    inst_reti.flip(1, SIG_MEM_OE);
     inst_reti.flip(1, SIG_S_DAT_2);
 
-    inst_reti.flip(2, SIG_MEM_OE); // DH <- M(SP++)
-    inst_reti.flip(2, SIG_DH_LOAD);
+    inst_reti.flip(2, SIG_MEM_OE); // DL <- M(SP++)
+    inst_reti.flip(2, SIG_DL_LOAD);
     inst_reti.flip(2, SIG_SP_OE);
-    inst_reti.flip(2, SIG_SP_UP);
     inst_reti.flip(2, SIG_S_DAT_2);
+    inst_reti.flip(2, SIG_SP_UP);
 
-    inst_reti.flip(3, SIG_MEM_OE); // DL <- M(SP)
-    inst_reti.flip(3, SIG_DL_LOAD);
-    inst_reti.flip(3, SIG_SP_OE);
-    inst_reti.flip(3, SIG_S_DAT_2);
+    inst_reti.flip(3, SIG_PC_LOAD); // PC <- D
 
-    inst_reti.flip(4, SIG_PC_LOAD); // PC <- D
-
-    inst_reti.flip(5, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
-    inst_reti.flip(5, SIG_MEM_OE);
-    inst_reti.flip(5, SIG_PC_OE);
-    inst_reti.flip(5, SIG_PC_UP);
-    inst_reti.flip(5, SIG_RCF_CLR);
+    inst_reti.flip(4, SIG_RI_LOAD); // RI <- M(PC++), RCF_CLR
+    inst_reti.flip(4, SIG_MEM_OE);
+    inst_reti.flip(4, SIG_PC_OE);
+    inst_reti.flip(4, SIG_PC_UP);
+    inst_reti.flip(4, SIG_RCF_CLR);
 
     microcode[OP_INST_RETI] = inst_reti;
 
