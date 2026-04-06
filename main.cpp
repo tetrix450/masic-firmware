@@ -117,7 +117,7 @@
 #define OP_INST_OUT_IND         0x3C
 #define OP_INST_IN_ABS          0x3D
 #define OP_INST_OUT_ABS         0x3E
-//#define OP_INST_LDSPH         0x3F
+#define OP_INST_LDSPH           0x3F
 
 /*
 
@@ -1496,32 +1496,32 @@ int main(){
     inst_int.flip(5, SIG_DL_LOAD); // DL <- AC
     inst_int.flip(5, SIG_S_DAT_0);
 
-    inst_int.flip(6, SIG_AC_LOAD); // AC <- PCL
+    inst_int.flip(6, SIG_AC_LOAD); // AC <- PCL, SP--
     inst_int.flip(6, SIG_PC_OE);
     inst_int.flip(6, SIG_S_DAT_1);
     inst_int.flip(6, SIG_S_AC_0);
     inst_int.flip(6, SIG_S_AC_2);
+        inst_int.flip(6, SIG_SP_DOWN);
 
-    inst_int.flip(7, SIG_S_DAT_0); // M(SP--) <- AC
+    inst_int.flip(7, SIG_S_DAT_0); // M(SP) <- AC
     inst_int.flip(7, SIG_MEM_WE);
     inst_int.flip(7, SIG_SP_OE);
-    inst_int.flip(7, SIG_SP_DOWN);
 
-    inst_int.flip(8, SIG_AC_LOAD); // AC <- PCH
+    inst_int.flip(8, SIG_AC_LOAD); // AC <- PCH, SP--
     inst_int.flip(8, SIG_PC_OE);
     inst_int.flip(8, SIG_S_DAT_1);
     inst_int.flip(8, SIG_S_DAT_0);
     inst_int.flip(8, SIG_S_AC_0);
     inst_int.flip(8, SIG_S_AC_2);
+    inst_int.flip(8, SIG_SP_DOWN);
 
     inst_int.flip(9, SIG_MEM_WE); // M(SP--) <- AC
     inst_int.flip(9, SIG_SP_OE);
     inst_int.flip(9, SIG_SP_DOWN);
     inst_int.flip(9, SIG_S_DAT_0);
 
-    inst_int.flip(10, SIG_MEM_WE); // M(SP--) <- EST
+    inst_int.flip(10, SIG_MEM_WE); // M(SP) <- EST
     inst_int.flip(10, SIG_SP_OE);
-    inst_int.flip(10, SIG_SP_DOWN);
     inst_int.flip(10, SIG_S_DAT_0);
     inst_int.flip(10, SIG_S_DAT_2);
     
