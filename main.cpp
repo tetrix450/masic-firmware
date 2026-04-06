@@ -1501,7 +1501,7 @@ int main(){
     inst_int.flip(6, SIG_S_DAT_1);
     inst_int.flip(6, SIG_S_AC_0);
     inst_int.flip(6, SIG_S_AC_2);
-        inst_int.flip(6, SIG_SP_DOWN);
+    inst_int.flip(6, SIG_SP_DOWN);
 
     inst_int.flip(7, SIG_S_DAT_0); // M(SP) <- AC
     inst_int.flip(7, SIG_MEM_WE);
