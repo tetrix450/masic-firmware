@@ -92,8 +92,8 @@
 #define OP_INST_JNS             0x23
 #define OP_INST_LOADST          0x24
 #define OP_INST_STOREST         0x25
-//#define OP_INST               0x26
-//#define OP_INST               0x27
+#define OP_INST_INC             0x26
+#define OP_INST_DEC             0x27
 //#define OP_INST               0x28
 //#define OP_INST               0x29
 #define OP_INST_JMP_IND         0x2A
@@ -275,8 +275,8 @@ int main(){
     inst_names[0x23] = "JNS";
     inst_names[0x24] = "LOADST (imm)";
     inst_names[0x25] = "STOREST (imm)";
-    inst_names[0x26] = "???";
-    inst_names[0x27] = "???";
+    inst_names[0x26] = "INC";
+    inst_names[0x27] = "DEC";
     inst_names[0x28] = "???";
     inst_names[0x29] = "???";
     inst_names[0x2a] = "JMP (ind)";
@@ -1151,8 +1151,40 @@ int main(){
 
     microcode[OP_INST_STOREST] = inst_storest;
 
-    // CÓDIGOS DE OPERACIÓN SIN UTILIZAR (0x26 -> 0x29)
-    for(int i = 0x26; i <= 0x29; i++){
+    // INC (0x26)
+
+    instruction inst_inc(1);
+
+    inst_inc.flip(0, SIG_AC_LOAD);
+    inst_inc.flip(0, SIG_MUX_CI_0);
+    inst_inc.flip(0, SIG_S_DAT_2);
+    inst_inc.flip(0, SIG_S_DAT_1);
+    inst_inc.flip(0, SIG_RI_LOAD);
+    inst_inc.flip(0, SIG_MEM_OE);
+    inst_inc.flip(0, SIG_PC_OE);
+    inst_inc.flip(0, SIG_PC_UP);
+    inst_inc.flip(0, SIG_RCF_CLR);
+
+    microcode[OP_INST_INC] = inst_inc;
+
+    // DEC (0x27)
+
+    instruction inst_dec(1);
+
+    inst_dec.flip(0, SIG_AC_LOAD);
+    inst_dec.flip(0, SIG_MUX_CI_0);
+    inst_dec.flip(0, SIG_S_DAT_2);
+    inst_dec.flip(0, SIG_S_DAT_1);
+    inst_dec.flip(0, SIG_RI_LOAD);
+    inst_dec.flip(0, SIG_MEM_OE);
+    inst_dec.flip(0, SIG_PC_OE);
+    inst_dec.flip(0, SIG_PC_UP);
+    inst_dec.flip(0, SIG_RCF_CLR);
+
+    microcode[OP_INST_DEC] = inst_dec;
+
+    // CÓDIGOS DE OPERACIÓN SIN UTILIZAR (0x28 -> 0x29)
+    for(int i = 0x28; i <= 0x29; i++){
         microcode[i] = inst_nop;
     }
 
