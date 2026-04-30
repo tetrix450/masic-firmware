@@ -166,6 +166,182 @@ class instruction{
         }
 };
 
+// Clase para generar el string con las operaciones elementales a partir de las señales
+class microinstruction{
+    private:
+
+        std::string content;
+        const uint64_t signals; 
+
+        void add(std::string s){
+            if(content.empty()){
+                content += s;
+            }else{
+                content += ", " + s;
+            }
+        }
+
+        std::string get_bus_dir(){
+
+            if(active(SIG_PC_OE)){
+                return "PC";
+            }else if(active(SIG_D_OE)){
+                return "D";
+            }else if(active(SIG_SP_OE)){
+                return "SP";
+            }
+
+            return "???";
+        }
+
+        std::string get_bus_dat(){
+            int sig_s_dat_0 = (signals>>SIG_S_DAT_0)&1;
+            int sig_s_dat_1 = (signals>>SIG_S_DAT_1)&1;
+            int sig_s_dat_2 = (signals>>SIG_S_DAT_2)&1;
+
+            int seleccion = (sig_s_dat_2<<2) | (sig_s_dat_1<<1) | sig_s_dat_0;
+            enum bus_data_t {AUX_OE, AC_OE, DIRL_OE, DIRH_OE, MEM_BUS, EST_OE, FILL_BUS};
+
+            switch(seleccion){
+            default:
+            case AUX_OE:
+                return "AUX";
+                break;
+            case AC_OE:
+                return "AC";
+                break;
+            case DIRL_OE:
+                return get_bus_dir() + "H";
+                break;
+            case DIRH_OE:
+                return get_bus_dir() + "L";
+                break;
+            case MEM_BUS:
+                return read_mem();
+                break;
+            case EST_OE:
+                return "EST"; // Registro de estado
+                break;
+            case FILL_BUS:
+                if(active(SIG_FILL_BIT)){
+                    return "255";
+                }else{
+                    return "0";
+                }
+                break;
+            }
+
+            return "???";
+        }
+
+        std::string read_mem(){
+            std::string direccion = get_bus_dir();
+            if(!active(SIG_IACK)){
+                if(!active(SIG_MEM_IO)){    // Seleccionado espacio de memoria principal
+                    return "M[" + direccion + "]";
+                }else{              // Seleccionado espacio de E/S
+                    return "IO[" + direccion + "]";
+                }
+            }else{
+                return "INTVECTOR";
+            }
+        }
+
+        std::string get_bus_mem_dat(){
+            if(active(SIG_MEM_OE)){
+                return read_mem();
+            }else if(active(SIG_MEM_WE)){
+                return get_bus_dat();
+            }
+            return "???";
+        }
+
+        std::string get_bus_ci(){
+            int sig_mux_ci_2 = (signals>>SIG_MUX_CI_2)&1;
+            int sig_mux_ci_1 = (signals>>SIG_MUX_CI_1)&1;
+            int sig_mux_ci_0 = (signals>>SIG_MUX_CI_0)&1;
+
+            int seleccion = (sig_mux_ci_2<<2) | (sig_mux_ci_1<<1) | sig_mux_ci_0;
+            switch(seleccion){
+            case 0:
+                return "0";
+                break;
+            case 1:
+                return "1";
+                break;
+            case 2:
+                return "C";
+                break;
+            case 3:
+                return "AC.bit(7)";
+                break;
+            default:
+            case 4:
+                return "AC.bit(0)";
+                break;
+            }
+        }
+
+        std::string get_bus_ac(){
+            int sig_s_ac_2 = (signals>>SIG_S_AC_2)&1;
+            int sig_s_ac_1 = (signals>>SIG_S_AC_1)&1;
+            int sig_s_ac_0 = (signals>>SIG_S_AC_0)&1;
+
+            int seleccion = (sig_s_ac_2<<2) | (sig_s_ac_1<<1) | sig_s_ac_0;
+            enum bus_ac_t {ADD_OE, SHR_OE, AND_OE, OR_OE, NOT_OE, BUS_AC};
+
+            switch(seleccion){
+            default:
+            case ADD_OE:{
+                if(!active(SIG_MUX_ADD)){
+                    return "AC + " + get_bus_dat() + " + " + get_bus_ci();
+                }else{
+                    return "AC + ~" + get_bus_dat() + " + " + get_bus_ci();
+                }
+                break;
+            }
+            case SHR_OE:
+                return get_bus_ci() + "<<7" + " + AC>>1";
+                break;
+            case AND_OE:
+                return "AC & " + get_bus_dat();
+                break;
+            case OR_OE:
+                return "AC | " + get_bus_dat();
+                break;
+            case NOT_OE:
+                return "~AC";
+                break;
+            case BUS_AC:
+                return get_bus_dat();
+                break;
+            }
+        }
+
+        bool active(int n){     // Devuelve si la señal especificada está activa
+            return (signals>>n) & 1;
+        }
+
+    public:
+
+        microinstruction(uint64_t signals):signals(signals){
+            if(active(SIG_PC_LOAD)) add("PC <- D");
+            if(active(SIG_SP_LOAD)) add("SP <- D");
+            if(active(SIG_DL_LOAD)) add("DL <- " + get_bus_dat());
+            if(active(SIG_DH_LOAD)) add("DL <- " + get_bus_dat());
+            if(active(SIG_LOAD_I)) add("I <- " + get_bus_dat() + ".bit(4)");
+            if(active(SIG_LOAD_ZOS)) add("ZOS <- " + get_bus_dat() + ".bits(3,2,1)");
+            if(active(SIG_LOAD_C)) add("C <-" + get_bus_dat() + ".bit(0)");
+            if(active(SIG_RI_LOAD)) add("RI <- " + get_bus_mem_dat());
+            if(active(SIG_AUX_LOAD)) add("AUX <- AC");
+            if(active(SIG_AC_LOAD)) add("AC <- " + get_bus_ac());
+        }
+
+        std::string get(){
+            return content;
+        }
+};
+
 std::vector<std::string> inst_names(64);
 std::vector<std::string> signal_names(40);
 
@@ -181,7 +357,7 @@ void check_instructions(c_word* salida){
         std::bitset<1> z        ((flags&0b00001000)>>3);
         std::bitset<1> o        ((flags&0b00000100)>>2);
         std::bitset<1> s        ((flags&0b00000010)>>1);
-        std::bitset<1> c        (flags&0b00000001);
+        std::bitset<1> c        ( flags&0b00000001);
 
         std::cout << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
         std::cout << "╔═══════════════════════════════════════════════╗" << std::endl;
@@ -216,13 +392,17 @@ void check_instructions(c_word* salida){
                     }
                 }
 
+                // Construyo el string con las operaciones elementales
+                microinstruction m(signals);
+                std::string elemental_operations = m.get();
+
                 std::bitset<8> byte_0(palabra&0xFF);
                 std::bitset<8> byte_1((palabra>>8)&0xFF);
                 std::bitset<8> byte_2((palabra>>16)&0xFF);
                 std::bitset<8> byte_3((palabra>>24)&0xFF);
                 std::bitset<8> byte_4((palabra>>32)&0xFF);
 
-                std::cout << byte_4 << " " << byte_3 << " " << byte_2 << " " << byte_1 << " "<< byte_0 << "│" << " [" << posicion << "] " << activated_signals << std::endl;
+                std::cout << byte_4 << " " << byte_3 << " " << byte_2 << " " << byte_1 << " "<< byte_0 << "│" << " [" << posicion << "] " << elemental_operations << "#" << activated_signals << std::endl;
 
                 // Dejar de mostrar la instrucción en el final (RCF_CLR activo)
                 if((palabra&0b0100000000000000000000000000000000000000) == 0b0100000000000000000000000000000000000000){
@@ -339,7 +519,7 @@ int main(){
     inst_jmp_abs.flip(1, SIG_DH_LOAD);
     inst_jmp_abs.flip(1, SIG_S_DAT_2);
 
-    inst_jmp_abs.flip(2, SIG_PC_LOAD);  // PC <- D
+    inst_jmp_abs.flip(2, SIG_PC_LOAD);  // PC < D
 
     inst_jmp_abs.flip(3, SIG_PC_UP);    // PC++, RI <- M(PC), RCF_CLR
     inst_jmp_abs.flip(3, SIG_MEM_OE);
@@ -1944,6 +2124,8 @@ int main(){
             if(rcf == 0 || rcf == 1){ // Los dos primeros ciclos son los de captura de vector de interrupción
                 salida[palabra] = c_word(ALL_INACTIVE); // AUX <- AC, AC <- I/O(INT), IACK
                 salida[palabra].flip(SIG_BUS_DIS);
+                salida[palabra].flip(SIG_S_AC_2);
+                salida[palabra].flip(SIG_S_AC_0);
                 salida[palabra].flip(SIG_AC_LOAD);
                 salida[palabra].flip(SIG_AUX_LOAD);
                 salida[palabra].flip(SIG_S_DAT_2);
