@@ -1,0 +1,299 @@
+\documentclass[11pt,a4paper,titlepage]{report}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[table]{xcolor}
+\usepackage{pdflscape}
+\newcommand{\vcell}[1]{
+\rotatebox{90}{
+\textbf{#1}}}
+\begin{document}
+\newlength{\colw}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\begin{landscape}
+\setlength{\colw}{\dimexpr(0.7 \linewidth / 16)}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{ 0x0 JMP (Absoluto directo a memoria)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{PC $\gets$ D}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{1.5em} \newline \\ \hline
+\end{tabular}}
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0x0} & \textbf{JMP} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\setlength{\colw}{\dimexpr(0.7 \linewidth / 16)}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{ 0x1 CLC (Sin operando)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{C $\gets$0,  RI $\gets$ M[PC++]}} \rule{0em}{1.5em} \newline \\ \hline
+\end{tabular}}
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0x1} & \textbf{CLC} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\setlength{\colw}{\dimexpr(0.7 \linewidth / 16)}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{ 0x2 STC (Sin operando)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{C $\gets$1,  RI $\gets$ M[PC++]}} \rule{0em}{1.5em} \newline \\ \hline
+\end{tabular}}
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0x2} & \textbf{STC} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\setlength{\colw}{\dimexpr(0.7 \linewidth / 16)}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{ 0x3 CLI (Sin operando)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{I $\gets$ 0,  RI $\gets$ M[PC++]}} \rule{0em}{1.5em} \newline \\ \hline
+\end{tabular}}
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0x3} & \textbf{CLI} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\setlength{\colw}{\dimexpr(0.7 \linewidth / 16)}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{ 0x4 STI (Sin operando)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{I $\gets$ 1,  RI $\gets$ M[PC++]}} \rule{0em}{1.5em} \newline \\ \hline
+\end{tabular}}
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0x4} & \textbf{STI} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\setlength{\colw}{\dimexpr(0.7 \linewidth / 16)}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{ 0x5 SUBC (Absoluto directo a memoria)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{ZOS $\gets$ M[D].bits(3,2,1),  C $\gets$M[D].bit(0),  AC $\gets$ AC + ~M[D] + C}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{1.5em} \newline \\ \hline
+\end{tabular}}
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0x5} & \textbf{SUBC} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\setlength{\colw}{\dimexpr(0.7 \linewidth / 16)}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{ 0x6 SUBC (Inmediato)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZOS $\gets$ M[PC++].bits(3,2,1),  C $\gets$M[PC++].bit(0),  AC $\gets$ AC + ~M[PC++] + C}} \rule{0em}{1.5em} \newline \\ \hline
+\end{tabular}}
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0x6} & \textbf{SUBC} & \textbf{Inmediato} & \textbf{C. OP | INM} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\setlength{\colw}{\dimexpr(0.7 \linewidth / 16)}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{ 0x7 LOAD.SP (Absoluto directo a memoria)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{SP $\gets$ D,  RI $\gets$ M[PC++],  AC $\gets$ AUX}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{DL $\gets$ AC}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{DL $\gets$ M[D++]}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AC $\gets$ M[D++]}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++],  AUX $\gets$ AC}} \rule{0em}{1.5em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{1.5em} \newline \\ \hline
+\end{tabular}}
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0x7} & \textbf{LOAD.SP} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\end{document}

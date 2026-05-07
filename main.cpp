@@ -1,8 +1,11 @@
+#include <fstream>
 #include <iostream>
 #include <bitset>
+#include <utility>
 #include <vector>
 #include <string>
 #include <iomanip>
+#include <map>
 
 // Señales de control
 // (Señalan el nº de bit dentro de la palabra de control, de 0 a 39)
@@ -177,18 +180,32 @@ class microinstruction{
             if(content.empty()){
                 content += s;
             }else{
-                content += ", " + s;
+                content += ",  " + s;
             }
         }
 
         std::string get_bus_dir(){
 
             if(active(SIG_PC_OE)){
-                return "PC";
+                if(active(SIG_PC_UP)){
+                    return "PC++";
+                }else{
+                    return "PC";
+                }
             }else if(active(SIG_D_OE)){
-                return "D";
+                if(active(SIG_D_UP)){
+                    return "D++";
+                }else{
+                    return "D";
+                }
             }else if(active(SIG_SP_OE)){
-                return "SP";
+                if(active(SIG_SP_UP)){
+                    return "SP++";
+                }else if(active(SIG_SP_DOWN)){
+                    return "SP--";
+                }else{
+                    return "SP";
+                }
             }
 
             return "???";
@@ -322,19 +339,28 @@ class microinstruction{
             return (signals>>n) & 1;
         }
 
+        std::string getbit(std::string s){
+            if(s.starts_with("255.bit")){
+                return "1";
+            }else if(s.starts_with("0.bit")){
+                return "0";
+            }
+            return s;
+        }
+
     public:
 
         microinstruction(uint64_t signals):signals(signals){
-            if(active(SIG_PC_LOAD)) add("PC <- D");
-            if(active(SIG_SP_LOAD)) add("SP <- D");
-            if(active(SIG_DL_LOAD)) add("DL <- " + get_bus_dat());
-            if(active(SIG_DH_LOAD)) add("DL <- " + get_bus_dat());
-            if(active(SIG_LOAD_I)) add("I <- " + get_bus_dat() + ".bit(4)");
-            if(active(SIG_LOAD_ZOS)) add("ZOS <- " + get_bus_dat() + ".bits(3,2,1)");
-            if(active(SIG_LOAD_C)) add("C <-" + get_bus_dat() + ".bit(0)");
-            if(active(SIG_RI_LOAD)) add("RI <- " + get_bus_mem_dat());
-            if(active(SIG_AUX_LOAD)) add("AUX <- AC");
-            if(active(SIG_AC_LOAD)) add("AC <- " + get_bus_ac());
+            if(active(SIG_PC_LOAD)) add("PC $\\gets$ D");
+            if(active(SIG_SP_LOAD)) add("SP $\\gets$ D");
+            if(active(SIG_DL_LOAD)) add("DL $\\gets$ " + get_bus_dat());
+            if(active(SIG_DH_LOAD)) add("DL $\\gets$ " + get_bus_dat());
+            if(active(SIG_LOAD_I)) add("I $\\gets$ " + getbit(get_bus_dat() + ".bit(4)"));
+            if(active(SIG_LOAD_ZOS)) add("ZOS $\\gets$ " + getbit(get_bus_dat() + ".bits(3,2,1)"));
+            if(active(SIG_LOAD_C)) add("C $\\gets$" + getbit(get_bus_dat() + ".bit(0)"));
+            if(active(SIG_RI_LOAD)) add("RI $\\gets$ " + get_bus_mem_dat());
+            if(active(SIG_AUX_LOAD)) add("AUX $\\gets$ AC");
+            if(active(SIG_AC_LOAD)) add("AC $\\gets$ " + get_bus_ac());
         }
 
         std::string get(){
@@ -342,10 +368,86 @@ class microinstruction{
         }
 };
 
+class latextables{
+    private:
+        std::ofstream outfile;
+    public:
+        latextables(){
+            // Abrir documento
+            outfile.open("tablas.tex", std::ios::out);
+            if(!outfile.is_open()){
+                std::cerr << "ERROR al abrir tablas.tex" << std::endl;
+            }
+
+            // Inicializar documento
+            outfile <<  "\\documentclass[11pt,a4paper,titlepage]{report}" << std::endl << 
+                        "\\usepackage[a4paper,margin=2.5cm]{geometry}" << std::endl <<
+                        "\\usepackage[table]{xcolor}" << std::endl <<
+                        "\\usepackage{pdflscape}" << std::endl <<
+                        "\\newcommand{\\vcell}[1]{" << std::endl <<
+                        "\\rotatebox{90}{" << std::endl <<
+                        "\\textbf{#1}}}" << std::endl <<
+                        "\\begin{document}" << std::endl <<
+                        "\\newlength{\\colw}" << std::endl <<
+                        "\\newcolumntype{C}[1]{>{\\centering\\arraybackslash}p{#1}}" << std::endl;
+        }
+
+        void add(int opcode, std::string mnemonic, std::string addressing, std::vector<std::string> operations, std::string format, int h, int z, int v, int s, int c){
+            outfile <<
+            "\\begin{landscape}" << std::endl <<
+            "\\setlength{\\colw}{\\dimexpr(0.7 \\linewidth / 16)}" << std::endl <<
+            "\\thispagestyle{empty}" << std::endl <<
+            "\\noindent\\makebox[\\linewidth]{%" << std::endl <<
+            "\\begin{minipage}{\\linewidth}" << std::endl <<
+            "\\centering" << std::endl <<
+            "{\\Huge \\textbf{ 0x" << std::hex << opcode << " " << mnemonic << " (" << addressing << ")}}\\\\[2em]" << std::endl <<
+            "\\rotatebox{-90}{\\begin{tabular}{|m{0.75em}|m{11cm}|}" << std::endl <<
+            "\\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{15} & \\rotatebox{-180}{\\textbf{" << operations[15] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{14} & \\rotatebox{-180}{\\textbf{" << operations[14] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{13} & \\rotatebox{-180}{\\textbf{" << operations[13] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{12} & \\rotatebox{-180}{\\textbf{" << operations[12] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{11} & \\rotatebox{-180}{\\textbf{" << operations[11] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{10} & \\rotatebox{-180}{\\textbf{" << operations[10] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{9} & \\rotatebox{-180}{\\textbf{" << operations[9] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{8} & \\rotatebox{-180}{\\textbf{" << operations[8] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{7} & \\rotatebox{-180}{\\textbf{" << operations[7] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{6} & \\rotatebox{-180}{\\textbf{" << operations[6] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{5} & \\rotatebox{-180}{\\textbf{" << operations[5] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{4} & \\rotatebox{-180}{\\textbf{" << operations[4] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{3} & \\rotatebox{-180}{\\textbf{" << operations[3] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{2} & \\rotatebox{-180}{\\textbf{" << operations[2] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{1} & \\rotatebox{-180}{\\textbf{" << operations[1] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{0} & \\rotatebox{-180}{\\textbf{" << operations[0] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
+            "\\end{tabular}}" << std::endl <<
+            "\\vspace{1cm}" << std::endl <<
+            "\\begin{tabular}{|p{\\dimexpr(\\linewidth - 20em)/4}|p{\\dimexpr(\\linewidth - 35em)/4}|p{\\dimexpr(\\linewidth - 5em)/4}|p{\\dimexpr(\\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\\hline" << std::endl <<
+            "\\rowcolor{gray!20}" << std::endl <<
+            "Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\\\ \\hline" << std::endl <<
+            "\\textbf{0x" << std::hex << opcode << "} & \\textbf{" << mnemonic << "} & \\textbf{" << addressing << "} & \\textbf{" << format << "} & " << h << " & " << z << " & " << v << " & " << s << " & " << c << " \\\\ \\hline" << std::endl <<
+            "\\end{tabular}" << std::endl <<
+            "\\end{minipage}%" << std::endl <<
+            "}" << std::endl <<
+            "\\end{landscape}" << std::endl <<
+            "\\newpage" << std::endl;
+        }
+
+        void end(){
+            // Finalizar documento
+            outfile << "\\end{document}" << std::endl;
+
+            outfile.close();
+        }
+};
+
 std::vector<std::string> inst_names(64);
 std::vector<std::string> signal_names(40);
+std::vector<std::string> addressing(64);
+std::map<std::string, std::string> format;
 
 void check_instructions(c_word* salida){
+    latextables lt; // Para generar las tablas en latex
+
     // Para comprobar las instrucciones
     for(int flags = 0; flags < 256; flags++){
 
@@ -374,6 +476,8 @@ void check_instructions(c_word* salida){
             }
             std::cout << "│" << std::endl;
 
+            std::vector<std::string> operations = std::vector<std::string>(16);
+            
             for(int step = 0; step < 16; step++){
                 std::cout << "│" << step << ": ";
 
@@ -394,7 +498,7 @@ void check_instructions(c_word* salida){
 
                 // Construyo el string con las operaciones elementales
                 microinstruction m(signals);
-                std::string elemental_operations = m.get();
+                operations[step] = m.get();
 
                 std::bitset<8> byte_0(palabra&0xFF);
                 std::bitset<8> byte_1((palabra>>8)&0xFF);
@@ -402,7 +506,7 @@ void check_instructions(c_word* salida){
                 std::bitset<8> byte_3((palabra>>24)&0xFF);
                 std::bitset<8> byte_4((palabra>>32)&0xFF);
 
-                std::cout << byte_4 << " " << byte_3 << " " << byte_2 << " " << byte_1 << " "<< byte_0 << "│" << " [" << posicion << "] " << elemental_operations << "#" << activated_signals << std::endl;
+                std::cout << byte_4 << " " << byte_3 << " " << byte_2 << " " << byte_1 << " "<< byte_0 << "│" << " [" << posicion << "] " << activated_signals << std::endl;
 
                 // Dejar de mostrar la instrucción en el final (RCF_CLR activo)
                 if((palabra&0b0100000000000000000000000000000000000000) == 0b0100000000000000000000000000000000000000){
@@ -410,40 +514,117 @@ void check_instructions(c_word* salida){
                 }
             }
             std::cout << "└───────────────────────────────────────────────┘" << std::endl;
+            
+            if(flags==0 && ri < 8){
+                lt.add(ri, inst_names[ri], addressing[ri], operations, format[addressing[ri]], i.to_ulong(), z.to_ulong(), o.to_ulong(), s.to_ulong(), c.to_ulong());
+            }
             //std::cin.get();
         }
     }
+    lt.end();
 }
 
 int main(){
 
-    inst_names[0x00] = "JMP (abs)";
+    format.insert(std::pair<std::string, std::string>("Absoluto directo a memoria", "C. OP | DIRL | DIRH"));
+    format.insert(std::pair<std::string, std::string>("Sin operando", "C. OP"));
+    format.insert(std::pair<std::string, std::string>("Inmediato", "C. OP | INM"));
+    format.insert(std::pair<std::string, std::string>("Absoluto indirecto a memoria", "C. OP | DIRL | DIRH"));
+    format.insert(std::pair<std::string, std::string>("Relativo a la pila", "C. OP | INM"));
+    format.insert(std::pair<std::string, std::string>("???", "???"));
+
+    addressing[0x00] = "Absoluto directo a memoria";
+    addressing[0x01] = "Sin operando";
+    addressing[0x02] = "Sin operando";
+    addressing[0x03] = "Sin operando";
+    addressing[0x04] = "Sin operando";
+    addressing[0x05] = "Absoluto directo a memoria";
+    addressing[0x06] = "Inmediato";
+    addressing[0x07] = "Absoluto directo a memoria";
+    addressing[0x08] = "Absoluto directo a memoria";
+    addressing[0x09] = "Inmediato";
+    addressing[0x0a] = "Absoluto indirecto a memoria";
+    addressing[0x0b] = "Absoluto directo a memoria";
+    addressing[0x0c] = "Absoluto indirecto a memoria";
+    addressing[0x0d] = "Absoluto directo a memoria";
+    addressing[0x0e] = "Inmediato";
+    addressing[0x0f] = "Absoluto directo a memoria";
+    addressing[0x10] = "Inmediato";
+    addressing[0x11] = "Absoluto directo a memoria";
+    addressing[0x12] = "Inmediato";
+    addressing[0x13] = "Absoluto directo a memoria";
+    addressing[0x14] = "Inmediato"; 
+    addressing[0x15] = "Absoluto directo a memoria";
+    addressing[0x16] = "Inmediato";
+    addressing[0x17] = "Sin operando";
+    addressing[0x18] = "???";
+    addressing[0x19] = "Absoluto directo a memoria";
+    addressing[0x1a] = "Inmediato";
+    addressing[0x1b] = "Sin operando";
+    addressing[0x1c] = "Absoluto directo a memoria";
+    addressing[0x1d] = "Absoluto directo a memoria";
+    addressing[0x1e] = "Absoluto directo a memoria";
+    addressing[0x1f] = "Absoluto directo a memoria";
+    addressing[0x20] = "Absoluto directo a memoria";
+    addressing[0x21] = "Absoluto directo a memoria";
+    addressing[0x22] = "Absoluto directo a memoria";
+    addressing[0x23] = "Absoluto directo a memoria";
+    addressing[0x24] = "Relativo a la pila";
+    addressing[0x25] = "Relativo a la pila";
+    addressing[0x26] = "Sin operando";
+    addressing[0x27] = "Sin operando";
+    addressing[0x28] = "???";
+    addressing[0x29] = "Sin operando";
+    addressing[0x2a] = "Absoluto indirecto a memoria";
+    addressing[0x2b] = "Sin operando";
+    addressing[0x2c] = "Sin operando";
+    addressing[0x2d] = "Sin operando";
+    addressing[0x2e] = "Sin operando";
+    addressing[0x2f] = "Sin operando";
+    addressing[0x30] = "Absoluto indirecto a memoria";
+    addressing[0x31] = "Sin operando";
+    addressing[0x32] = "Sin operando";
+    addressing[0x33] = "Absoluto indirecto a memoria";
+    addressing[0x34] = "Sin operando";
+    addressing[0x35] = "Inmediato";
+    addressing[0x36] = "Sin operando";
+    addressing[0x37] = "???";
+    addressing[0x38] = "???";
+    addressing[0x39] = "???";
+    addressing[0x3a] = "Sin operando";
+    addressing[0x3b] = "Sin operando";
+    addressing[0x3c] = "Absoluto indirecto a memoria";
+    addressing[0x3d] = "Absoluto directo a memoria";
+    addressing[0x3e] = "Absoluto directo a memoria";
+    addressing[0x3f] = "Absoluto directo a memoria";
+
+    inst_names[0x00] = "JMP";
     inst_names[0x01] = "CLC";
     inst_names[0x02] = "STC";
     inst_names[0x03] = "CLI";
     inst_names[0x04] = "STI";
-    inst_names[0x05] = "SUBC (abs)";
-    inst_names[0x06] = "SUBC (imm)";
-    inst_names[0x07] = "LOAD.SP (abs)";
-    inst_names[0x08] = "LOAD (abs)";
-    inst_names[0x09] = "LOAD (imm)";
-    inst_names[0x0a] = "LOAD (ind)";
-    inst_names[0x0b] = "STORE (abs)";
-    inst_names[0x0c] = "STORE (ind)";
-    inst_names[0x0d] = "ADD (abs)";
-    inst_names[0x0e] = "ADD (imm)";
-    inst_names[0x0f] = "ADC (abs)";
-    inst_names[0x10] = "ADC (imm)";
-    inst_names[0x11] = "SUB (abs)";
-    inst_names[0x12] = "SUB (imm)";
-    inst_names[0x13] = "AND (abs)";
-    inst_names[0x14] = "AND (imm)";
-    inst_names[0x15] = "OR (abs)";
-    inst_names[0x16] = "OR (imm)";
+    inst_names[0x05] = "SUBC";
+    inst_names[0x06] = "SUBC";
+    inst_names[0x07] = "LOAD.SP";
+    inst_names[0x08] = "LOAD";
+    inst_names[0x09] = "LOAD";
+    inst_names[0x0a] = "LOAD";
+    inst_names[0x0b] = "STORE";
+    inst_names[0x0c] = "STORE";
+    inst_names[0x0d] = "ADD";
+    inst_names[0x0e] = "ADD";
+    inst_names[0x0f] = "ADC";
+    inst_names[0x10] = "ADC";
+    inst_names[0x11] = "SUB";
+    inst_names[0x12] = "SUB";
+    inst_names[0x13] = "AND";
+    inst_names[0x14] = "AND";
+    inst_names[0x15] = "OR";
+    inst_names[0x16] = "OR";
     inst_names[0x17] = "NOT";
     inst_names[0x18] = "???";
-    inst_names[0x19] = "CMP (abs)";
-    inst_names[0x1a] = "CMP (imm)";
+    inst_names[0x19] = "CMP";
+    inst_names[0x1a] = "CMP";
     inst_names[0x1b] = "NOP";
     inst_names[0x1c] = "JV";
     inst_names[0x1d] = "JNV";
@@ -453,19 +634,19 @@ int main(){
     inst_names[0x21] = "JNC";
     inst_names[0x22] = "JS";
     inst_names[0x23] = "JNS";
-    inst_names[0x24] = "LOAD.STACK (imm)";
-    inst_names[0x25] = "STORE.STACK (imm)";
+    inst_names[0x24] = "LOAD.STACK";
+    inst_names[0x25] = "STORE.STACK";
     inst_names[0x26] = "INC";
     inst_names[0x27] = "DEC";
     inst_names[0x28] = "???";
     inst_names[0x29] = "???";
-    inst_names[0x2a] = "JMP (ind)";
+    inst_names[0x2a] = "JMP";
     inst_names[0x2b] = "SHL";
     inst_names[0x2c] = "SHRA";
     inst_names[0x2d] = "SHR";
     inst_names[0x2e] = "ROL";
     inst_names[0x2f] = "ROR";
-    inst_names[0x30] = "IN (ind)";
+    inst_names[0x30] = "IN";
     inst_names[0x31] = "PUSH";
     inst_names[0x32] = "POP";
     inst_names[0x33] = "CALL";
@@ -477,10 +658,10 @@ int main(){
     inst_names[0x39] = "???";
     inst_names[0x3a] = "RCL";
     inst_names[0x3b] = "RCR";
-    inst_names[0x3c] = "OUT (ind)";
-    inst_names[0x3d] = "IN (abs)";
-    inst_names[0x3e] = "OUT (abs)";
-    inst_names[0x3f] = "STORE.SP (abs)";
+    inst_names[0x3c] = "OUT";
+    inst_names[0x3d] = "IN";
+    inst_names[0x3e] = "OUT";
+    inst_names[0x3f] = "STORE.SP";
 
     signal_names = {"SP_DOWN", "AC_LOAD", "AUX_LOAD", "RI_LOAD", "D_UP",
     "SP_UP", "PC_UP", "BACK", "IACK", "C_LOAD", "ZOS_LOAD", "I_LOAD", "MUX_CI_0",
