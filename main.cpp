@@ -3,6 +3,7 @@
 #include <bitset>
 #include <utility>
 #include <vector>
+#include <cstdint>
 #include <string>
 #include <iomanip>
 #include <map>
@@ -290,11 +291,11 @@ class microinstruction{
                 return "C";
                 break;
             case 3:
-                return "AC.bit(7)";
+                return "AC.7";
                 break;
             default:
             case 4:
-                return "AC.bit(0)";
+                return "AC.0";
                 break;
             }
         }
@@ -321,7 +322,7 @@ class microinstruction{
                 return get_bus_ci() + "<<7" + " + AC>>1";
                 break;
             case AND_OE:
-                return "AC & " + get_bus_dat();
+                return "AC \\& " + get_bus_dat();
                 break;
             case OR_OE:
                 return "AC | " + get_bus_dat();
@@ -340,9 +341,9 @@ class microinstruction{
         }
 
         std::string getbit(std::string s){
-            if(s.starts_with("255.bit")){
+            if(s.starts_with("255")){
                 return "1";
-            }else if(s.starts_with("0.bit")){
+            }else if(s.starts_with("0")){
                 return "0";
             }
             return s;
@@ -355,9 +356,19 @@ class microinstruction{
             if(active(SIG_SP_LOAD)) add("SP $\\gets$ D");
             if(active(SIG_DL_LOAD)) add("DL $\\gets$ " + get_bus_dat());
             if(active(SIG_DH_LOAD)) add("DL $\\gets$ " + get_bus_dat());
-            if(active(SIG_LOAD_I)) add("I $\\gets$ " + getbit(get_bus_dat() + ".bit(4)"));
-            if(active(SIG_LOAD_ZOS)) add("ZOS $\\gets$ " + getbit(get_bus_dat() + ".bits(3,2,1)"));
-            if(active(SIG_LOAD_C)) add("C $\\gets$" + getbit(get_bus_dat() + ".bit(0)"));
+
+            // Flags
+            if(!active(SIG_LOAD_ZOS) && !active(SIG_LOAD_C) &&  active(SIG_LOAD_I)) add("H $\\gets$ " + getbit(get_bus_dat()));
+            if(!active(SIG_LOAD_ZOS) &&  active(SIG_LOAD_C) && !active(SIG_LOAD_I)) add("C $\\gets$ " + getbit(get_bus_dat()));
+            if(!active(SIG_LOAD_ZOS) &&  active(SIG_LOAD_C) &&  active(SIG_LOAD_I)) add("HC $\\gets$ " + getbit(get_bus_dat()));
+            if( active(SIG_LOAD_ZOS) && !active(SIG_LOAD_C) && !active(SIG_LOAD_I)) add("ZVS $\\gets$ " + getbit(get_bus_dat()));
+            if( active(SIG_LOAD_ZOS) && !active(SIG_LOAD_C) &&  active(SIG_LOAD_I)) add("HZVS $\\gets$ " + getbit(get_bus_dat()));
+            if( active(SIG_LOAD_ZOS) &&  active(SIG_LOAD_C) && !active(SIG_LOAD_I)) add("ZVSC $\\gets$ " + getbit(get_bus_dat()));
+            if( active(SIG_LOAD_ZOS) &&  active(SIG_LOAD_C) &&  active(SIG_LOAD_I)) add("HZVSC $\\gets$ " + getbit(get_bus_dat()));
+            
+            // Memoria
+            if(active(SIG_MEM_WE)) add("M[" + get_bus_dir() + "] $\\gets$ " + get_bus_mem_dat());
+            
             if(active(SIG_RI_LOAD)) add("RI $\\gets$ " + get_bus_mem_dat());
             if(active(SIG_AUX_LOAD)) add("AUX $\\gets$ AC");
             if(active(SIG_AC_LOAD)) add("AC $\\gets$ " + get_bus_ac());
@@ -367,6 +378,55 @@ class microinstruction{
             return content;
         }
 };
+
+std::string to_hex(int number, int width = 0) {
+    std::stringstream ss;
+    ss << "0x"
+       << std::hex << std::uppercase << std::setfill('0') << std::setw(width)
+       << number;
+    return ss.str();
+}
+
+std::string to_bin(long long unsigned int number) {
+    std::stringstream ss;
+    ss << "0b" << std::bitset<6>{number};
+    return ss.str();
+}
+
+std::string split_string(const std::string& texto)
+{
+    if (texto.empty())
+        return texto;
+
+    std::size_t mitad = texto.size() / 2;
+
+    // Buscar el espacio más cercano a la mitad
+    std::size_t izquierda = texto.rfind(' ', mitad);
+    std::size_t derecha   = texto.find(' ', mitad);
+
+    std::size_t pos;
+
+    if (izquierda == std::string::npos)
+        pos = derecha;
+    else if (derecha == std::string::npos)
+        pos = izquierda;
+    else
+    {
+        // Elegir el espacio más cercano al centro
+        pos = (mitad - izquierda <= derecha - mitad)
+              ? izquierda
+              : derecha;
+    }
+
+    // Si no hay espacios, devolver igual
+    if (pos == std::string::npos)
+        return texto;
+
+    std::string resultado = texto;
+    resultado.replace(pos, 1, " \\\\ ");
+
+    return resultado;
+}
 
 class latextables{
     private:
@@ -384,47 +444,41 @@ class latextables{
                         "\\usepackage[a4paper,margin=2.5cm]{geometry}" << std::endl <<
                         "\\usepackage[table]{xcolor}" << std::endl <<
                         "\\usepackage{pdflscape}" << std::endl <<
-                        "\\newcommand{\\vcell}[1]{" << std::endl <<
-                        "\\rotatebox{90}{" << std::endl <<
-                        "\\textbf{#1}}}" << std::endl <<
-                        "\\begin{document}" << std::endl <<
-                        "\\newlength{\\colw}" << std::endl <<
-                        "\\newcolumntype{C}[1]{>{\\centering\\arraybackslash}p{#1}}" << std::endl;
+                        "\\begin{document}" << std::endl;
         }
 
-        void add(int opcode, std::string mnemonic, std::string addressing, std::vector<std::string> operations, std::string format, int h, int z, int v, int s, int c){
+        void add(int opcode, std::string mnemonic, std::string addressing, std::vector<std::string> operations, std::string format, char h, char z, char v, char s, char c){
             outfile <<
             "\\begin{landscape}" << std::endl <<
-            "\\setlength{\\colw}{\\dimexpr(0.7 \\linewidth / 16)}" << std::endl <<
             "\\thispagestyle{empty}" << std::endl <<
             "\\noindent\\makebox[\\linewidth]{%" << std::endl <<
             "\\begin{minipage}{\\linewidth}" << std::endl <<
             "\\centering" << std::endl <<
-            "{\\Huge \\textbf{ 0x" << std::hex << opcode << " " << mnemonic << " (" << addressing << ")}}\\\\[2em]" << std::endl <<
+            "{\\Huge \\textbf{" << to_hex(opcode, 2) << " " << mnemonic << " (" << addressing << ")}}\\\\[2em]" << std::endl <<
             "\\rotatebox{-90}{\\begin{tabular}{|m{0.75em}|m{11cm}|}" << std::endl <<
             "\\hline" << std::endl <<
-            "\\cellcolor{gray!20} \\rotatebox{90}{15} & \\rotatebox{-180}{\\textbf{" << operations[15] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
-            "\\cellcolor{gray!20} \\rotatebox{90}{14} & \\rotatebox{-180}{\\textbf{" << operations[14] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
-            "\\cellcolor{gray!20} \\rotatebox{90}{13} & \\rotatebox{-180}{\\textbf{" << operations[13] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
-            "\\cellcolor{gray!20} \\rotatebox{90}{12} & \\rotatebox{-180}{\\textbf{" << operations[12] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
-            "\\cellcolor{gray!20} \\rotatebox{90}{11} & \\rotatebox{-180}{\\textbf{" << operations[11] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
-            "\\cellcolor{gray!20} \\rotatebox{90}{10} & \\rotatebox{-180}{\\textbf{" << operations[10] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
-            "\\cellcolor{gray!20} \\rotatebox{90}{9} & \\rotatebox{-180}{\\textbf{" << operations[9] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
-            "\\cellcolor{gray!20} \\rotatebox{90}{8} & \\rotatebox{-180}{\\textbf{" << operations[8] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
-            "\\cellcolor{gray!20} \\rotatebox{90}{7} & \\rotatebox{-180}{\\textbf{" << operations[7] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
-            "\\cellcolor{gray!20} \\rotatebox{90}{6} & \\rotatebox{-180}{\\textbf{" << operations[6] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
-            "\\cellcolor{gray!20} \\rotatebox{90}{5} & \\rotatebox{-180}{\\textbf{" << operations[5] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
-            "\\cellcolor{gray!20} \\rotatebox{90}{4} & \\rotatebox{-180}{\\textbf{" << operations[4] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
-            "\\cellcolor{gray!20} \\rotatebox{90}{3} & \\rotatebox{-180}{\\textbf{" << operations[3] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
-            "\\cellcolor{gray!20} \\rotatebox{90}{2} & \\rotatebox{-180}{\\textbf{" << operations[2] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
-            "\\cellcolor{gray!20} \\rotatebox{90}{1} & \\rotatebox{-180}{\\textbf{" << operations[1] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
-            "\\cellcolor{gray!20} \\rotatebox{90}{0} & \\rotatebox{-180}{\\textbf{" << operations[0] << "}} \\rule{0em}{1.5em} \\newline \\\\ \\hline" << std::endl <<
-            "\\end{tabular}}" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{15} & \\rotatebox{-180}{\\textbf{" << operations[15] << "}} \\rule{0em}{2.30em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{14} & \\rotatebox{-180}{\\textbf{" << operations[14] << "}} \\rule{0em}{2.30em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{13} & \\rotatebox{-180}{\\textbf{" << operations[13] << "}} \\rule{0em}{2.30em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{12} & \\rotatebox{-180}{\\textbf{" << operations[12] << "}} \\rule{0em}{2.30em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{11} & \\rotatebox{-180}{\\textbf{" << operations[11] << "}} \\rule{0em}{2.30em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{10} & \\rotatebox{-180}{\\textbf{" << operations[10] << "}} \\rule{0em}{2.30em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{9} & \\rotatebox{-180}{\\textbf{" << operations[9] << "}} \\rule{0em}{2.30em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{8} & \\rotatebox{-180}{\\textbf{" << operations[8] << "}} \\rule{0em}{2.30em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{7} & \\rotatebox{-180}{\\textbf{" << operations[7] << "}} \\rule{0em}{2.30em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{6} & \\rotatebox{-180}{\\textbf{" << operations[6] << "}} \\rule{0em}{2.30em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{5} & \\rotatebox{-180}{\\textbf{" << operations[5] << "}} \\rule{0em}{2.30em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{4} & \\rotatebox{-180}{\\textbf{" << operations[4] << "}} \\rule{0em}{2.30em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{3} & \\rotatebox{-180}{\\textbf{" << operations[3] << "}} \\rule{0em}{2.30em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{2} & \\rotatebox{-180}{\\textbf{" << operations[2] << "}} \\rule{0em}{2.30em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{1} & \\rotatebox{-180}{\\textbf{" << operations[1] << "}} \\rule{0em}{2.30em} \\newline \\\\ \\hline" << std::endl <<
+            "\\cellcolor{gray!20} \\rotatebox{90}{0} & \\rotatebox{-180}{\\textbf{" << operations[0] << "}} \\rule{0em}{2.30em} \\newline \\\\ \\hline" << std::endl <<
+            "\\end{tabular}}" << std::endl << std::endl <<
             "\\vspace{1cm}" << std::endl <<
             "\\begin{tabular}{|p{\\dimexpr(\\linewidth - 20em)/4}|p{\\dimexpr(\\linewidth - 35em)/4}|p{\\dimexpr(\\linewidth - 5em)/4}|p{\\dimexpr(\\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\\hline" << std::endl <<
             "\\rowcolor{gray!20}" << std::endl <<
             "Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\\\ \\hline" << std::endl <<
-            "\\textbf{0x" << std::hex << opcode << "} & \\textbf{" << mnemonic << "} & \\textbf{" << addressing << "} & \\textbf{" << format << "} & " << h << " & " << z << " & " << v << " & " << s << " & " << c << " \\\\ \\hline" << std::endl <<
+            "\\textbf{" << to_bin(opcode) << "} & \\textbf{" << mnemonic << "} & \\textbf{" << addressing << "} & \\textbf{" << format << "} & " << h << " & " << z << " & " << v << " & " << s << " & " << c << " \\\\ \\hline" << std::endl <<
             "\\end{tabular}" << std::endl <<
             "\\end{minipage}%" << std::endl <<
             "}" << std::endl <<
@@ -448,7 +502,6 @@ std::map<std::string, std::string> format;
 void check_instructions(c_word* salida){
     latextables lt; // Para generar las tablas en latex
 
-    // Para comprobar las instrucciones
     for(int flags = 0; flags < 256; flags++){
 
         // Extraigo cada bit por separado
@@ -461,42 +514,29 @@ void check_instructions(c_word* salida){
         std::bitset<1> s        ((flags&0b00000010)>>1);
         std::bitset<1> c        ( flags&0b00000001);
 
-        std::cout << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
-        std::cout << "╔═══════════════════════════════════════════════╗" << std::endl;
-        std::cout << "║    ifetch=" << ifetch << " irq=" << irq << " brq=" << brq << " I=" << i << " Z=" << z << " O=" << o << " S=" << s << " C=" << c << "   ║" << std::endl;
-        std::cout << "╚═══════════════════════════════════════════════╝" << std::endl;
-
-        std::cout << std::hex;
         for(int ri = 0; ri < 64; ri++){
-            std::cout << "┌───────────────────────────────────────────────┐" << std::endl;
-            std::cout << "│ 0x" << std::setw(2) << std::setfill('0') << ri << ": " << inst_names[ri];
 
-            for(int j = 0; j < 40 - (int)inst_names[ri].length(); j++){
-                std::cout << " ";
-            }
-            std::cout << "│" << std::endl;
-
+            // Vector de operaciones elementales de la instrucción
             std::vector<std::string> operations = std::vector<std::string>(16);
-            
+
             for(int step = 0; step < 16; step++){
-                std::cout << "│" << step << ": ";
 
-                // Mostrar la palabra de control
-                uint64_t posicion = (ifetch.to_ulong()<<17) + (irq.to_ulong()<<16) + (brq.to_ulong()<<15) + (i.to_ulong()<<14) + (z.to_ulong()<<13) + (o.to_ulong()<<12) + (s.to_ulong()<<11) + (c.to_ulong()<<10) + (ri<<4) + step;
+                // Construir la palabra de control
+                uint64_t posicion = (ifetch.to_ulong()<<17) + 
+                (irq.to_ulong()<<16) + 
+                (brq.to_ulong()<<15) + 
+                (i.to_ulong()<<14) + 
+                (z.to_ulong()<<13) + 
+                (o.to_ulong()<<12) + 
+                (s.to_ulong()<<11) + 
+                (c.to_ulong()<<10) + 
+                (ri<<4) 
+                + step;
+
                 uint64_t palabra = salida[posicion].to_ulong();
-                
-                // Construyo un string con las señales activadas
-                std::string activated_signals;
-
-                uint64_t signals = ALL_INACTIVE ^ palabra; // Operación XOR para comprobar diferencias
-                for(int i = 0; i < 40; i++){
-                    // Comprobar si la señal i-ésima está activa
-                    if((signals>>i) & 1){
-                        activated_signals += " " + signal_names[i];
-                    }
-                }
 
                 // Construyo el string con las operaciones elementales
+                uint64_t signals = ALL_INACTIVE ^ palabra;
                 microinstruction m(signals);
                 operations[step] = m.get();
 
@@ -506,17 +546,24 @@ void check_instructions(c_word* salida){
                 std::bitset<8> byte_3((palabra>>24)&0xFF);
                 std::bitset<8> byte_4((palabra>>32)&0xFF);
 
-                std::cout << byte_4 << " " << byte_3 << " " << byte_2 << " " << byte_1 << " "<< byte_0 << "│" << " [" << posicion << "] " << activated_signals << std::endl;
-
                 // Dejar de mostrar la instrucción en el final (RCF_CLR activo)
                 if((palabra&0b0100000000000000000000000000000000000000) == 0b0100000000000000000000000000000000000000){
                     break;
                 }
             }
-            std::cout << "└───────────────────────────────────────────────┘" << std::endl;
+            // std::cout << "└───────────────────────────────────────────────┘" << std::endl;
             
-            if(flags==0 && ri < 8){
-                lt.add(ri, inst_names[ri], addressing[ri], operations, format[addressing[ri]], i.to_ulong(), z.to_ulong(), o.to_ulong(), s.to_ulong(), c.to_ulong());
+            if(flags == 0 && ri < 64){
+                lt.add(ri,
+                inst_names[ri],
+                addressing[ri],
+                operations,
+                format[addressing[ri]],
+                (char)(i.to_ulong() + 48),
+                (char)(z.to_ulong() + 48),
+                (char)(o.to_ulong() + 48),
+                (char)(s.to_ulong() + 48),
+                (char)(c.to_ulong() + 48));
             }
             //std::cin.get();
         }
@@ -601,8 +648,8 @@ int main(){
     inst_names[0x00] = "JMP";
     inst_names[0x01] = "CLC";
     inst_names[0x02] = "STC";
-    inst_names[0x03] = "CLI";
-    inst_names[0x04] = "STI";
+    inst_names[0x03] = "CLH";
+    inst_names[0x04] = "STH";
     inst_names[0x05] = "SUBC";
     inst_names[0x06] = "SUBC";
     inst_names[0x07] = "LOAD.SP";
