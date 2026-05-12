@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1778614376.89889 "/home/tetrix/Escritorio/masic_firmware/tablas.tex" "tablas.pdf" "tablas" 1778614378.39356 0
+["pdflatex"] 1778623791.65651 "/home/tetrix/Escritorio/masic_firmware/tablas.tex" "tablas.pdf" "tablas" 1778623793.20436 0
   "/etc/texmf/web2c/texmf.cnf" 1778155756.15741 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/tetrix/Escritorio/masic_firmware/tablas.tex" 1778614376.66629 161580 0b55c923835deb87fe2f446fe42d54ff ""
+  "/home/tetrix/Escritorio/masic_firmware/tablas.tex" 1778623791.45009 161643 903f9406b926fdf90dcdeea09fed7d1a ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -46,8 +46,8 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1741904018 41538 c016915c1d51223b6dbbfe27341748a8 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1778158061 5467255 9a64d1b40e0b893fc5588ecce9d8accf ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1778158211 3349141 fb6ea23b848801c30723d79ef848589f ""
-  "tablas.aux" 1778614378.29829 33 b15110c942eab56359f7f466b6696bf7 "pdflatex"
-  "tablas.tex" 1778614376.66629 161580 0b55c923835deb87fe2f446fe42d54ff ""
+  "tablas.aux" 1778623793.11409 33 b15110c942eab56359f7f466b6696bf7 "pdflatex"
+  "tablas.tex" 1778623791.45009 161643 903f9406b926fdf90dcdeea09fed7d1a ""
   (generated)
   "tablas.aux"
   "tablas.log"

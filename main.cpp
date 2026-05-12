@@ -314,7 +314,7 @@ class microinstruction{
                 if(!active(SIG_MUX_ADD)){
                     return "AC + " + get_bus_dat() + " + " + get_bus_ci();
                 }else{
-                    return "AC + ~" + get_bus_dat() + " + " + get_bus_ci();
+                    return "AC + $\\sim$" + get_bus_dat() + " + " + get_bus_ci();
                 }
                 break;
             }
@@ -328,7 +328,7 @@ class microinstruction{
                 return "AC | " + get_bus_dat();
                 break;
             case NOT_OE:
-                return "~AC";
+                return "$\\sim$AC";
                 break;
             case BUS_AC:
                 return get_bus_dat();
@@ -340,13 +340,40 @@ class microinstruction{
             return (signals>>n) & 1;
         }
 
-        std::string getbit(std::string s){
+        std::string getbit(std::string s, int bit){
             if(s.starts_with("255")){
                 return "1";
             }else if(s.starts_with("0")){
                 return "0";
+            }else{
+                return s + "." + std::to_string(bit);
             }
-            return s;
+        }
+
+        std::string get_bus_c(){
+            if(!active(SIG_MUX_C_1) && !active(SIG_MUX_C_0)){
+                return getbit(get_bus_dat(), 0);
+            }else if(!active(SIG_MUX_C_1) && active(SIG_MUX_C_0)){
+                return getbit(get_bus_dat(), 7);
+            }else{
+                return "ALU";
+            }
+        }
+
+        std::string get_bus_zos(){
+            if(!active(SIG_MUX_ZOS)){
+                return getbit(get_bus_dat(), 321);
+            }else{
+                return "ALU";
+            }
+        }
+
+        std::string get_bus_zosc(){
+            if(!active(SIG_MUX_ZOS)){
+                return get_bus_dat();
+            }else{
+                return "ALU";
+            }
         }
 
     public:
@@ -355,16 +382,29 @@ class microinstruction{
             if(active(SIG_PC_LOAD)) add("PC $\\gets$ D");
             if(active(SIG_SP_LOAD)) add("SP $\\gets$ D");
             if(active(SIG_DL_LOAD)) add("DL $\\gets$ " + get_bus_dat());
-            if(active(SIG_DH_LOAD)) add("DL $\\gets$ " + get_bus_dat());
+            if(active(SIG_DH_LOAD)) add("DH $\\gets$ " + get_bus_dat());
 
             // Flags
-            if(!active(SIG_LOAD_ZOS) && !active(SIG_LOAD_C) &&  active(SIG_LOAD_I)) add("H $\\gets$ " + getbit(get_bus_dat()));
-            if(!active(SIG_LOAD_ZOS) &&  active(SIG_LOAD_C) && !active(SIG_LOAD_I)) add("C $\\gets$ " + getbit(get_bus_dat()));
-            if(!active(SIG_LOAD_ZOS) &&  active(SIG_LOAD_C) &&  active(SIG_LOAD_I)) add("HC $\\gets$ " + getbit(get_bus_dat()));
-            if( active(SIG_LOAD_ZOS) && !active(SIG_LOAD_C) && !active(SIG_LOAD_I)) add("ZVS $\\gets$ " + getbit(get_bus_dat()));
-            if( active(SIG_LOAD_ZOS) && !active(SIG_LOAD_C) &&  active(SIG_LOAD_I)) add("HZVS $\\gets$ " + getbit(get_bus_dat()));
-            if( active(SIG_LOAD_ZOS) &&  active(SIG_LOAD_C) && !active(SIG_LOAD_I)) add("ZVSC $\\gets$ " + getbit(get_bus_dat()));
-            if( active(SIG_LOAD_ZOS) &&  active(SIG_LOAD_C) &&  active(SIG_LOAD_I)) add("HZVSC $\\gets$ " + getbit(get_bus_dat()));
+            if(!active(SIG_LOAD_ZOS) && !active(SIG_LOAD_C) &&  active(SIG_LOAD_I))
+                add("H $\\gets$ " + getbit(get_bus_dat(), 4));
+
+            if(!active(SIG_LOAD_ZOS) &&  active(SIG_LOAD_C) && !active(SIG_LOAD_I))
+                add("C $\\gets$ " + getbit(get_bus_c(), 0));
+
+            if(!active(SIG_LOAD_ZOS) &&  active(SIG_LOAD_C) &&  active(SIG_LOAD_I))
+                add("H $\\gets$ " + getbit(get_bus_dat(), 4) + ", C $\\gets$ " + get_bus_c());
+
+            if( active(SIG_LOAD_ZOS) && !active(SIG_LOAD_C) && !active(SIG_LOAD_I))
+                add("ZVS $\\gets$ " + get_bus_zos());
+
+            if( active(SIG_LOAD_ZOS) && !active(SIG_LOAD_C) &&  active(SIG_LOAD_I))
+               add("H $\\gets$ " + getbit(get_bus_dat(), 4) + ", ZVS $\\gets$ " + get_bus_zos());
+
+            if( active(SIG_LOAD_ZOS) &&  active(SIG_LOAD_C) && !active(SIG_LOAD_I))
+               add("ZVSC $\\gets$ " + get_bus_zosc());
+
+            if( active(SIG_LOAD_ZOS) &&  active(SIG_LOAD_C) &&  active(SIG_LOAD_I))
+               add("HZVSC $\\gets$ " + get_bus_dat());
             
             // Memoria
             if(active(SIG_MEM_WE)) add("M[" + get_bus_dir() + "] $\\gets$ " + get_bus_mem_dat());
@@ -372,6 +412,26 @@ class microinstruction{
             if(active(SIG_RI_LOAD)) add("RI $\\gets$ " + get_bus_mem_dat());
             if(active(SIG_AUX_LOAD)) add("AUX $\\gets$ AC");
             if(active(SIG_AC_LOAD)) add("AC $\\gets$ " + get_bus_ac());
+
+            //Incrementos/decrementos
+
+            if(!active(SIG_MEM_OE) && !active(SIG_MEM_WE)){
+                if(active(SIG_PC_UP)){
+                    add("PC++");
+                }
+
+                if(active(SIG_D_UP)){
+                    add("D++");
+                }
+
+                if(active(SIG_SP_UP)){
+                    add("SP++");
+                }
+
+                if(active(SIG_SP_DOWN)){
+                    add("SP++");
+                }
+            }
         }
 
         std::string get(){
@@ -391,41 +451,6 @@ std::string to_bin(long long unsigned int number) {
     std::stringstream ss;
     ss << "0b" << std::bitset<6>{number};
     return ss.str();
-}
-
-std::string split_string(const std::string& texto)
-{
-    if (texto.empty())
-        return texto;
-
-    std::size_t mitad = texto.size() / 2;
-
-    // Buscar el espacio más cercano a la mitad
-    std::size_t izquierda = texto.rfind(' ', mitad);
-    std::size_t derecha   = texto.find(' ', mitad);
-
-    std::size_t pos;
-
-    if (izquierda == std::string::npos)
-        pos = derecha;
-    else if (derecha == std::string::npos)
-        pos = izquierda;
-    else
-    {
-        // Elegir el espacio más cercano al centro
-        pos = (mitad - izquierda <= derecha - mitad)
-              ? izquierda
-              : derecha;
-    }
-
-    // Si no hay espacios, devolver igual
-    if (pos == std::string::npos)
-        return texto;
-
-    std::string resultado = texto;
-    resultado.replace(pos, 1, " \\\\ ");
-
-    return resultado;
 }
 
 class latextables{
