@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.5.7)  13 MAY 2026 00:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.5.7)  27 MAY 2026 00:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -95,27 +95,33 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 Package graphics Info: Driver file: pdftex.def on input line 106.
 ))
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
-)) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+)) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/helvet.sty
+Package: helvet 2020/03/25 PSNFSS-v9.3 (WaS) 
+)
+LaTeX Font Info:    Trying to load font information for OT1+phv on input line 7.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
+File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
+) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count275
 \l__pdf_internal_box=\box54
 ) (./tablas.aux)
 \openout1 = `tablas.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -171,17 +177,17 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 39.
+(Font)              <10.95> on input line 42.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 39.
+(Font)              <8> on input line 42.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 39.
+(Font)              <6> on input line 42.
 
 
 [1
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}]
 
 [2
 
@@ -357,21 +363,11 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 
 ]
-Overfull \hbox (2.31746pt too wide) in paragraph at lines 1335--1335
-[]|\OT1/cmr/bx/n/10.95 LOAD.STACK| 
- []
-
-
 
 [37
 
 
 ]
-Overfull \hbox (9.38928pt too wide) in paragraph at lines 1371--1371
-[]|\OT1/cmr/bx/n/10.95 STORE.STACK| 
- []
-
-
 
 [38
 
@@ -407,16 +403,6 @@ Overfull \hbox (9.38928pt too wide) in paragraph at lines 1371--1371
 
 
 ]
-Overfull \hbox (5.92139pt too wide) in paragraph at lines 1623--1623
-[]|[]
- []
-
-
-Overfull \hbox (8.59131pt too wide) in paragraph at lines 1623--1623
- [][] 
- []
-
-
 
 [45
 
@@ -427,31 +413,11 @@ Overfull \hbox (8.59131pt too wide) in paragraph at lines 1623--1623
 
 
 ]
-Overfull \hbox (10.22533pt too wide) in paragraph at lines 1695--1695
-[]|[]
- []
-
-
-Overfull \hbox (8.59131pt too wide) in paragraph at lines 1695--1695
- [][] 
- []
-
-
 
 [47
 
 
 ]
-Overfull \hbox (5.92139pt too wide) in paragraph at lines 1731--1731
-[]|[]
- []
-
-
-Overfull \hbox (8.59131pt too wide) in paragraph at lines 1731--1731
- [][] 
- []
-
-
 
 [48
 
@@ -536,6 +502,16 @@ Overfull \hbox (8.59131pt too wide) in paragraph at lines 1731--1731
 [64
 
 
+]
+
+[65
+
+
+]
+
+[66
+
+
 ] (./tablas.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
@@ -543,18 +519,18 @@ L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 2542 strings out of 473197
- 39995 string characters out of 5718606
- 459816 words of memory out of 5000000
- 25796 multiletter control sequences out of 15000+600000
- 562490 words of font info for 48 fonts, out of 8000000 for 9000
+ 2623 strings out of 473197
+ 41373 string characters out of 5718606
+ 460163 words of memory out of 5000000
+ 25867 multiletter control sequences out of 15000+600000
+ 567208 words of font info for 52 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 89i,15n,95p,306b,312s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on tablas.pdf (64 pages, 168014 bytes).
+ 89i,15n,95p,309b,314s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on tablas.pdf (66 pages, 145306 bytes).
 PDF statistics:
- 231 PDF objects out of 1000 (max. 8388607)
- 155 compressed objects within 2 object streams
+ 233 PDF objects out of 1000 (max. 8388607)
+ 157 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

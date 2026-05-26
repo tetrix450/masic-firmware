@@ -188,25 +188,11 @@ class microinstruction{
         std::string get_bus_dir(){
 
             if(active(SIG_PC_OE)){
-                if(active(SIG_PC_UP)){
-                    return "PC++";
-                }else{
-                    return "PC";
-                }
+                return "PC";
             }else if(active(SIG_D_OE)){
-                if(active(SIG_D_UP)){
-                    return "D++";
-                }else{
-                    return "D";
-                }
+                return "D";
             }else if(active(SIG_SP_OE)){
-                if(active(SIG_SP_UP)){
-                    return "SP++";
-                }else if(active(SIG_SP_DOWN)){
-                    return "SP--";
-                }else{
-                    return "SP";
-                }
+                return "SP";
             }
 
             return "???";
@@ -238,7 +224,7 @@ class microinstruction{
                 return read_mem();
                 break;
             case EST_OE:
-                return "EST"; // Registro de estado
+                return "HZVSC"; // Registro de estado
                 break;
             case FILL_BUS:
                 if(active(SIG_FILL_BIT)){
@@ -256,9 +242,9 @@ class microinstruction{
             std::string direccion = get_bus_dir();
             if(!active(SIG_IACK)){
                 if(!active(SIG_MEM_IO)){    // Seleccionado espacio de memoria principal
-                    return "M[" + direccion + "]";
+                    return "M(" + direccion + ")";
                 }else{              // Seleccionado espacio de E/S
-                    return "IO[" + direccion + "]";
+                    return "IO(" + direccion + ")";
                 }
             }else{
                 return "INTVECTOR";
@@ -319,7 +305,7 @@ class microinstruction{
                 break;
             }
             case SHR_OE:
-                return get_bus_ci() + "<<7" + " + AC>>1";
+                return get_bus_ci() + "$\\ll$7" + " + AC$\\gg$1";
                 break;
             case AND_OE:
                 return "AC \\& " + get_bus_dat();
@@ -389,7 +375,7 @@ class microinstruction{
                 add("H $\\gets$ " + getbit(get_bus_dat(), 4));
 
             if(!active(SIG_LOAD_ZOS) &&  active(SIG_LOAD_C) && !active(SIG_LOAD_I))
-                add("C $\\gets$ " + getbit(get_bus_c(), 0));
+                add("C $\\gets$ " + get_bus_c());
 
             if(!active(SIG_LOAD_ZOS) &&  active(SIG_LOAD_C) &&  active(SIG_LOAD_I))
                 add("H $\\gets$ " + getbit(get_bus_dat(), 4) + ", C $\\gets$ " + get_bus_c());
@@ -407,7 +393,7 @@ class microinstruction{
                add("HZVSC $\\gets$ " + get_bus_dat());
             
             // Memoria
-            if(active(SIG_MEM_WE)) add("M[" + get_bus_dir() + "] $\\gets$ " + get_bus_mem_dat());
+            if(active(SIG_MEM_WE)) add("M(" + get_bus_dir() + ") $\\gets$ " + get_bus_mem_dat());
             
             if(active(SIG_RI_LOAD)) add("RI $\\gets$ " + get_bus_mem_dat());
             if(active(SIG_AUX_LOAD)) add("AUX $\\gets$ AC");
@@ -415,22 +401,24 @@ class microinstruction{
 
             //Incrementos/decrementos
 
-            if(!active(SIG_MEM_OE) && !active(SIG_MEM_WE)){
-                if(active(SIG_PC_UP)){
-                    add("PC++");
-                }
+            if(active(SIG_PC_UP)){
+                add("PC+1");
+            }
 
-                if(active(SIG_D_UP)){
-                    add("D++");
-                }
+            if(active(SIG_D_UP)){
+                add("D+1");
+            }
 
-                if(active(SIG_SP_UP)){
-                    add("SP++");
-                }
+            if(active(SIG_SP_UP)){
+                add("SP+1");
+            }
 
-                if(active(SIG_SP_DOWN)){
-                    add("SP++");
-                }
+            if(active(SIG_SP_DOWN)){
+                add("SP-1");
+            }
+
+            if(active(SIG_D_CLR)){
+                add("D\\_CLR");
             }
         }
 
@@ -469,7 +457,9 @@ class latextables{
                         "\\usepackage[a4paper,margin=2.5cm]{geometry}" << std::endl <<
                         "\\usepackage[table]{xcolor}" << std::endl <<
                         "\\usepackage{pdflscape}" << std::endl <<
-                        "\\begin{document}" << std::endl;
+                        "\\usepackage{helvet}\n" << 
+                        "\\renewcommand\\familydefault{\\sfdefault}\n" <<
+                        "\\begin{document}\n" << std::endl;
         }
 
         void add(int opcode, std::string mnemonic, std::string addressing, std::vector<std::string> operations, std::string format, char h, char z, char v, char s, char c){
@@ -479,7 +469,7 @@ class latextables{
             "\\noindent\\makebox[\\linewidth]{%" << std::endl <<
             "\\begin{minipage}{\\linewidth}" << std::endl <<
             "\\centering" << std::endl <<
-            "{\\Huge \\textbf{" << to_hex(opcode, 2) << " " << mnemonic << " (" << addressing << ")}}\\\\[2em]" << std::endl <<
+            "{\\Huge \\textbf{[" << to_hex(opcode, 2) << "] " << mnemonic << " (" << addressing << ")}}\\\\[2em]" << std::endl <<
             "\\rotatebox{-90}{\\begin{tabular}{|m{0.75em}|m{11cm}|}" << std::endl <<
             "\\hline" << std::endl <<
             "\\cellcolor{gray!20} \\rotatebox{90}{15} & \\rotatebox{-180}{\\textbf{" << operations[15] << "}} \\rule{0em}{2.30em} \\newline \\\\ \\hline" << std::endl <<
@@ -527,26 +517,25 @@ std::map<std::string, std::string> format;
 void check_instructions(c_word* salida){
     latextables lt; // Para generar las tablas en latex
 
-    for(int flags = 0; flags < 256; flags++){
+    for(int ri = 0; ri < 64; ri++){
+        for(int flags = 0; flags < 256; flags++){
 
-        // Extraigo cada bit por separado
-        std::bitset<1> ifetch   ((flags&0b10000000)>>7);
-        std::bitset<1> irq      ((flags&0b01000000)>>6);
-        std::bitset<1> brq      ((flags&0b00100000)>>5);
-        std::bitset<1> i        ((flags&0b00010000)>>4);
-        std::bitset<1> z        ((flags&0b00001000)>>3);
-        std::bitset<1> o        ((flags&0b00000100)>>2);
-        std::bitset<1> s        ((flags&0b00000010)>>1);
-        std::bitset<1> c        ( flags&0b00000001);
-
-        for(int ri = 0; ri < 64; ri++){
+            // Extraigo cada bit por separado
+            std::bitset<1> ifetch   ((flags&0b10000000)>>7);
+            std::bitset<1> irq      ((flags&0b01000000)>>6);
+            std::bitset<1> brq      ((flags&0b00100000)>>5);
+            std::bitset<1> i        ((flags&0b00010000)>>4);
+            std::bitset<1> z        ((flags&0b00001000)>>3);
+            std::bitset<1> o        ((flags&0b00000100)>>2);
+            std::bitset<1> s        ((flags&0b00000010)>>1);
+            std::bitset<1> c        ( flags&0b00000001);
 
             // Vector de operaciones elementales de la instrucción
             std::vector<std::string> operations = std::vector<std::string>(16);
 
             for(int step = 0; step < 16; step++){
 
-                // Construir la palabra de control
+                // Posición en la memoria de control
                 uint64_t posicion = (ifetch.to_ulong()<<17) + 
                 (irq.to_ulong()<<16) + 
                 (brq.to_ulong()<<15) + 
@@ -558,6 +547,7 @@ void check_instructions(c_word* salida){
                 (ri<<4) 
                 + step;
 
+                // Palabra de control
                 uint64_t palabra = salida[posicion].to_ulong();
 
                 // Construyo el string con las operaciones elementales
@@ -572,25 +562,72 @@ void check_instructions(c_word* salida){
                 std::bitset<8> byte_4((palabra>>32)&0xFF);
 
                 // Dejar de mostrar la instrucción en el final (RCF_CLR activo)
-                if((palabra&0b0100000000000000000000000000000000000000) == 0b0100000000000000000000000000000000000000){
+                if((palabra & 0b0100000000000000000000000000000000000000) == 0b0100000000000000000000000000000000000000){
                     break;
                 }
             }
-            // std::cout << "└───────────────────────────────────────────────┘" << std::endl;
             
-            if(flags == 0 && ri < 64){
-                lt.add(ri,
-                inst_names[ri],
-                addressing[ri],
-                operations,
-                format[addressing[ri]],
-                (char)(i.to_ulong() + 48),
-                (char)(z.to_ulong() + 48),
-                (char)(o.to_ulong() + 48),
-                (char)(s.to_ulong() + 48),
-                (char)(c.to_ulong() + 48));
+            if(inst_names[ri] != "???"){
+
+                if(ifetch == 0 && brq == 0 && irq == 0){
+                    if((ri == OP_INST_JV || ri == OP_INST_JNV) && i == 0 && z == 0 && s == 0 && c == 0){
+                        lt.add(ri,
+                        inst_names[ri],
+                        addressing[ri],
+                        operations,
+                        format[addressing[ri]],
+                        'x',
+                        'x',
+                        (char)(o.to_ulong() + 48),
+                        'x',
+                        'x');
+                    }else if((ri == OP_INST_JC || ri == OP_INST_JNC) && i == 0 && z == 0 && s == 0 && o == 0){
+                        lt.add(ri,
+                        inst_names[ri],
+                        addressing[ri],
+                        operations,
+                        format[addressing[ri]],
+                        'x',
+                        'x',
+                        'x',
+                        'x',
+                        (char)(c.to_ulong() + 48));
+                    }else if((ri == OP_INST_JZ || ri == OP_INST_JNZ) && i == 0 && c == 0 && s == 0 && o == 0){
+                        lt.add(ri,
+                        inst_names[ri],
+                        addressing[ri],
+                        operations,
+                        format[addressing[ri]],
+                        'x',
+                        (char)(z.to_ulong() + 48),
+                        'x',
+                        'x',
+                        'x');
+                    }else if((ri == OP_INST_JS || ri == OP_INST_JNS) && i == 0 && z == 0 && c == 0 && o == 0){
+                        lt.add(ri,
+                        inst_names[ri],
+                        addressing[ri],
+                        operations,
+                        format[addressing[ri]],
+                        'x',
+                        'x',
+                        'x',
+                        (char)(s.to_ulong() + 48),
+                        'x');
+                    }else if(flags == 0){ // Instrucciones incondicionales
+                        lt.add(ri,
+                        inst_names[ri],
+                        addressing[ri],
+                        operations,
+                        format[addressing[ri]],
+                        'x',
+                        'x',
+                        'x',
+                        'x',
+                        'x');
+                    }
+                }
             }
-            //std::cin.get();
         }
     }
     lt.end();
@@ -598,65 +635,65 @@ void check_instructions(c_word* salida){
 
 int main(){
 
-    format.insert(std::pair<std::string, std::string>("Absoluto directo a memoria", "C. OP | DIRL | DIRH"));
+    format.insert(std::pair<std::string, std::string>("Directo absoluto a memoria", "C. OP | DIRL | DIRH"));
     format.insert(std::pair<std::string, std::string>("Sin operando", "C. OP"));
     format.insert(std::pair<std::string, std::string>("Inmediato", "C. OP | INM"));
-    format.insert(std::pair<std::string, std::string>("Absoluto indirecto a memoria", "C. OP | DIRL | DIRH"));
+    format.insert(std::pair<std::string, std::string>("Indirecto absoluto a memoria", "C. OP | DIRL | DIRH"));
     format.insert(std::pair<std::string, std::string>("Relativo a la pila", "C. OP | INM"));
     format.insert(std::pair<std::string, std::string>("???", "???"));
 
-    addressing[0x00] = "Absoluto directo a memoria";
+    addressing[0x00] = "Directo absoluto a memoria";
     addressing[0x01] = "Sin operando";
     addressing[0x02] = "Sin operando";
     addressing[0x03] = "Sin operando";
     addressing[0x04] = "Sin operando";
-    addressing[0x05] = "Absoluto directo a memoria";
+    addressing[0x05] = "Directo absoluto a memoria";
     addressing[0x06] = "Inmediato";
-    addressing[0x07] = "Absoluto directo a memoria";
-    addressing[0x08] = "Absoluto directo a memoria";
+    addressing[0x07] = "Directo absoluto a memoria";
+    addressing[0x08] = "Directo absoluto a memoria";
     addressing[0x09] = "Inmediato";
-    addressing[0x0a] = "Absoluto indirecto a memoria";
-    addressing[0x0b] = "Absoluto directo a memoria";
-    addressing[0x0c] = "Absoluto indirecto a memoria";
-    addressing[0x0d] = "Absoluto directo a memoria";
+    addressing[0x0a] = "Indirecto absoluto a memoria";
+    addressing[0x0b] = "Directo absoluto a memoria";
+    addressing[0x0c] = "Indirecto absoluto a memoria";
+    addressing[0x0d] = "Directo absoluto a memoria";
     addressing[0x0e] = "Inmediato";
-    addressing[0x0f] = "Absoluto directo a memoria";
+    addressing[0x0f] = "Directo absoluto a memoria";
     addressing[0x10] = "Inmediato";
-    addressing[0x11] = "Absoluto directo a memoria";
+    addressing[0x11] = "Directo absoluto a memoria";
     addressing[0x12] = "Inmediato";
-    addressing[0x13] = "Absoluto directo a memoria";
+    addressing[0x13] = "Directo absoluto a memoria";
     addressing[0x14] = "Inmediato"; 
-    addressing[0x15] = "Absoluto directo a memoria";
+    addressing[0x15] = "Directo absoluto a memoria";
     addressing[0x16] = "Inmediato";
     addressing[0x17] = "Sin operando";
     addressing[0x18] = "???";
-    addressing[0x19] = "Absoluto directo a memoria";
+    addressing[0x19] = "Directo absoluto a memoria";
     addressing[0x1a] = "Inmediato";
     addressing[0x1b] = "Sin operando";
-    addressing[0x1c] = "Absoluto directo a memoria";
-    addressing[0x1d] = "Absoluto directo a memoria";
-    addressing[0x1e] = "Absoluto directo a memoria";
-    addressing[0x1f] = "Absoluto directo a memoria";
-    addressing[0x20] = "Absoluto directo a memoria";
-    addressing[0x21] = "Absoluto directo a memoria";
-    addressing[0x22] = "Absoluto directo a memoria";
-    addressing[0x23] = "Absoluto directo a memoria";
+    addressing[0x1c] = "Directo absoluto a memoria";
+    addressing[0x1d] = "Directo absoluto a memoria";
+    addressing[0x1e] = "Directo absoluto a memoria";
+    addressing[0x1f] = "Directo absoluto a memoria";
+    addressing[0x20] = "Directo absoluto a memoria";
+    addressing[0x21] = "Directo absoluto a memoria";
+    addressing[0x22] = "Directo absoluto a memoria";
+    addressing[0x23] = "Directo absoluto a memoria";
     addressing[0x24] = "Relativo a la pila";
     addressing[0x25] = "Relativo a la pila";
     addressing[0x26] = "Sin operando";
     addressing[0x27] = "Sin operando";
     addressing[0x28] = "???";
     addressing[0x29] = "Sin operando";
-    addressing[0x2a] = "Absoluto indirecto a memoria";
+    addressing[0x2a] = "Indirecto absoluto a memoria";
     addressing[0x2b] = "Sin operando";
     addressing[0x2c] = "Sin operando";
     addressing[0x2d] = "Sin operando";
     addressing[0x2e] = "Sin operando";
     addressing[0x2f] = "Sin operando";
-    addressing[0x30] = "Absoluto indirecto a memoria";
+    addressing[0x30] = "Indirecto absoluto a memoria";
     addressing[0x31] = "Sin operando";
     addressing[0x32] = "Sin operando";
-    addressing[0x33] = "Absoluto indirecto a memoria";
+    addressing[0x33] = "Directo absoluto a memoria";
     addressing[0x34] = "Sin operando";
     addressing[0x35] = "Inmediato";
     addressing[0x36] = "Sin operando";
@@ -665,10 +702,10 @@ int main(){
     addressing[0x39] = "???";
     addressing[0x3a] = "Sin operando";
     addressing[0x3b] = "Sin operando";
-    addressing[0x3c] = "Absoluto indirecto a memoria";
-    addressing[0x3d] = "Absoluto directo a memoria";
-    addressing[0x3e] = "Absoluto directo a memoria";
-    addressing[0x3f] = "Absoluto directo a memoria";
+    addressing[0x3c] = "Indirecto absoluto a memoria";
+    addressing[0x3d] = "Directo absoluto a memoria";
+    addressing[0x3e] = "Directo absoluto a memoria";
+    addressing[0x3f] = "Directo absoluto a memoria";
 
     inst_names[0x00] = "JMP";
     inst_names[0x01] = "CLC";
@@ -2374,13 +2411,22 @@ int main(){
 
         // Si se está capturando una interrupción (IFETCH activa)
         if(ifetch){
-            if(rcf == 0 || rcf == 1){ // Los dos primeros ciclos son los de captura de vector de interrupción
+            if(rcf == 0){ // Los dos primeros ciclos son los de captura de vector de interrupción
                 salida[palabra] = c_word(ALL_INACTIVE); // AUX <- AC, AC <- I/O(INT), IACK
                 salida[palabra].flip(SIG_BUS_DIS);
                 salida[palabra].flip(SIG_S_AC_2);
                 salida[palabra].flip(SIG_S_AC_0);
                 salida[palabra].flip(SIG_AC_LOAD);
                 salida[palabra].flip(SIG_AUX_LOAD);
+                salida[palabra].flip(SIG_S_DAT_2);
+                salida[palabra].flip(SIG_IACK);
+                salida[palabra].flip(SIG_IFETCH);
+            }else if(rcf == 1){
+                salida[palabra] = c_word(ALL_INACTIVE); // AC <- I/O(INT), IACK
+                salida[palabra].flip(SIG_BUS_DIS);
+                salida[palabra].flip(SIG_S_AC_2);
+                salida[palabra].flip(SIG_S_AC_0);
+                salida[palabra].flip(SIG_AC_LOAD);
                 salida[palabra].flip(SIG_S_DAT_2);
                 salida[palabra].flip(SIG_IACK);
                 salida[palabra].flip(SIG_IFETCH);

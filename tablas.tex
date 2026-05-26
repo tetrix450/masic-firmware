@@ -2,13 +2,16 @@
 \usepackage[a4paper,margin=2.5cm]{geometry}
 \usepackage[table]{xcolor}
 \usepackage{pdflscape}
+\usepackage{helvet}
+\renewcommand\familydefault{\sfdefault}
 \begin{document}
+
 \begin{landscape}
 \thispagestyle{empty}
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x00 JMP (Absoluto directo a memoria)}}\\[2em]
+{\Huge \textbf{[0x00] JMP (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -23,17 +26,17 @@
 \cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{PC $\gets$ D}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b000000} & \textbf{JMP} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b000000} & \textbf{JMP} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -44,7 +47,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x01 CLC (Sin operando)}}\\[2em]
+{\Huge \textbf{[0x01] CLC (Sin operando)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -62,14 +65,14 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{C $\gets$ 0,  RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{C $\gets$ 0,  RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b000001} & \textbf{CLC} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b000001} & \textbf{CLC} & \textbf{Sin operando} & \textbf{C. OP} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -80,7 +83,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x02 STC (Sin operando)}}\\[2em]
+{\Huge \textbf{[0x02] STC (Sin operando)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -98,14 +101,14 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{C $\gets$ 1.0,  RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{C $\gets$ 1,  RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b000010} & \textbf{STC} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b000010} & \textbf{STC} & \textbf{Sin operando} & \textbf{C. OP} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -116,7 +119,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x03 CLH (Sin operando)}}\\[2em]
+{\Huge \textbf{[0x03] CLH (Sin operando)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -134,14 +137,14 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{H $\gets$ 0,  RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{H $\gets$ 0,  RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b000011} & \textbf{CLH} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b000011} & \textbf{CLH} & \textbf{Sin operando} & \textbf{C. OP} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -152,7 +155,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x04 STH (Sin operando)}}\\[2em]
+{\Huge \textbf{[0x04] STH (Sin operando)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -170,14 +173,14 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{H $\gets$ 1,  RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{H $\gets$ 1,  RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b000100} & \textbf{STH} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b000100} & \textbf{STH} & \textbf{Sin operando} & \textbf{C. OP} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -188,7 +191,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x05 SUBC (Absoluto directo a memoria)}}\\[2em]
+{\Huge \textbf{[0x05] SUBC (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -203,17 +206,17 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  AC $\gets$ AC + $\sim$M[D] + C}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  AC $\gets$ AC + $\sim$M(D) + C}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b000101} & \textbf{SUBC} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b000101} & \textbf{SUBC} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -224,7 +227,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x06 SUBC (Inmediato)}}\\[2em]
+{\Huge \textbf{[0x06] SUBC (Inmediato)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -241,15 +244,15 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  AC $\gets$ AC + $\sim$M[PC++] + C}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  AC $\gets$ AC + $\sim$M(PC) + C,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b000110} & \textbf{SUBC} & \textbf{Inmediato} & \textbf{C. OP | INM} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b000110} & \textbf{SUBC} & \textbf{Inmediato} & \textbf{C. OP | INM} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -260,7 +263,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x07 LOAD.SP (Absoluto directo a memoria)}}\\[2em]
+{\Huge \textbf{[0x07] LOAD.SP (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -273,19 +276,19 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{SP $\gets$ D,  RI $\gets$ M[PC++],  AC $\gets$ AUX}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{SP $\gets$ D,  RI $\gets$ M(PC),  AC $\gets$ AUX,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{DL $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{DH $\gets$ M[D++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AC $\gets$ M[D++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++],  AUX $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{DH $\gets$ M(D),  D+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AC $\gets$ M(D),  D+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  AUX $\gets$ AC,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b000111} & \textbf{LOAD.SP} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b000111} & \textbf{LOAD.SP} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -296,7 +299,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x08 LOAD (Absoluto directo a memoria)}}\\[2em]
+{\Huge \textbf{[0x08] LOAD (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -311,17 +314,17 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AC $\gets$ M[D]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AC $\gets$ M(D)}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b001000} & \textbf{LOAD} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b001000} & \textbf{LOAD} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -332,7 +335,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x09 LOAD (Inmediato)}}\\[2em]
+{\Huge \textbf{[0x09] LOAD (Inmediato)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -349,15 +352,15 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{AC $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{AC $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b001001} & \textbf{LOAD} & \textbf{Inmediato} & \textbf{C. OP | INM} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b001001} & \textbf{LOAD} & \textbf{Inmediato} & \textbf{C. OP | INM} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -368,7 +371,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x0A LOAD (Absoluto indirecto a memoria)}}\\[2em]
+{\Huge \textbf{[0x0A] LOAD (Indirecto absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -380,20 +383,20 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{AC $\gets$ M[D]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{AC $\gets$ M(D)}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{DL $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{DH $\gets$ M[D]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AC $\gets$ M[D++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{DH $\gets$ M(D)}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AC $\gets$ M(D),  D+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b001010} & \textbf{LOAD} & \textbf{Absoluto indirecto a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b001010} & \textbf{LOAD} & \textbf{Indirecto absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -404,7 +407,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x0B STORE (Absoluto directo a memoria)}}\\[2em]
+{\Huge \textbf{[0x0B] STORE (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -419,17 +422,17 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{M[D] $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{M(D) $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b001011} & \textbf{STORE} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b001011} & \textbf{STORE} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -440,7 +443,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x0C STORE (Absoluto indirecto a memoria)}}\\[2em]
+{\Huge \textbf{[0x0C] STORE (Indirecto absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -452,20 +455,20 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{M[D] $\gets$ AUX,  AC $\gets$ AUX}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{M(D) $\gets$ AUX,  AC $\gets$ AUX}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{DL $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{DH $\gets$ M[D]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AC $\gets$ M[D++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++],  AUX $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{DH $\gets$ M(D)}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AC $\gets$ M(D),  D+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  AUX $\gets$ AC,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b001100} & \textbf{STORE} & \textbf{Absoluto indirecto a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b001100} & \textbf{STORE} & \textbf{Indirecto absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -476,7 +479,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x0D ADD (Absoluto directo a memoria)}}\\[2em]
+{\Huge \textbf{[0x0D] ADD (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -491,17 +494,17 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  AC $\gets$ AC + M[D] + 0}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  AC $\gets$ AC + M(D) + 0}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b001101} & \textbf{ADD} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b001101} & \textbf{ADD} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -512,79 +515,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x0E ADD (Inmediato)}}\\[2em]
-\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
-\hline
-\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  AC $\gets$ AC + M[PC++] + 0}} \rule{0em}{2.30em} \newline \\ \hline
-\end{tabular}}
-
-\vspace{1cm}
-\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
-\rowcolor{gray!20}
-Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b001110} & \textbf{ADD} & \textbf{Inmediato} & \textbf{C. OP | INM} & 0 & 0 & 0 & 0 & 0 \\ \hline
-\end{tabular}
-\end{minipage}%
-}
-\end{landscape}
-\newpage
-\begin{landscape}
-\thispagestyle{empty}
-\noindent\makebox[\linewidth]{%
-\begin{minipage}{\linewidth}
-\centering
-{\Huge \textbf{0x0F ADC (Absoluto directo a memoria)}}\\[2em]
-\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
-\hline
-\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  AC $\gets$ AC + M[D] + C}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\end{tabular}}
-
-\vspace{1cm}
-\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
-\rowcolor{gray!20}
-Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b001111} & \textbf{ADC} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
-\end{tabular}
-\end{minipage}%
-}
-\end{landscape}
-\newpage
-\begin{landscape}
-\thispagestyle{empty}
-\noindent\makebox[\linewidth]{%
-\begin{minipage}{\linewidth}
-\centering
-{\Huge \textbf{0x10 ADC (Inmediato)}}\\[2em]
+{\Huge \textbf{[0x0E] ADD (Inmediato)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -601,15 +532,15 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  AC $\gets$ AC + M[PC++] + C}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  AC $\gets$ AC + M(PC) + 0,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b010000} & \textbf{ADC} & \textbf{Inmediato} & \textbf{C. OP | INM} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b001110} & \textbf{ADD} & \textbf{Inmediato} & \textbf{C. OP | INM} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -620,7 +551,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x11 SUB (Absoluto directo a memoria)}}\\[2em]
+{\Huge \textbf{[0x0F] ADC (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -635,17 +566,17 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  AC $\gets$ AC + $\sim$M[D] + 1}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  AC $\gets$ AC + M(D) + C}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b010001} & \textbf{SUB} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b001111} & \textbf{ADC} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -656,79 +587,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x12 SUB (Inmediato)}}\\[2em]
-\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
-\hline
-\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  AC $\gets$ AC + $\sim$M[PC++] + 1}} \rule{0em}{2.30em} \newline \\ \hline
-\end{tabular}}
-
-\vspace{1cm}
-\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
-\rowcolor{gray!20}
-Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b010010} & \textbf{SUB} & \textbf{Inmediato} & \textbf{C. OP | INM} & 0 & 0 & 0 & 0 & 0 \\ \hline
-\end{tabular}
-\end{minipage}%
-}
-\end{landscape}
-\newpage
-\begin{landscape}
-\thispagestyle{empty}
-\noindent\makebox[\linewidth]{%
-\begin{minipage}{\linewidth}
-\centering
-{\Huge \textbf{0x13 AND (Absoluto directo a memoria)}}\\[2em]
-\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
-\hline
-\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{ZVS $\gets$ ALU,  AC $\gets$ AC \& M[D]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\end{tabular}}
-
-\vspace{1cm}
-\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
-\rowcolor{gray!20}
-Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b010011} & \textbf{AND} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
-\end{tabular}
-\end{minipage}%
-}
-\end{landscape}
-\newpage
-\begin{landscape}
-\thispagestyle{empty}
-\noindent\makebox[\linewidth]{%
-\begin{minipage}{\linewidth}
-\centering
-{\Huge \textbf{0x14 AND (Inmediato)}}\\[2em]
+{\Huge \textbf{[0x10] ADC (Inmediato)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -745,15 +604,15 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVS $\gets$ ALU,  AC $\gets$ AC \& M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  AC $\gets$ AC + M(PC) + C,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b010100} & \textbf{AND} & \textbf{Inmediato} & \textbf{C. OP | INM} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b010000} & \textbf{ADC} & \textbf{Inmediato} & \textbf{C. OP | INM} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -764,7 +623,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x15 OR (Absoluto directo a memoria)}}\\[2em]
+{\Huge \textbf{[0x11] SUB (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -779,17 +638,17 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{ZVS $\gets$ ALU,  AC $\gets$ AC | M[D]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  AC $\gets$ AC + $\sim$M(D) + 1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b010101} & \textbf{OR} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b010001} & \textbf{SUB} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -800,7 +659,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x16 OR (Inmediato)}}\\[2em]
+{\Huge \textbf{[0x12] SUB (Inmediato)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -817,15 +676,15 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVS $\gets$ ALU,  AC $\gets$ AC | M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  AC $\gets$ AC + $\sim$M(PC) + 1,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b010110} & \textbf{OR} & \textbf{Inmediato} & \textbf{C. OP | INM} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b010010} & \textbf{SUB} & \textbf{Inmediato} & \textbf{C. OP | INM} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -836,7 +695,151 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x17 NOT (Sin operando)}}\\[2em]
+{\Huge \textbf{[0x13] AND (Directo absoluto a memoria)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{ZVS $\gets$ ALU,  AC $\gets$ AC \& M(D)}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\end{tabular}}
+
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0b010011} & \textbf{AND} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{[0x14] AND (Inmediato)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVS $\gets$ ALU,  AC $\gets$ AC \& M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\end{tabular}}
+
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0b010100} & \textbf{AND} & \textbf{Inmediato} & \textbf{C. OP | INM} & x & x & x & x & x \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{[0x15] OR (Directo absoluto a memoria)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{ZVS $\gets$ ALU,  AC $\gets$ AC | M(D)}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\end{tabular}}
+
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0b010101} & \textbf{OR} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{[0x16] OR (Inmediato)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVS $\gets$ ALU,  AC $\gets$ AC | M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\end{tabular}}
+
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0b010110} & \textbf{OR} & \textbf{Inmediato} & \textbf{C. OP | INM} & x & x & x & x & x \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{[0x17] NOT (Sin operando)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -854,14 +857,14 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVS $\gets$ ALU,  RI $\gets$ M[PC++],  AC $\gets$ $\sim$AC}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVS $\gets$ ALU,  RI $\gets$ M(PC),  AC $\gets$ $\sim$AC,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b010111} & \textbf{NOT} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b010111} & \textbf{NOT} & \textbf{Sin operando} & \textbf{C. OP} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -872,7 +875,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x18 ??? (???)}}\\[2em]
+{\Huge \textbf{[0x19] CMP (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -887,53 +890,17 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\end{tabular}}
-
-\vspace{1cm}
-\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
-\rowcolor{gray!20}
-Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b011000} & \textbf{???} & \textbf{???} & \textbf{???} & 0 & 0 & 0 & 0 & 0 \\ \hline
-\end{tabular}
-\end{minipage}%
-}
-\end{landscape}
-\newpage
-\begin{landscape}
-\thispagestyle{empty}
-\noindent\makebox[\linewidth]{%
-\begin{minipage}{\linewidth}
-\centering
-{\Huge \textbf{0x19 CMP (Absoluto directo a memoria)}}\\[2em]
-\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
-\hline
-\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b011001} & \textbf{CMP} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b011001} & \textbf{CMP} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -944,7 +911,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x1A CMP (Inmediato)}}\\[2em]
+{\Huge \textbf{[0x1A] CMP (Inmediato)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -961,15 +928,15 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b011010} & \textbf{CMP} & \textbf{Inmediato} & \textbf{C. OP | INM} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b011010} & \textbf{CMP} & \textbf{Inmediato} & \textbf{C. OP | INM} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -980,7 +947,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x1B NOP (Sin operando)}}\\[2em]
+{\Huge \textbf{[0x1B] NOP (Sin operando)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -998,14 +965,14 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b011011} & \textbf{NOP} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b011011} & \textbf{NOP} & \textbf{Sin operando} & \textbf{C. OP} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1016,7 +983,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x1C JV (Absoluto directo a memoria)}}\\[2em]
+{\Huge \textbf{[0x1C] JV (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1032,16 +999,16 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{PC++}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{PC++}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b011100} & \textbf{JV} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b011100} & \textbf{JV} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & 0 & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1052,7 +1019,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x1D JNV (Absoluto directo a memoria)}}\\[2em]
+{\Huge \textbf{[0x1C] JV (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1067,17 +1034,17 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{PC $\gets$ D}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b011101} & \textbf{JNV} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b011100} & \textbf{JV} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & 1 & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1088,7 +1055,43 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x1E JZ (Absoluto directo a memoria)}}\\[2em]
+{\Huge \textbf{[0x1D] JNV (Directo absoluto a memoria)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{PC $\gets$ D}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\end{tabular}}
+
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0b011101} & \textbf{JNV} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & 0 & x & x \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{[0x1D] JNV (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1104,16 +1107,16 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{PC++}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{PC++}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b011110} & \textbf{JZ} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b011101} & \textbf{JNV} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & 1 & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1124,43 +1127,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x1F JNZ (Absoluto directo a memoria)}}\\[2em]
-\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
-\hline
-\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{PC $\gets$ D}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\end{tabular}}
-
-\vspace{1cm}
-\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
-\rowcolor{gray!20}
-Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b011111} & \textbf{JNZ} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
-\end{tabular}
-\end{minipage}%
-}
-\end{landscape}
-\newpage
-\begin{landscape}
-\thispagestyle{empty}
-\noindent\makebox[\linewidth]{%
-\begin{minipage}{\linewidth}
-\centering
-{\Huge \textbf{0x20 JC (Absoluto directo a memoria)}}\\[2em]
+{\Huge \textbf{[0x1E] JZ (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1176,16 +1143,16 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{PC++}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{PC++}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b100000} & \textbf{JC} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b011110} & \textbf{JZ} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & 0 & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1196,7 +1163,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x21 JNC (Absoluto directo a memoria)}}\\[2em]
+{\Huge \textbf{[0x1E] JZ (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1211,17 +1178,17 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{PC $\gets$ D}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b100001} & \textbf{JNC} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b011110} & \textbf{JZ} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & 1 & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1232,7 +1199,43 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x22 JS (Absoluto directo a memoria)}}\\[2em]
+{\Huge \textbf{[0x1F] JNZ (Directo absoluto a memoria)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{PC $\gets$ D}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\end{tabular}}
+
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0b011111} & \textbf{JNZ} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & 0 & x & x & x \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{[0x1F] JNZ (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1248,16 +1251,16 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{PC++}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{PC++}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b100010} & \textbf{JS} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b011111} & \textbf{JNZ} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & 1 & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1268,7 +1271,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x23 JNS (Absoluto directo a memoria)}}\\[2em]
+{\Huge \textbf{[0x20] JC (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1283,17 +1286,17 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{PC $\gets$ D}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b100011} & \textbf{JNS} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b100000} & \textbf{JC} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & 0 \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1304,7 +1307,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x24 LOAD.STACK (Relativo a la pila)}}\\[2em]
+{\Huge \textbf{[0x20] JC (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1315,13 +1318,265 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{AC $\gets$ M[D]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{PC $\gets$ D}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\end{tabular}}
+
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0b100000} & \textbf{JC} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & 1 \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{[0x21] JNC (Directo absoluto a memoria)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{PC $\gets$ D}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\end{tabular}}
+
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0b100001} & \textbf{JNC} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & 0 \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{[0x21] JNC (Directo absoluto a memoria)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\end{tabular}}
+
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0b100001} & \textbf{JNC} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & 1 \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{[0x22] JS (Directo absoluto a memoria)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\end{tabular}}
+
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0b100010} & \textbf{JS} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & 0 & x \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{[0x22] JS (Directo absoluto a memoria)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{PC $\gets$ D}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\end{tabular}}
+
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0b100010} & \textbf{JS} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & 1 & x \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{[0x23] JNS (Directo absoluto a memoria)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{PC $\gets$ D}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\end{tabular}}
+
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0b100011} & \textbf{JNS} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & 0 & x \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{[0x23] JNS (Directo absoluto a memoria)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\end{tabular}}
+
+\vspace{1cm}
+\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
+\rowcolor{gray!20}
+Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
+\textbf{0b100011} & \textbf{JNS} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & 1 & x \\ \hline
+\end{tabular}
+\end{minipage}%
+}
+\end{landscape}
+\newpage
+\begin{landscape}
+\thispagestyle{empty}
+\noindent\makebox[\linewidth]{%
+\begin{minipage}{\linewidth}
+\centering
+{\Huge \textbf{[0x24] LOAD.STACK (Relativo a la pila)}}\\[2em]
+\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
+\hline
+\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{AC $\gets$ M(D)}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{DH $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{AC $\gets$ AC + 0 + C}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{AC $\gets$ SPL}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{DL $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{C $\gets$ ALU.0,  AC $\gets$ AC + M[PC++] + 0}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{C $\gets$ ALU,  AC $\gets$ AC + M(PC) + 0,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{AUX $\gets$ AC,  AC $\gets$ SPH}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
@@ -1329,7 +1584,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b100100} & \textbf{LOAD.STACK} & \textbf{Relativo a la pila} & \textbf{C. OP | INM} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b100100} & \textbf{LOAD.STACK} & \textbf{Relativo a la pila} & \textbf{C. OP | INM} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1340,7 +1595,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x25 STORE.STACK (Relativo a la pila)}}\\[2em]
+{\Huge \textbf{[0x25] STORE.STACK (Relativo a la pila)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1351,13 +1606,13 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{M[D] $\gets$ AUX,  AC $\gets$ AUX}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{M(D) $\gets$ AUX,  AC $\gets$ AUX}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{DH $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{AC $\gets$ AC + 0 + C}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{AC $\gets$ SPL}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{DL $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{C $\gets$ ALU.0,  AC $\gets$ AC + M[PC++] + 0}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{C $\gets$ ALU,  AC $\gets$ AC + M(PC) + 0,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{AUX $\gets$ AC,  AC $\gets$ SPH}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
@@ -1365,7 +1620,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b100101} & \textbf{STORE.STACK} & \textbf{Relativo a la pila} & \textbf{C. OP | INM} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b100101} & \textbf{STORE.STACK} & \textbf{Relativo a la pila} & \textbf{C. OP | INM} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1376,7 +1631,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x26 INC (Sin operando)}}\\[2em]
+{\Huge \textbf{[0x26] INC (Sin operando)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1394,14 +1649,14 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  RI $\gets$ M[PC++],  AC $\gets$ AC + 0 + 1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  RI $\gets$ M(PC),  AC $\gets$ AC + 0 + 1,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b100110} & \textbf{INC} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b100110} & \textbf{INC} & \textbf{Sin operando} & \textbf{C. OP} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1412,7 +1667,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x27 DEC (Sin operando)}}\\[2em]
+{\Huge \textbf{[0x27] DEC (Sin operando)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1430,14 +1685,14 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  RI $\gets$ M[PC++],  AC $\gets$ AC + 255 + 0}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  RI $\gets$ M(PC),  AC $\gets$ AC + 255 + 0,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b100111} & \textbf{DEC} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b100111} & \textbf{DEC} & \textbf{Sin operando} & \textbf{C. OP} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1448,7 +1703,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x28 ??? (???)}}\\[2em]
+{\Huge \textbf{[0x2A] JMP (Indirecto absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1460,92 +1715,20 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\end{tabular}}
-
-\vspace{1cm}
-\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
-\rowcolor{gray!20}
-Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b101000} & \textbf{???} & \textbf{???} & \textbf{???} & 0 & 0 & 0 & 0 & 0 \\ \hline
-\end{tabular}
-\end{minipage}%
-}
-\end{landscape}
-\newpage
-\begin{landscape}
-\thispagestyle{empty}
-\noindent\makebox[\linewidth]{%
-\begin{minipage}{\linewidth}
-\centering
-{\Huge \textbf{0x29 ??? (Sin operando)}}\\[2em]
-\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
-\hline
-\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\end{tabular}}
-
-\vspace{1cm}
-\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
-\rowcolor{gray!20}
-Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b101001} & \textbf{???} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
-\end{tabular}
-\end{minipage}%
-}
-\end{landscape}
-\newpage
-\begin{landscape}
-\thispagestyle{empty}
-\noindent\makebox[\linewidth]{%
-\begin{minipage}{\linewidth}
-\centering
-{\Huge \textbf{0x2A JMP (Absoluto indirecto a memoria)}}\\[2em]
-\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
-\hline
-\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{RI $\gets$ M[D]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{RI $\gets$ M(D),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{PC $\gets$ D,  AC $\gets$ AUX}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{DL $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{DH $\gets$ M[D]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AC $\gets$ M[D++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++],  AUX $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{DH $\gets$ M(D)}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AC $\gets$ M(D),  D+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  AUX $\gets$ AC,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b101010} & \textbf{JMP} & \textbf{Absoluto indirecto a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b101010} & \textbf{JMP} & \textbf{Indirecto absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1556,7 +1739,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x2B SHL (Sin operando)}}\\[2em]
+{\Huge \textbf{[0x2B] SHL (Sin operando)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1574,14 +1757,14 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  RI $\gets$ M[PC++],  AC $\gets$ AC + AC + 0}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  RI $\gets$ M(PC),  AC $\gets$ AC + AC + 0,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b101011} & \textbf{SHL} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b101011} & \textbf{SHL} & \textbf{Sin operando} & \textbf{C. OP} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1592,7 +1775,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x2C SHRA (Sin operando)}}\\[2em]
+{\Huge \textbf{[0x2C] SHRA (Sin operando)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1610,14 +1793,14 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  RI $\gets$ M[PC++],  AC $\gets$ AC.7<<7 + AC>>1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  RI $\gets$ M(PC),  AC $\gets$ AC.7$\ll$7 + AC$\gg$1,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b101100} & \textbf{SHRA} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b101100} & \textbf{SHRA} & \textbf{Sin operando} & \textbf{C. OP} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1628,7 +1811,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x2D SHR (Sin operando)}}\\[2em]
+{\Huge \textbf{[0x2D] SHR (Sin operando)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1646,14 +1829,14 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  RI $\gets$ M[PC++],  AC $\gets$ 0<<7 + AC>>1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  RI $\gets$ M(PC),  AC $\gets$ 0$\ll$7 + AC$\gg$1,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b101101} & \textbf{SHR} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b101101} & \textbf{SHR} & \textbf{Sin operando} & \textbf{C. OP} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1664,7 +1847,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x2E ROL (Sin operando)}}\\[2em]
+{\Huge \textbf{[0x2E] ROL (Sin operando)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1682,14 +1865,14 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  RI $\gets$ M[PC++],  AC $\gets$ AC + AC + AC.7}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  RI $\gets$ M(PC),  AC $\gets$ AC + AC + AC.7,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b101110} & \textbf{ROL} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b101110} & \textbf{ROL} & \textbf{Sin operando} & \textbf{C. OP} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1700,7 +1883,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x2F ROR (Sin operando)}}\\[2em]
+{\Huge \textbf{[0x2F] ROR (Sin operando)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1718,14 +1901,14 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  RI $\gets$ M[PC++],  AC $\gets$ AC.0<<7 + AC>>1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  RI $\gets$ M(PC),  AC $\gets$ AC.0$\ll$7 + AC$\gg$1,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b101111} & \textbf{ROR} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b101111} & \textbf{ROR} & \textbf{Sin operando} & \textbf{C. OP} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1736,7 +1919,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x30 IN (Absoluto indirecto a memoria)}}\\[2em]
+{\Huge \textbf{[0x30] IN (Indirecto absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1748,20 +1931,20 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{AC $\gets$ IO[D]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{AC $\gets$ IO(D)}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{DL $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{DH $\gets$ M[D]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AC $\gets$ M[D++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{DH $\gets$ M(D)}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AC $\gets$ M(D),  D+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b110000} & \textbf{IN} & \textbf{Absoluto indirecto a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b110000} & \textbf{IN} & \textbf{Indirecto absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1772,7 +1955,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x31 PUSH (Sin operando)}}\\[2em]
+{\Huge \textbf{[0x31] PUSH (Sin operando)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1788,16 +1971,16 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{M[SP] $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{SP++}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{M(SP) $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{SP-1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b110001} & \textbf{PUSH} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b110001} & \textbf{PUSH} & \textbf{Sin operando} & \textbf{C. OP} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1808,7 +1991,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x32 POP (Sin operando)}}\\[2em]
+{\Huge \textbf{[0x32] POP (Sin operando)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1825,15 +2008,15 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{AC $\gets$ M[SP++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{AC $\gets$ M(SP),  SP+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b110010} & \textbf{POP} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b110010} & \textbf{POP} & \textbf{Sin operando} & \textbf{C. OP} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1844,7 +2027,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x33 CALL (Absoluto indirecto a memoria)}}\\[2em]
+{\Huge \textbf{[0x33] CALL (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1856,20 +2039,20 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++],  AC $\gets$ AUX}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{PC $\gets$ D,  M[SP] $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{AC $\gets$ PCL,  SP++}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{M[SP] $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AC $\gets$ PCH,  SP++}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++],  AUX $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  AC $\gets$ AUX,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{PC $\gets$ D,  M(SP) $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{AC $\gets$ PCL,  SP-1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{M(SP) $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AC $\gets$ PCH,  SP-1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  AUX $\gets$ AC,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b110011} & \textbf{CALL} & \textbf{Absoluto indirecto a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b110011} & \textbf{CALL} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1880,7 +2063,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x34 RET (Sin operando)}}\\[2em]
+{\Huge \textbf{[0x34] RET (Sin operando)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1895,17 +2078,17 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{PC $\gets$ D}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DL $\gets$ M[SP++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DH $\gets$ M[SP++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DL $\gets$ M(SP),  SP+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DH $\gets$ M(SP),  SP+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b110100} & \textbf{RET} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b110100} & \textbf{RET} & \textbf{Sin operando} & \textbf{C. OP} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1916,32 +2099,32 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x35 INT (Inmediato)}}\\[2em]
+{\Huge \textbf{[0x35] INT (Inmediato)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{PC $\gets$ D,  AC $\gets$ AUX}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{M[SP] $\gets$ EST}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{M[SP--] $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{AC $\gets$ PCL,  SP++}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{M[SP] $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{AC $\gets$ PCH,  SP++}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{M(SP) $\gets$ HZVSC}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{M(SP) $\gets$ AC,  SP-1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{AC $\gets$ PCL,  SP-1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{M(SP) $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{AC $\gets$ PCH,  SP-1}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{DL $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{DH $\gets$ M[D]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{AC $\gets$ M[D++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{DH $\gets$ M(D)}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{AC $\gets$ M(D),  D+1}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{DL $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{AC $\gets$ AC + AC + 0}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{AUX $\gets$ AC,  AC $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{AC $\gets$ AC + AC + 0,  D\_CLR}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{AUX $\gets$ AC,  AC $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b110101} & \textbf{INT} & \textbf{Inmediato} & \textbf{C. OP | INM} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b110101} & \textbf{INT} & \textbf{Inmediato} & \textbf{C. OP | INM} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1952,7 +2135,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x36 RETI (Sin operando)}}\\[2em]
+{\Huge \textbf{[0x36] RETI (Sin operando)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -1966,18 +2149,18 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{PC $\gets$ D}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{DL $\gets$ M[SP++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[SP++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{HZVSC $\gets$ M[SP++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{DL $\gets$ M(SP),  SP+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(SP),  SP+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{HZVSC $\gets$ M(SP),  SP+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b110110} & \textbf{RETI} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b110110} & \textbf{RETI} & \textbf{Sin operando} & \textbf{C. OP} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -1988,7 +2171,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x37 ??? (???)}}\\[2em]
+{\Huge \textbf{[0x3A] RCL (Sin operando)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -2006,14 +2189,14 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  RI $\gets$ M(PC),  AC $\gets$ AC + AC + C,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b110111} & \textbf{???} & \textbf{???} & \textbf{???} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b111010} & \textbf{RCL} & \textbf{Sin operando} & \textbf{C. OP} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -2024,7 +2207,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x38 ??? (???)}}\\[2em]
+{\Huge \textbf{[0x3B] RCR (Sin operando)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -2042,14 +2225,14 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  RI $\gets$ M(PC),  AC $\gets$ C$\ll$7 + AC$\gg$1,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b111000} & \textbf{???} & \textbf{???} & \textbf{???} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b111011} & \textbf{RCR} & \textbf{Sin operando} & \textbf{C. OP} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -2060,7 +2243,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x39 ??? (???)}}\\[2em]
+{\Huge \textbf{[0x3C] OUT (Indirecto absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -2072,128 +2255,20 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\end{tabular}}
-
-\vspace{1cm}
-\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
-\rowcolor{gray!20}
-Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b111001} & \textbf{???} & \textbf{???} & \textbf{???} & 0 & 0 & 0 & 0 & 0 \\ \hline
-\end{tabular}
-\end{minipage}%
-}
-\end{landscape}
-\newpage
-\begin{landscape}
-\thispagestyle{empty}
-\noindent\makebox[\linewidth]{%
-\begin{minipage}{\linewidth}
-\centering
-{\Huge \textbf{0x3A RCL (Sin operando)}}\\[2em]
-\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
-\hline
-\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  RI $\gets$ M[PC++],  AC $\gets$ AC + AC + C}} \rule{0em}{2.30em} \newline \\ \hline
-\end{tabular}}
-
-\vspace{1cm}
-\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
-\rowcolor{gray!20}
-Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b111010} & \textbf{RCL} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
-\end{tabular}
-\end{minipage}%
-}
-\end{landscape}
-\newpage
-\begin{landscape}
-\thispagestyle{empty}
-\noindent\makebox[\linewidth]{%
-\begin{minipage}{\linewidth}
-\centering
-{\Huge \textbf{0x3B RCR (Sin operando)}}\\[2em]
-\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
-\hline
-\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{ZVSC $\gets$ ALU,  RI $\gets$ M[PC++],  AC $\gets$ C<<7 + AC>>1}} \rule{0em}{2.30em} \newline \\ \hline
-\end{tabular}}
-
-\vspace{1cm}
-\begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
-\rowcolor{gray!20}
-Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b111011} & \textbf{RCR} & \textbf{Sin operando} & \textbf{C. OP} & 0 & 0 & 0 & 0 & 0 \\ \hline
-\end{tabular}
-\end{minipage}%
-}
-\end{landscape}
-\newpage
-\begin{landscape}
-\thispagestyle{empty}
-\noindent\makebox[\linewidth]{%
-\begin{minipage}{\linewidth}
-\centering
-{\Huge \textbf{0x3C OUT (Absoluto indirecto a memoria)}}\\[2em]
-\rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
-\hline
-\cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{14} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{13} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{12} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{11} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{10} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{M[D] $\gets$ AUX,  AC $\gets$ AUX}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{M(D) $\gets$ AUX,  AC $\gets$ AUX}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{DL $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{DH $\gets$ M[D]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AUX $\gets$ AC,  AC $\gets$ M[D++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{DH $\gets$ M(D)}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AUX $\gets$ AC,  AC $\gets$ M(D),  D+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b111100} & \textbf{OUT} & \textbf{Absoluto indirecto a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b111100} & \textbf{OUT} & \textbf{Indirecto absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -2204,7 +2279,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x3D IN (Absoluto directo a memoria)}}\\[2em]
+{\Huge \textbf{[0x3D] IN (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -2219,17 +2294,17 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AC $\gets$ IO[D]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AC $\gets$ IO(D)}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b111101} & \textbf{IN} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b111101} & \textbf{IN} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -2240,7 +2315,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x3E OUT (Absoluto directo a memoria)}}\\[2em]
+{\Huge \textbf{[0x3E] OUT (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -2255,17 +2330,17 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{M[D] $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{M(D) $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b111110} & \textbf{OUT} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b111110} & \textbf{OUT} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
@@ -2276,7 +2351,7 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \noindent\makebox[\linewidth]{%
 \begin{minipage}{\linewidth}
 \centering
-{\Huge \textbf{0x3F STORE.SP (Absoluto directo a memoria)}}\\[2em]
+{\Huge \textbf{[0x3F] STORE.SP (Directo absoluto a memoria)}}\\[2em]
 \rotatebox{-90}{\begin{tabular}{|m{0.75em}|m{11cm}|}
 \hline
 \cellcolor{gray!20} \rotatebox{90}{15} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
@@ -2288,20 +2363,20 @@ Código de operación & Mnemónica & Direccionamiento & Formato de instrucción 
 \cellcolor{gray!20} \rotatebox{90}{9} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{8} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{7} & \rotatebox{-180}{\textbf{}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{RI $\gets$ M[PC++],  AC $\gets$ AUX}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{M[D] $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{6} & \rotatebox{-180}{\textbf{RI $\gets$ M(PC),  AC $\gets$ AUX,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{5} & \rotatebox{-180}{\textbf{M(D) $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{4} & \rotatebox{-180}{\textbf{AC $\gets$ SPL}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{M[D++] $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{3} & \rotatebox{-180}{\textbf{M(D) $\gets$ AC,  D+1}} \rule{0em}{2.30em} \newline \\ \hline
 \cellcolor{gray!20} \rotatebox{90}{2} & \rotatebox{-180}{\textbf{AC $\gets$ SPH}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M[PC++],  AUX $\gets$ AC}} \rule{0em}{2.30em} \newline \\ \hline
-\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M[PC++]}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{1} & \rotatebox{-180}{\textbf{DH $\gets$ M(PC),  AUX $\gets$ AC,  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
+\cellcolor{gray!20} \rotatebox{90}{0} & \rotatebox{-180}{\textbf{DL $\gets$ M(PC),  PC+1}} \rule{0em}{2.30em} \newline \\ \hline
 \end{tabular}}
 
 \vspace{1cm}
 \begin{tabular}{|p{\dimexpr(\linewidth - 20em)/4}|p{\dimexpr(\linewidth - 35em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{\dimexpr(\linewidth - 5em)/4}|p{1em}|p{1em}|p{1em}|p{1em}|p{1em}|}\hline
 \rowcolor{gray!20}
 Código de operación & Mnemónica & Direccionamiento & Formato de instrucción & H & Z & V & S & C \\ \hline
-\textbf{0b111111} & \textbf{STORE.SP} & \textbf{Absoluto directo a memoria} & \textbf{C. OP | DIRL | DIRH} & 0 & 0 & 0 & 0 & 0 \\ \hline
+\textbf{0b111111} & \textbf{STORE.SP} & \textbf{Directo absoluto a memoria} & \textbf{C. OP | DIRL | DIRH} & x & x & x & x & x \\ \hline
 \end{tabular}
 \end{minipage}%
 }
